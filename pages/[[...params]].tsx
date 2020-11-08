@@ -10,17 +10,20 @@ import {
   POPULAR_PARAM_KEY,
   POPULAR_PARAM_DEFAULT,
   SORT_TYPE,
-  GEO_FILTER,
   TIME_FILTER
 } from "../functions/constants";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/dist/client/router";
 import RankedCard from "../components/home-page/RankedCard";
 import WideCard from "../components/home-page/WideCard";
+import { Post, PostList } from "../interfaces";
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   console.log(query);
-  const posts = await getPopularPosts({});
+  const posts = await getPopularPosts({
+    ...query,
+    sort_type: query.hasOwnProperty("params") ? query.params[0] : "hot"
+  });
   const trendingSubs = await getPopularPosts({
     subreddit: "trendingsubreddits",
     sort_type: "new",
@@ -41,11 +44,15 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 const IndexPage = ({ postData, trendingSubs, params }: any) => {
   const router = useRouter();
   const [{ posts, after }, setPostData] = useState(postData);
+  // const [nextPosts, setNextPosts] = useState<PostList>({})
   const [selectedParams, setSelectedParams] = useState({
     ...zipObject(POPULAR_PARAM_KEY, POPULAR_PARAM_DEFAULT),
     ...params
   });
+  const loader = useRef<HTMLDivElement>(null);
+
   const filterPopular = async () => {
+    setPostData({ posts: new Array(15).fill({}) });
     router.push({
       pathname: selectedParams.hasOwnProperty(SORT_TYPE)
         ? selectedParams[SORT_TYPE]
@@ -54,6 +61,40 @@ const IndexPage = ({ postData, trendingSubs, params }: any) => {
     });
     setPostData(await getPopularPosts(selectedParams));
   };
+
+  const fetchMorePosts = async () => {
+    console.log(posts, after)
+      const next = await getPopularPosts({
+        ...selectedParams,
+        after: after
+      });
+      setPostData({ ...next, posts: [...posts, ...next.posts] });
+    };
+
+  // useEffect(() => {
+  //   const observer = new IntersectionObserver(fetchMorePosts);
+  //   if (loader.current) observer.observe(loader.current);
+  //   return () => {
+  //     if (loader.current) observer.unobserve(loader.current);
+  //   };
+  // }, []);
+
+  // useEffect(() => {
+  //   console.log(nextPosts)
+  //   if (nextPosts.hasOwnProperty("posts")) setPostData(nextPosts)
+  // }, [nextPosts]);
+
+  // const fetchMorePosts = async (entities: any) => {
+  //   const target = entities[0];
+  //   console.log(entities[0], posts, after)
+  //   if (target.isIntersecting) {
+  //     const next = await getPopularPosts({
+  //       ...selectedParams,
+  //       after: after
+  //     });
+  //     setNextPosts(next.posts ? { ...next, posts: [...posts, ...next.posts] } : { ...nextPosts, posts: [{} as Post] });
+  //   }
+  // };
 
   return (
     <Layout title="Reddium">
@@ -79,16 +120,6 @@ const IndexPage = ({ postData, trendingSubs, params }: any) => {
                 dataObj={selectedParams}
                 updateParams={setSelectedParams}
               />
-              {selectedParams.sort_type == "temp_hot" ? (
-                <Dropdown
-                  key={GEO_FILTER}
-                  id={GEO_FILTER}
-                  dataObj={selectedParams}
-                  updateParams={setSelectedParams}
-                />
-              ) : (
-                ""
-              )}
               {selectedParams.sort_type == "top" ? (
                 <Dropdown
                   key={TIME_FILTER}
@@ -113,26 +144,34 @@ const IndexPage = ({ postData, trendingSubs, params }: any) => {
                 </p>
               </div>
               <div>
-                {trendingSubs.posts[0].title
-                  .split(":")[1]
-                  .split(",")
-                  .slice(0, 3)
-                  .map((sub: string, ind: number) => (
-                    <div
-                      key={ind}
-                      className="mb-3 pb-3 sub-bottom-border justify-between flex items-center"
-                    >
-                      <a
-                        className="heading-text tracking-wide"
-                        href={"https://reddit.com" + sub}
+                {trendingSubs.hasOwnProperty("posts") ? (
+                  trendingSubs.posts[0].title
+                    .split(":")[1]
+                    .split(",")
+                    .slice(0, 3)
+                    .map((sub: string, ind: number) => (
+                      <div
+                        key={ind}
+                        className="mb-3 pb-3 sub-bottom-border justify-between flex items-center"
                       >
-                        {sub}
-                      </a>
-                      <button className="px-3 py-1 cursor-pointer rounded btn-outline-green text-sm">
-                        Follow
-                      </button>
-                    </div>
-                  ))}
+                        <a
+                          className="heading-text tracking-wide"
+                          href={"https://reddit.com" + sub}
+                        >
+                          {sub}
+                        </a>
+                        <button className="px-3 py-1 cursor-pointer rounded btn-outline-green text-sm">
+                          Follow
+                        </button>
+                      </div>
+                    ))
+                ) : (
+                  <div className="shimmer">
+                    <div className="h-4 w-full mb-5 mx-3 pb-3 shimmer-bg"></div>
+                    <div className="h-4 w-full mb-5 mx-3 pb-3 shimmer-bg"></div>
+                    <div className="h-4 w-full mb-5 mx-3 pb-3 shimmer-bg"></div>
+                  </div>
+                )}
                 <a
                   className="main-green text-sm"
                   href="https://reddit.com/r/trendingsubreddits"
@@ -146,7 +185,7 @@ const IndexPage = ({ postData, trendingSubs, params }: any) => {
       </div>
       <div className="w-full main-container max-width-main pb-4 pt-10 sub-top-border">
         <div className="w-full flex mb-4 flex-row items-center">
-          <img className="mr-3" src="trending.svg"/>
+          <img className="mr-3" src="trending.svg" />
           <div>
             <p className="heading-text text-sm leading-4 uppercase tracking-wide">
               Trending on Reddit
@@ -164,19 +203,30 @@ const IndexPage = ({ postData, trendingSubs, params }: any) => {
           {posts.slice(11, posts.length).map((p: any) => (
             <WideCard key={p.id} {...p} />
           ))}
-        </div>
-        <div className="grid-right">
-            <div className="sticky top-8 p-8 about-bg flex flex-col">
-            <div className="w-full flex mb-4 flex-row items-center">
-          <img className="mr-3" src="bookmarks.svg"/>
-          <div>
-            <p className="heading-text text-sm leading-4 uppercase tracking-wide">
-              About Reddium
-            </p>
+          <div className="w-full text-center" ref={loader}>
+            {/* <WideCard {...({} as Post)} /> */}
+            <button
+                className="my-4 mx-auto  p-2 cursor-pointer w-64 max-w-full btn-black text-white rounded"
+                onClick={fetchMorePosts}
+              >
+                Load More
+              </button>
           </div>
         </div>
-            <div className="w-full"><p>Lorem ipsum dolor sin amet</p></div>
+        <div className="grid-right">
+          <div className="sticky top-8 p-8 about-bg flex flex-col">
+            <div className="w-full flex mb-4 flex-row items-center">
+              <img className="mr-3" src="bookmarks.svg" />
+              <div>
+                <p className="heading-text text-sm leading-4 uppercase tracking-wide">
+                  About Reddium
+                </p>
+              </div>
             </div>
+            <div className="w-full">
+              <p>Lorem ipsum dolor sin amet</p>
+            </div>
+          </div>
         </div>
       </div>
     </Layout>

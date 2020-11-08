@@ -19,6 +19,8 @@ export type Post = {
   ups: number
   url: string
   permalink: string
+  selftext: string
+  num_comments: number
   thumbnail?: string
   created_utc: number
 }
@@ -26,6 +28,7 @@ export type Post = {
 export type Props = {
   children?: ReactNode
   title?: string
+  backgroundColor?: string
 }
 
 export type DropdownProps = {
@@ -42,4 +45,9 @@ export type QueryParams = {
   limit?: number
   after?: string
   t?: string
+}
+
+export type PostList = {
+  posts?: Post[]
+  after?: string
 }

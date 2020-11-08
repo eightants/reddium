@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Head from "next/head";
-import Link from "next/link";
 import { Props } from "../interfaces";
+import Link from "next/link";
 
-const Layout = ({ children, title }: Props) => {
+const Subpage = ({ children, title, backgroundColor = "white" }: Props) => {
   const [showSearch, setShowSearch] = useState(false);
   return (
     <div>
@@ -12,28 +12,24 @@ const Layout = ({ children, title }: Props) => {
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <header>
-        <nav className="flex items-center justify-center max-width-main mx-auto z-50 h-16 my-6">
+      <header
+        style={{
+          backgroundColor: backgroundColor
+        }}
+      >
+        <nav className="flex items-center justify-center max-width-sub mx-auto z-50 h-16">
           <div className="flex-grow flex items-center">
-            <Link href="/">
-              <div className="pr-4 nav-img h-8 flex flex-row items-center cursor-pointer">
-                <img className="h-full" src="medium_symbol.svg" />
-                <h1 className="ml-4 site-name text-3xl tracking-tighter">
-                  Reddium
-                </h1>
-              </div>
-            </Link>
-            <div className="pl-4">
-              <h1 className="font-bold text-lg leading-6 nav-greeting">
-                Good morning
-              </h1>
+            <div className="pr-4 h-6 flex flex-row items-center cursor-pointer">
+              <Link href="/">
+                <img className="h-full" src="/medium_symbol.svg" />
+              </Link>
             </div>
           </div>
           <div className="items-center flex flex-row">
             <div className="flex flex-row items-center">
               <img
                 className="cursor-pointer p-1 mr-2 ml-3"
-                src="search.svg"
+                src="/search.svg"
                 onClick={() => setShowSearch(!showSearch)}
               />
               {showSearch ? (
@@ -57,4 +53,4 @@ const Layout = ({ children, title }: Props) => {
   );
 };
 
-export default Layout;
+export default Subpage;
