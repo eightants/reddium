@@ -22,6 +22,6 @@ export function getIntFromString(s: string, max: number) {
 }
 
 export function limitText(text: string, max: number) {
-  if (text.length < max) return text;
-  return text.slice(0, max) + "...";
+  if (text.length < max) return text.split('&amp;').join('&');
+  return text.slice(0, max).split('&amp;').join('&') + "...";
 }

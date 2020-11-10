@@ -1,6 +1,6 @@
 import React from "react";
 import { getIntFromString, getTime, limitText } from "../../functions/common";
-import { TITLE_MAX } from "../../functions/constants";
+import { PLACEHOLDER_IMAGES, TITLE_MAX } from "../../functions/constants";
 import { Post } from "../../interfaces";
 
 const LargeCard = (post: Post) =>
@@ -13,7 +13,11 @@ const LargeCard = (post: Post) =>
             "url(" +
             (post.thumbnail && post.thumbnail.includes("://")
               ? post.thumbnail
-              : "/default.jpg") +
+              : `/placeholders/${
+                  PLACEHOLDER_IMAGES[
+                    getIntFromString(post.title, PLACEHOLDER_IMAGES.length)
+                  ] || "default.jpg"
+                }`) +
             ")",
           minHeight: "240px",
           backgroundSize: "cover"

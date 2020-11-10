@@ -11,7 +11,6 @@ export async function getPopularPosts({
   limit = 25,
   after = ""
 }: QueryParams) {
-    console.log(subreddit, sort_type, t)
   const res = await (
     await fetch(
       `https://www.reddit.com/r/${subreddit}/${sort_type}.json?limit=${limit}&after=${after}&t=${t}`
@@ -31,3 +30,17 @@ export async function getSubredditInfo({ subreddit }: QueryParams) {
   ).json();
   return res.data;
 }
+
+export async function getPostInfo({ subreddit, postid }: QueryParams) {
+    const res = await (
+      await fetch(`https://www.reddit.com/r/${subreddit}/comments/${postid}.json`)
+    ).json();
+    if (!res.hasOwnProperty("error")) {
+        const comments: Post[] = res[1].data.children.map((post: any) => post.data);
+      return {
+        post: res[0].data.children[0].data,
+        comments: comments
+      };
+    }
+    return res;
+  }

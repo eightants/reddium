@@ -16,6 +16,12 @@
   font-weight: 700;
 }
 
+@font-face {
+  font-family: "Charter";
+  src: url("../public/Charter-Regular.otf");
+  font-weight: 500;
+}
+
 h1,
 h2 {
   font-family: "Sohne", sans-serif;
@@ -29,6 +35,10 @@ h2 {
 
 .site-name {
   font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.heading-font {
+  font-family: "Charter", Georgia, "Times New Roman", Times, serif;
 }
 
 .heading-text {
@@ -45,7 +55,7 @@ h2 {
 }
 
 .max-w-600 {
-    max-width: 600px;
+  max-width: 600px;
 }
 
 .sub-line-height {
@@ -53,11 +63,11 @@ h2 {
 }
 
 .text-18 {
-    font-size: 17px;
+  font-size: 17px;
 }
 
 .text-16 {
-    font-size: 15px;
+  font-size: 15px;
 }
 
 .sub-opacity-68 {
@@ -73,11 +83,23 @@ h2 {
 }
 
 .link-black-hover:hover {
-    color: rgb(41, 41, 41);
+  color: rgb(41, 41, 41);
+}
+
+.link-green-hover:hover {
+  color: rgb(7, 59, 6);
 }
 
 .about-bg {
   background-color: rgb(250, 250, 250);
+}
+
+.green-bg {
+  background-color: rgb(26, 137, 23);
+}
+
+.blue-bg {
+  background-color: rgb(53, 88, 118);
 }
 
 .main-grey {
@@ -108,8 +130,13 @@ h2 {
   border: 1px solid rgb(41, 41, 41);
 }
 
+.btn-outline-white {
+  background-color: transparent;
+  color: white;
+  border: 1px solid white;
+}
+
 .main-container {
-  display: flex;
   align-items: stretch;
   flex-direction: row;
   flex-wrap: wrap;
@@ -134,8 +161,8 @@ h2 {
 }
 
 .sub-thumbnail-img {
-    flex: 0 0 140px;
-  }
+  flex: 0 0 140px;
+}
 
 .wide-thumbnail-img {
   flex: 0 0 180px;
@@ -206,15 +233,6 @@ h2 {
   top: 32px;
 }
 
-.overlay-hide {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: -10;
-  width: 100vw;
-  height: 100vh;
-}
-
 .shimmer-bg {
   background-color: rgba(242, 242, 242, 1);
 }
@@ -226,6 +244,17 @@ h2 {
 .search-bar {
   transition: width 140ms ease-in 0s, padding 140ms ease-in 0s;
   background-color: transparent;
+}
+
+.load-more:hover {
+  background: rgb(242, 242, 242) none repeat scroll 0 0;
+}
+
+@media (max-width: 1200px) {
+  .mid-container {
+    max-width: 50%;
+    flex-basis: 50%;
+  }
 }
 
 @-webkit-keyframes k1 {

@@ -1,29 +1,35 @@
 import React from "react";
 import { getIntFromString, getTime, limitText } from "../../functions/common";
-import { TITLE_MAX } from "../../functions/constants";
+import { PLACEHOLDER_IMAGES, TITLE_MAX } from "../../functions/constants";
 import { Post } from "../../interfaces";
 
 const SubGridCard = (post: Post) =>
   post.hasOwnProperty("title") ? (
-    <div className="overflow-hidden w-4/12 flex-grow px-4 mb-4">
+    <div className="overflow-hidden w-4/12 flex-grow px-4 mb-4 md:w-full md:px-0">
       <div>
-        <div
-          className="w-full shimmer-bg"
-          style={{
-            backgroundImage:
-              "url(" +
-              (post.thumbnail && post.thumbnail.includes("://")
-                ? post.thumbnail
-                : "/default.jpg") +
-              ")",
-            height: "180px",
-            backgroundSize: "cover"
-          }}
-        ></div>
-        <h2 className="text-xl pt-6">{limitText(post.title, TITLE_MAX)}</h2>
-        <h4 className="text-lg my-2 tracking-tight sub-opacity-54 w-10/12">
-          {limitText(post.selftext, TITLE_MAX)}
-        </h4>
+        <a href={post.permalink}>
+          <div
+            className="w-full shimmer-bg"
+            style={{
+              backgroundImage:
+                "url(" +
+                (post.thumbnail && post.thumbnail.includes("://")
+                  ? post.thumbnail
+                  : `/placeholders/${
+                      PLACEHOLDER_IMAGES[
+                        getIntFromString(post.title, PLACEHOLDER_IMAGES.length)
+                      ] || "default.jpg"
+                    }`) +
+                ")",
+              height: "180px",
+              backgroundSize: "cover"
+            }}
+          ></div>
+          <h2 className="text-xl pt-6">{limitText(post.title, TITLE_MAX)}</h2>
+          <h4 className="text-lg my-2 tracking-tight sub-opacity-54 w-10/12">
+            {limitText(post.selftext, TITLE_MAX)}
+          </h4>
+        </a>
         <div className="sub-text font-medium main-black flex flex-row items-center mb-4 pt-3">
           <div
             className="rounded-full"
@@ -38,7 +44,7 @@ const SubGridCard = (post: Post) =>
             }}
           ></div>
           <div className="pl-2 font-semibold">
-            <span className="sub-link-grey">{post.author}</span>
+            <span className="main-green">{post.author}</span>
             <div className="tracking-5 sub-opacity-68">
               <span>{getTime(post.created_utc)}</span>
               <span className="px-2">·</span>
@@ -53,7 +59,7 @@ const SubGridCard = (post: Post) =>
       <div
         className="w-full shimmer-bg"
         style={{
-          height: "180px",
+          height: "180px"
         }}
       ></div>
       <div className="w-full">

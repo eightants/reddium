@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Head from "next/head";
-import Link from "next/link";
 import { Props } from "../interfaces";
 
 const Layout = ({ children, title }: Props) => {
@@ -13,16 +12,16 @@ const Layout = ({ children, title }: Props) => {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <header>
-        <nav className="flex items-center justify-center max-width-main mx-auto z-50 h-16 my-6">
+        <nav className="flex items-center justify-center max-width-main mx-auto z-50 h-16 my-6 lg:mx-12">
           <div className="flex-grow flex items-center">
-            <Link href="/">
+            <a href="/">
               <div className="pr-4 nav-img h-8 flex flex-row items-center cursor-pointer">
                 <img className="h-full" src="medium_symbol.svg" />
                 <h1 className="ml-4 site-name text-3xl tracking-tighter">
                   Reddium
                 </h1>
               </div>
-            </Link>
+            </a>
             <div className="pl-4">
               <h1 className="font-bold text-lg leading-6 nav-greeting">
                 Good morning

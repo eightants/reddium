@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Head from "next/head";
 import { Props } from "../interfaces";
 
-const Subpage = ({ children, title, backgroundColor = "white" }: Props) => {
+const PostLayout = ({ children, title }: Props) => {
   const [showSearch, setShowSearch] = useState(false);
   return (
     <div>
@@ -11,12 +11,8 @@ const Subpage = ({ children, title, backgroundColor = "white" }: Props) => {
         <meta charSet="utf-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
-      <header
-        style={{
-          backgroundColor: backgroundColor
-        }}
-      >
-        <nav className="flex items-center justify-center max-width-sub mx-auto z-50 h-16 lg:mx-12">
+      <header>
+        <nav className="flex px-4 items-center justify-center max-width-main mx-auto z-50 h-16 lg:mx-12">
           <div className="flex-grow flex items-center">
             <div className="pr-4 h-6 flex flex-row items-center cursor-pointer">
               <a href="/">
@@ -52,4 +48,4 @@ const Subpage = ({ children, title, backgroundColor = "white" }: Props) => {
   );
 };
 
-export default Subpage;
+export default PostLayout;

@@ -1,5 +1,6 @@
 import React from "react";
-import { getIntFromString, getTime } from "../../functions/common";
+import { getIntFromString, getTime, limitText } from "../../functions/common";
+import { PLACEHOLDER_IMAGES, TITLE_MAX } from "../../functions/constants";
 import { Post } from "../../interfaces";
 
 const MidCard = ({
@@ -13,18 +14,22 @@ const MidCard = ({
     <div className="mr-4 pb-8 flex overflow-hidden">
       <div className="w-full block pr-5 flex-grow">
         <div className="sub-text font-medium main-black mt-1 flex flex-row items-center">
-        <div className="rounded-full"
-        style={{
-          backgroundImage: `url('/avatars/avatar (${getIntFromString(author, 18)}).jpg')`,
-          width: "20px",
-          height: "20px",
-          backgroundSize: "cover"
-        }}
-      ></div>
+          <div
+            className="rounded-full"
+            style={{
+              backgroundImage: `url('/avatars/avatar (${getIntFromString(
+                author,
+                18
+              )}).jpg')`,
+              width: "20px",
+              height: "20px",
+              backgroundSize: "cover"
+            }}
+          ></div>
           <span className="ml-2 font-semibold">{author}</span>
         </div>
         <div className="overflow-hidden max-h-16">
-          <h2 className="mt-2">{title}</h2>
+          <h2 className="mt-2">{limitText(title, TITLE_MAX)}</h2>
         </div>
         <div className="sub-text mt-2">
           <span>{getTime(created_utc)}</span>
@@ -39,7 +44,11 @@ const MidCard = ({
             "url(" +
             (thumbnail && thumbnail.includes("://")
               ? thumbnail
-              : "/default.jpg") +
+              : `/placeholders/${
+                  PLACEHOLDER_IMAGES[
+                    getIntFromString(title, PLACEHOLDER_IMAGES.length)
+                  ] || "default.jpg"
+                }`) +
             ")",
           width: "100px",
           height: "100px",

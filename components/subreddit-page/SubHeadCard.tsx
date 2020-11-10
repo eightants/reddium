@@ -1,5 +1,6 @@
 import React from "react";
 import { getIntFromString, getTime } from "../../functions/common";
+import { PLACEHOLDER_IMAGES } from "../../functions/constants";
 import { Post } from "../../interfaces";
 
 const SubHeadCard = (post: Post) =>
@@ -20,7 +21,7 @@ const SubHeadCard = (post: Post) =>
             }}
           ></div>
           <div className="pl-2 font-semibold">
-            <span className="sub-link-grey">{post.author}</span>
+            <span className="main-green">{post.author}</span>
             <div className="tracking-5 sub-opacity-68">
               <span>{getTime(post.created_utc)}</span>
               <span className="px-2">·</span>
@@ -35,7 +36,11 @@ const SubHeadCard = (post: Post) =>
               "url(" +
               (post.thumbnail && post.thumbnail.includes("://")
                 ? post.thumbnail
-                : "/default.jpg") +
+                : `/placeholders/${
+                  PLACEHOLDER_IMAGES[
+                      getIntFromString(post.title, PLACEHOLDER_IMAGES.length)
+                    ] || "default.jpg"
+                  }`) +
               ")",
             height: "180px",
             width: "600px",

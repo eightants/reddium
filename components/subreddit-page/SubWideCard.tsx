@@ -1,6 +1,10 @@
 import React from "react";
 import { getIntFromString, getTime, limitText } from "../../functions/common";
-import { DESC_MAX, TITLE_MAX } from "../../functions/constants";
+import {
+  DESC_MAX,
+  PLACEHOLDER_IMAGES,
+  TITLE_MAX
+} from "../../functions/constants";
 import { Post } from "../../interfaces";
 
 const SubWideCard = ({
@@ -8,7 +12,7 @@ const SubWideCard = ({
   created_utc,
   subreddit_name_prefixed,
   author,
-  thumbnail, 
+  thumbnail,
   selftext
 }: Post) =>
   title ? (
@@ -19,8 +23,8 @@ const SubWideCard = ({
             {limitText(title, TITLE_MAX)}
           </h2>
           <h4 className="text-lg tracking-tight sub-opacity-54">
-          {limitText(selftext, DESC_MAX)}
-        </h4>
+            {limitText(selftext, DESC_MAX)}
+          </h4>
         </div>
         <div
           className="sub-thumbnail-img"
@@ -29,7 +33,11 @@ const SubWideCard = ({
               "url(" +
               (thumbnail && thumbnail.includes("://")
                 ? thumbnail
-                : "/default.jpg") +
+                : `/placeholders/${
+                  PLACEHOLDER_IMAGES[
+                      getIntFromString(title, PLACEHOLDER_IMAGES.length)
+                    ] || "default.jpg"
+                  }`) +
               ")",
             width: "140px",
             height: "120px",
@@ -51,7 +59,7 @@ const SubWideCard = ({
           }}
         ></div>
         <div className="pl-2 font-semibold">
-          <span className="sub-link-grey">{author}</span>
+          <span className="main-green">{author}</span>
           <div className="tracking-5 sub-opacity-68">
             <span>{getTime(created_utc)}</span>
             <span className="px-2">·</span>

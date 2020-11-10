@@ -45,6 +45,7 @@ export type QueryParams = {
   limit?: number
   after?: string
   t?: string
+  postid?: string
 }
 
 export type PostList = {

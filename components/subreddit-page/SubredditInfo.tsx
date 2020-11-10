@@ -10,7 +10,7 @@ const SubredditInfo = (subredditInfo: any) => (
             "url(" +
             (subredditInfo.icon_img && subredditInfo.icon_img.includes("://")
               ? subredditInfo.icon_img
-              : "/default.jpg") +
+              : "/placeholders/default.jpg") +
             ")",
           width: "36px",
           height: "36px",
@@ -26,7 +26,7 @@ const SubredditInfo = (subredditInfo: any) => (
         {subredditInfo.public_description}
       </div>
       <a
-        className="sub-link-grey link-black-hover"
+        className="main-green link-green-hover"
         href={`https://reddit.com/r/${subredditInfo.display_name}`}
       >
         More information
