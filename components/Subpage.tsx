@@ -1,16 +1,12 @@
 import React, { useState } from "react";
-import Head from "next/head";
 import { Props } from "../interfaces";
+import TitleHead from "./TitleHead";
 
 const Subpage = ({ children, title, backgroundColor = "white" }: Props) => {
   const [showSearch, setShowSearch] = useState(false);
   return (
     <div>
-      <Head>
-        <title>{title}</title>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      </Head>
+      <TitleHead title={title} />
       <header
         style={{
           backgroundColor: backgroundColor
@@ -18,11 +14,11 @@ const Subpage = ({ children, title, backgroundColor = "white" }: Props) => {
       >
         <nav className="flex items-center justify-center max-width-sub mx-auto z-50 h-16 lg:mx-12">
           <div className="flex-grow flex items-center">
-            <div className="pr-4 h-6 flex flex-row items-center cursor-pointer">
-              <a href="/">
-                <img className="h-full" src="/medium_symbol.svg" />
-              </a>
-            </div>
+            <a href="/">
+              <div className="pr-4 h-6 flex flex-row items-center cursor-pointer">
+                <img className="h-full" src="/reddium_symbol.svg" />
+              </div>
+            </a>
           </div>
           <div className="items-center flex flex-row">
             <div className="flex flex-row items-center">

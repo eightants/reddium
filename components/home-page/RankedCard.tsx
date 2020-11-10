@@ -6,7 +6,8 @@ const RankedCard = ({
   created_utc,
   subreddit_name_prefixed,
   author,
-  rank
+  rank,
+  permalink
 }: any) =>
   title ? (
     <div className="mid-container">
@@ -18,17 +19,23 @@ const RankedCard = ({
         </div>
         <div className="w-full block pr-5 flex-grow">
           <div className="sub-text font-medium main-black mt-1 flex flex-row items-center">
-          <div className="rounded-full"
-        style={{
-          backgroundImage: `url('/avatars/avatar (${getIntFromString(author, 18)}).jpg')`,
-          width: "20px",
-          height: "20px",
-          backgroundSize: "cover"
-        }}
-      ></div>
-          <span className="ml-2 font-semibold">{author}</span>
+            <div
+              className="rounded-full"
+              style={{
+                backgroundImage: `url('/avatars/avatar (${getIntFromString(
+                  author,
+                  18
+                )}).jpg')`,
+                width: "20px",
+                height: "20px",
+                backgroundSize: "cover"
+              }}
+            ></div>
+            <span className="ml-2 font-semibold">{author}</span>
           </div>
-          <h2 className="mt-2">{title}</h2>
+          <a href={permalink}>
+            <h2 className="mt-2">{title}</h2>
+          </a>
           <div className="sub-text mt-2">
             <span>{getTime(created_utc)}</span>
             <span className="px-2">·</span>

@@ -1,8 +1,6 @@
 // tailwind.config.js
 module.exports = {
-  purge: {
-    content: ["/*.tsx"]
-  },
+  purge: ["./components/**/*.tsx", "./pages/**/*.tsx"],
   theme: {
     screens: {
       xl: { max: "1579px" },

@@ -9,7 +9,8 @@ const WideCard = ({
   subreddit_name_prefixed,
   author,
   thumbnail,
-  selftext
+  selftext,
+  permalink
 }: Post) =>
   title ? (
     <div className="mr-4 pb-8 flex overflow-hidden">
@@ -29,36 +30,40 @@ const WideCard = ({
           ></div>
           <span className="ml-2 font-semibold">{author}</span>
         </div>
-        <h2 className="mt-2 overflow-hidden max-h-14 leading-8 text-2xl">
-          {limitText(title, TITLE_MAX)}
-        </h2>
-        <h4 className="text-base mb-2 tracking-tight sub-opacity-54">
-          {limitText(selftext, TITLE_MAX)}
-        </h4>
+        <a href={permalink}>
+          <h2 className="mt-2 overflow-hidden max-h-14 leading-8 text-2xl">
+            {limitText(title, TITLE_MAX)}
+          </h2>
+          <h4 className="text-base mb-2 tracking-tight sub-opacity-54">
+            {limitText(selftext, TITLE_MAX)}
+          </h4>
+        </a>
         <div className="sub-text mt-2">
           <span>{getTime(created_utc)}</span>
           <span className="px-2">·</span>
           <span>{subreddit_name_prefixed}</span>
         </div>
       </div>
-      <div
-        className="wide-thumbnail-img"
-        style={{
-          backgroundImage:
-            "url(" +
-            (thumbnail && thumbnail.includes("://")
-              ? thumbnail
-              : `/placeholders/${
-                  PLACEHOLDER_IMAGES[
-                    getIntFromString(title, PLACEHOLDER_IMAGES.length)
-                  ] || "default.jpg"
-                }`) +
-            ")",
-          width: "180px",
-          height: "112px",
-          backgroundSize: "cover"
-        }}
-      ></div>
+      <a href={permalink}>
+        <div
+          className="wide-thumbnail-img"
+          style={{
+            backgroundImage:
+              "url(" +
+              (thumbnail && thumbnail.includes("://")
+                ? thumbnail
+                : `/placeholders/${
+                    PLACEHOLDER_IMAGES[
+                      getIntFromString(title, PLACEHOLDER_IMAGES.length)
+                    ] || "default.jpg"
+                  }`) +
+              ")",
+            width: "180px",
+            height: "112px",
+            backgroundSize: "cover"
+          }}
+        ></div>
+      </a>
     </div>
   ) : (
     <div className="mr-4 pb-8 flex overflow-hidden shimmer">

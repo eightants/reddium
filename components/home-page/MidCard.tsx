@@ -8,7 +8,8 @@ const MidCard = ({
   created_utc,
   subreddit_name_prefixed,
   author,
-  thumbnail
+  thumbnail,
+  permalink
 }: Post) =>
   title ? (
     <div className="mr-4 pb-8 flex overflow-hidden">
@@ -29,7 +30,9 @@ const MidCard = ({
           <span className="ml-2 font-semibold">{author}</span>
         </div>
         <div className="overflow-hidden max-h-16">
-          <h2 className="mt-2">{limitText(title, TITLE_MAX)}</h2>
+          <a href={permalink}>
+            <h2 className="mt-2">{limitText(title, TITLE_MAX)}</h2>
+          </a>
         </div>
         <div className="sub-text mt-2">
           <span>{getTime(created_utc)}</span>
@@ -37,24 +40,26 @@ const MidCard = ({
           <span>{subreddit_name_prefixed}</span>
         </div>
       </div>
-      <div
-        className="thumbnail-img"
-        style={{
-          backgroundImage:
-            "url(" +
-            (thumbnail && thumbnail.includes("://")
-              ? thumbnail
-              : `/placeholders/${
-                  PLACEHOLDER_IMAGES[
-                    getIntFromString(title, PLACEHOLDER_IMAGES.length)
-                  ] || "default.jpg"
-                }`) +
-            ")",
-          width: "100px",
-          height: "100px",
-          backgroundSize: "cover"
-        }}
-      ></div>
+      <a href={permalink}>
+        <div
+          className="thumbnail-img"
+          style={{
+            backgroundImage:
+              "url(" +
+              (thumbnail && thumbnail.includes("://")
+                ? thumbnail
+                : `/placeholders/${
+                    PLACEHOLDER_IMAGES[
+                      getIntFromString(title, PLACEHOLDER_IMAGES.length)
+                    ] || "default.jpg"
+                  }`) +
+              ")",
+            width: "100px",
+            height: "100px",
+            backgroundSize: "cover"
+          }}
+        ></div>
+      </a>
     </div>
   ) : (
     <div className="mr-4 pb-8 flex overflow-hidden shimmer">

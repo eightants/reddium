@@ -13,37 +13,40 @@ const SubWideCard = ({
   subreddit_name_prefixed,
   author,
   thumbnail,
-  selftext
+  selftext,
+  permalink
 }: Post) =>
   title ? (
     <div className="py-8 overflow-hidden sub-bottom-border">
       <div className="flex">
-        <div className="w-full block pr-5 flex-grow">
-          <h2 className="mt-2 overflow-hidden max-h-14 leading-8 text-2xl font-normal tracking-normal">
-            {limitText(title, TITLE_MAX)}
-          </h2>
-          <h4 className="text-lg tracking-tight sub-opacity-54">
-            {limitText(selftext, DESC_MAX)}
-          </h4>
-        </div>
-        <div
-          className="sub-thumbnail-img"
-          style={{
-            backgroundImage:
-              "url(" +
-              (thumbnail && thumbnail.includes("://")
-                ? thumbnail
-                : `/placeholders/${
-                  PLACEHOLDER_IMAGES[
-                      getIntFromString(title, PLACEHOLDER_IMAGES.length)
-                    ] || "default.jpg"
-                  }`) +
-              ")",
-            width: "140px",
-            height: "120px",
-            backgroundSize: "cover"
-          }}
-        ></div>
+        <a href={permalink}>
+          <div className="w-full block pr-5 flex-grow">
+            <h2 className="mt-2 overflow-hidden max-h-14 leading-8 text-2xl font-normal tracking-normal">
+              {limitText(title, TITLE_MAX)}
+            </h2>
+            <h4 className="text-lg tracking-tight sub-opacity-54">
+              {limitText(selftext, DESC_MAX)}
+            </h4>
+          </div>
+          <div
+            className="sub-thumbnail-img"
+            style={{
+              backgroundImage:
+                "url(" +
+                (thumbnail && thumbnail.includes("://")
+                  ? thumbnail
+                  : `/placeholders/${
+                      PLACEHOLDER_IMAGES[
+                        getIntFromString(title, PLACEHOLDER_IMAGES.length)
+                      ] || "default.jpg"
+                    }`) +
+                ")",
+              width: "140px",
+              height: "120px",
+              backgroundSize: "cover"
+            }}
+          ></div>
+        </a>
       </div>
       <div className="sub-text font-medium main-black flex flex-row items-center mb-4 pt-3">
         <div
