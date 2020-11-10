@@ -47,6 +47,14 @@ const SubredditPage = ({ postData, subredditInfo, params }: any) => {
     window.location.href = `/r/${selectedParams.subreddit}/${selectedParams.sort_type}?t=${selectedParams.t}&limit=${selectedParams.limit}`;
   };
 
+  const fetchMorePosts = async () => {
+    const next = await getPopularPosts({
+      ...selectedParams,
+      after: after
+    });
+    setPostData({ ...next, posts: [...posts, ...next.posts] });
+  };
+
   return (
     <Subpage title={subredditInfo.display_name} backgroundColor="rgb(250,250,250)">
       <Header {...params} />
@@ -101,6 +109,15 @@ const SubredditPage = ({ postData, subredditInfo, params }: any) => {
           {posts.slice(3, posts.length).map((p: any) => (
             <SubWideCard key={p.id} {...p} />
           ))}
+          <div className="w-full text-center">
+            <button
+              className="my-4 mx-auto p-2 cursor-pointer w-48 max-w-full load-more main-black font-semibold rounded flex flex-row justify-between items-center"
+              onClick={fetchMorePosts}
+            >
+              <div className="flex-grow text-center">Show More</div>
+              <img className="ml-3" src="/down_arrow.svg" />
+            </button>
+          </div>
         </div>
         <div className="grid-right md:hidden">
           <div className="sticky top-8 p-8">
