@@ -18,7 +18,7 @@ export function getRandomInt(max: number) {
 }
 
 export function getIntFromString(s: string, max: number) {
-  return (s.length % max) + 1;
+  return (s.length % max);
 }
 
 export function limitText(text: string, max: number) {

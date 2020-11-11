@@ -58,17 +58,17 @@ const SubredditPage = ({ postData, subredditInfo, params }: any) => {
   return (
     <Subpage title={subredditInfo.display_name} backgroundColor="rgb(250,250,250)">
       <Header {...params} />
-      <section className="w-full mx-auto max-width-sub pb-10 mt-6 lg:w-auto lg:mx-12">
+      <section className="w-full mx-auto max-width-sub pb-10 mt-6 lg:w-auto lg:mx-12 sm:mx-6">
         <header className="sub-bottom-border pb-2">
           <span className="text-lg sub-opacity-68">Featured</span>
         </header>
-        <div className="my-6 flex flex-row flex-wrap">
+        <div className="my-6 flex flex-row flex-wrap sm-border-b sm:pb-4">
           {posts.slice(0, 3).map((p: any) => (
             <SubGridCard key={p.id} {...p} />
           ))}
         </div>
       </section>
-      <section className="hidden mx-12 w-auto max-width-sub pb-10 mt-6 md:block">
+      <section className="hidden mx-12 w-auto max-width-sub pb-10 mt-6 md:block sm:mx-6">
             <SubredditInfo {...subredditInfo} />
             <div className="h-full pt-8">
               <div className="mb-12">
@@ -101,7 +101,7 @@ const SubredditPage = ({ postData, subredditInfo, params }: any) => {
               </div>
             </div>
       </section>
-      <div className="w-full flex main-container max-width-sub pb-4 posts-grid md:block lg:w-auto lg:mx-12">
+      <div className="w-full flex main-container max-width-sub pb-4 posts-grid md:block lg:w-auto lg:mx-12 sm:mx-6">
         <div className="w-full mb-4 grid-left">
           <header className="sub-bottom-border pb-2">
             <span className="text-lg sub-opacity-68">Trending</span>

@@ -1,11 +1,12 @@
 import React from "react";
-import { getIntFromString, getTime, limitText } from "../../functions/common";
+import { getIntFromString, limitText } from "../../functions/common";
 import {
   DESC_MAX,
   PLACEHOLDER_IMAGES,
   TITLE_MAX
 } from "../../functions/constants";
 import { Post } from "../../interfaces";
+import { PostMetadata } from "../common";
 
 const SubWideCard = ({
   title,
@@ -18,18 +19,18 @@ const SubWideCard = ({
 }: Post) =>
   title ? (
     <div className="py-8 overflow-hidden sub-bottom-border">
-      <div className="flex">
-        <a href={permalink}>
+      <a href={permalink}>
+        <div className="flex">
           <div className="w-full block pr-5 flex-grow">
-            <h2 className="mt-2 overflow-hidden max-h-14 leading-8 text-2xl font-normal tracking-normal">
+            <h2 className="mt-2 overflow-hidden max-h-14 leading-8 text-2xl font-normal tracking-normal sm:text-lg sm:leading-5">
               {limitText(title, TITLE_MAX)}
             </h2>
-            <h4 className="text-lg tracking-tight sub-opacity-54">
+            <h4 className="text-lg tracking-tight sub-opacity-54 sm:text-base">
               {limitText(selftext, DESC_MAX)}
             </h4>
           </div>
           <div
-            className="sub-thumbnail-img"
+            className="sub-thumbnail-img sm:hidden"
             style={{
               backgroundImage:
                 "url(" +
@@ -46,8 +47,26 @@ const SubWideCard = ({
               backgroundSize: "cover"
             }}
           ></div>
-        </a>
-      </div>
+          <div
+            className="mini-thumbnail-img hidden sm:block"
+            style={{
+              backgroundImage:
+                "url(" +
+                (thumbnail && thumbnail.includes("://")
+                  ? thumbnail
+                  : `/placeholders/${
+                      PLACEHOLDER_IMAGES[
+                        getIntFromString(title, PLACEHOLDER_IMAGES.length)
+                      ] || "default.jpg"
+                    }`) +
+                ")",
+              width: "80px",
+              height: "80px",
+              backgroundSize: "cover"
+            }}
+          ></div>
+        </div>
+      </a>
       <div className="sub-text font-medium main-black flex flex-row items-center mb-4 pt-3">
         <div
           className="rounded-full"
@@ -63,11 +82,11 @@ const SubWideCard = ({
         ></div>
         <div className="pl-2 font-semibold">
           <span className="main-green">{author}</span>
-          <div className="tracking-5 sub-opacity-68">
-            <span>{getTime(created_utc)}</span>
-            <span className="px-2">·</span>
-            <span>{subreddit_name_prefixed}</span>
-          </div>
+          <PostMetadata
+            className="tracking-5 sub-opacity-68"
+            created_utc={created_utc}
+            subreddit_name_prefixed={subreddit_name_prefixed}
+          />
         </div>
       </div>
     </div>

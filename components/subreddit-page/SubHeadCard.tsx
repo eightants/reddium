@@ -1,7 +1,8 @@
 import React from "react";
-import { getIntFromString, getTime } from "../../functions/common";
+import { getIntFromString } from "../../functions/common";
 import { PLACEHOLDER_IMAGES } from "../../functions/constants";
 import { Post } from "../../interfaces";
+import { PostMetadata } from "../common";
 
 const SubHeadCard = (post: Post) =>
   post.hasOwnProperty("title") ? (
@@ -22,11 +23,11 @@ const SubHeadCard = (post: Post) =>
           ></div>
           <div className="pl-2 font-semibold">
             <span className="main-green">{post.author}</span>
-            <div className="tracking-5 sub-opacity-68">
-              <span>{getTime(post.created_utc)}</span>
-              <span className="px-2">·</span>
-              <span>{post.subreddit_name_prefixed}</span>
-            </div>
+            <PostMetadata
+              className="tracking-5 sub-opacity-68"
+              created_utc={post.created_utc}
+              subreddit_name_prefixed={post.subreddit_name_prefixed}
+            />
           </div>
         </div>
         <div
@@ -37,7 +38,7 @@ const SubHeadCard = (post: Post) =>
               (post.thumbnail && post.thumbnail.includes("://")
                 ? post.thumbnail
                 : `/placeholders/${
-                  PLACEHOLDER_IMAGES[
+                    PLACEHOLDER_IMAGES[
                       getIntFromString(post.title, PLACEHOLDER_IMAGES.length)
                     ] || "default.jpg"
                   }`) +

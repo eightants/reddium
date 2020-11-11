@@ -1,5 +1,6 @@
 import React from "react";
-import { getIntFromString, getTime } from "../../functions/common";
+import { getIntFromString } from "../../functions/common";
+import { PostMetadata } from "../common";
 
 const RankedCard = ({
   title,
@@ -36,11 +37,11 @@ const RankedCard = ({
           <a href={permalink}>
             <h2 className="mt-2">{title}</h2>
           </a>
-          <div className="sub-text mt-2">
-            <span>{getTime(created_utc)}</span>
-            <span className="px-2">·</span>
-            <span>{subreddit_name_prefixed}</span>
-          </div>
+          <PostMetadata
+            className="sub-text mt-2"
+            created_utc={created_utc}
+            subreddit_name_prefixed={subreddit_name_prefixed}
+          />
         </div>
       </div>
     </div>

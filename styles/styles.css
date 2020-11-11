@@ -84,6 +84,7 @@ h2 {
 
 .link-black-hover:hover {
   color: rgb(41, 41, 41);
+  opacity: 1;
 }
 
 .link-green-hover:hover {
@@ -158,6 +159,10 @@ h2 {
 
 .thumbnail-img {
   flex: 0 0 100px;
+}
+
+.mini-thumbnail-img {
+  flex: 0 0 80px;
 }
 
 .sub-thumbnail-img {
@@ -250,10 +255,29 @@ h2 {
   background: rgb(242, 242, 242) none repeat scroll 0 0;
 }
 
+.sm-border-b {
+  border: 0px;
+}
+
 @media (max-width: 1200px) {
   .mid-container {
     max-width: 50%;
     flex-basis: 50%;
+  }
+}
+
+@media (max-width: 720px) {
+  .mid-container {
+    max-width: 100%;
+    flex-basis: 100%;
+  }
+
+  .container-divide {
+    border: 0px;
+  }
+
+  .sm-border-b {
+    border-bottom: 1px solid rgb(230, 230, 230);
   }
 }
 

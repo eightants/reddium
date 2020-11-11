@@ -1,6 +1,8 @@
 export const TITLE_MAX = 100;
 export const DESC_MAX = 200;
 
+export const SPECIAL_SUBREDDITS = ["all", "popular"];
+
 export const SORT_TYPE = "sort_type";
 export const GEO_FILTER = "geo_filter";
 export const TIME_FILTER = "t";

@@ -1,7 +1,8 @@
 import React from "react";
-import { getIntFromString, getTime, limitText } from "../../functions/common";
+import { getIntFromString, limitText } from "../../functions/common";
 import { PLACEHOLDER_IMAGES, TITLE_MAX } from "../../functions/constants";
 import { Post } from "../../interfaces";
+import { PostMetadata } from "../common";
 
 const MidCard = ({
   title,
@@ -12,7 +13,7 @@ const MidCard = ({
   permalink
 }: Post) =>
   title ? (
-    <div className="mr-4 pb-8 flex overflow-hidden">
+    <div className="mr-4 pb-8 flex overflow-hidden sm:mr-0">
       <div className="w-full block pr-5 flex-grow">
         <div className="sub-text font-medium main-black mt-1 flex flex-row items-center">
           <div
@@ -34,11 +35,11 @@ const MidCard = ({
             <h2 className="mt-2">{limitText(title, TITLE_MAX)}</h2>
           </a>
         </div>
-        <div className="sub-text mt-2">
-          <span>{getTime(created_utc)}</span>
-          <span className="px-2">·</span>
-          <span>{subreddit_name_prefixed}</span>
-        </div>
+        <PostMetadata
+          className="sub-text mt-2"
+          created_utc={created_utc}
+          subreddit_name_prefixed={subreddit_name_prefixed}
+        />
       </div>
       <a href={permalink}>
         <div

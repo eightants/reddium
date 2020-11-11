@@ -1,5 +1,6 @@
 import { zipObject } from "lodash";
 import React, { useEffect, useRef, useState } from "react";
+import { getTime } from "../../functions/common";
 import {
   POPULAR_PARAM_KEY,
   POPULAR_PARAM_VALUES
@@ -49,8 +50,8 @@ export const Dropdown = ({ id, dataObj, updateParams }: DropdownProps) => {
                 className="my-1 px-4 mx-1 p-2 cursor-pointer"
                 key={ind}
                 onClick={() => {
-                  updateParams({ ...dataObj, [id]: value })
-                  setShowDropdown(false)
+                  updateParams({ ...dataObj, [id]: value });
+                  setShowDropdown(false);
                 }}
               >
                 {value}
@@ -61,6 +62,49 @@ export const Dropdown = ({ id, dataObj, updateParams }: DropdownProps) => {
       ) : (
         <div></div>
       )}
+    </div>
+  );
+};
+
+export const PostMetadata = ({
+  className,
+  created_utc,
+  subreddit_name_prefixed
+}: any) => (
+  <div className={className}>
+    <span>{getTime(created_utc)}</span>
+    <span className="px-2">·</span>
+    <a className="link-black-hover" href={subreddit_name_prefixed}>
+      {subreddit_name_prefixed}
+    </a>
+  </div>
+);
+
+export const NavMenu = () => {
+  const [showSearch, setShowSearch] = useState(false);
+  return (
+    <div className="items-center flex flex-row h-full">
+      <div className="flex flex-row items-center h-full">
+        <img
+          className="cursor-pointer p-1 mr-2 ml-3 sub-opacity-68 link-black-hover"
+          src="/search.svg"
+          onClick={() => setShowSearch(!showSearch)}
+        />
+        {showSearch ? (
+          <input
+            className="search-bar main-black text-base"
+            placeholder="Search Reddit"
+            value=""
+          />
+        ) : (
+          ""
+        )}
+        <img className="h-8 cursor-pointer p-1 ml-2 sub-opacity-68 link-black-hover" src="/coffee.svg" />
+        <img className="h-10 cursor-pointer p-1 ml-2 sub-opacity-68 link-black-hover hidden sm:block" src="/github.svg" />
+      </div>
+      <button className="sm:hidden my-4 ml-4 p-1 px-3 sub-opacity-68 link-black-hover text-sm cursor-pointer max-w-full btn-outline-black rounded">
+        Star on GitHub
+      </button>
     </div>
   );
 };

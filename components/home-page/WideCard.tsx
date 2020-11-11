@@ -1,7 +1,8 @@
 import React from "react";
-import { getIntFromString, getTime, limitText } from "../../functions/common";
+import { getIntFromString, limitText } from "../../functions/common";
 import { PLACEHOLDER_IMAGES, TITLE_MAX } from "../../functions/constants";
 import { Post } from "../../interfaces";
+import { PostMetadata } from "../common";
 
 const WideCard = ({
   title,
@@ -13,7 +14,7 @@ const WideCard = ({
   permalink
 }: Post) =>
   title ? (
-    <div className="mr-4 pb-8 flex overflow-hidden">
+    <div className="mr-4 pb-8 flex overflow-hidden sm:mr-0">
       <div className="w-full block pr-5 flex-grow">
         <div className="sub-text font-medium main-black mt-1 flex flex-row items-center">
           <div
@@ -31,22 +32,22 @@ const WideCard = ({
           <span className="ml-2 font-semibold">{author}</span>
         </div>
         <a href={permalink}>
-          <h2 className="mt-2 overflow-hidden max-h-14 leading-8 text-2xl">
+          <h2 className="mt-2 overflow-hidden max-h-14 leading-8 text-2xl sm:text-base sm:leading-5">
             {limitText(title, TITLE_MAX)}
           </h2>
           <h4 className="text-base mb-2 tracking-tight sub-opacity-54">
             {limitText(selftext, TITLE_MAX)}
           </h4>
         </a>
-        <div className="sub-text mt-2">
-          <span>{getTime(created_utc)}</span>
-          <span className="px-2">·</span>
-          <span>{subreddit_name_prefixed}</span>
-        </div>
+        <PostMetadata
+          className="sub-text mt-2"
+          created_utc={created_utc}
+          subreddit_name_prefixed={subreddit_name_prefixed}
+        />
       </div>
       <a href={permalink}>
         <div
-          className="wide-thumbnail-img"
+          className="wide-thumbnail-img sm:hidden"
           style={{
             backgroundImage:
               "url(" +
@@ -59,6 +60,24 @@ const WideCard = ({
                   }`) +
               ")",
             width: "180px",
+            height: "112px",
+            backgroundSize: "cover"
+          }}
+        ></div>
+        <div
+          className="sub-thumbnail-img hidden sm:block"
+          style={{
+            backgroundImage:
+              "url(" +
+              (thumbnail && thumbnail.includes("://")
+                ? thumbnail
+                : `/placeholders/${
+                    PLACEHOLDER_IMAGES[
+                      getIntFromString(title, PLACEHOLDER_IMAGES.length)
+                    ] || "default.jpg"
+                  }`) +
+              ")",
+            width: "140px",
             height: "112px",
             backgroundSize: "cover"
           }}

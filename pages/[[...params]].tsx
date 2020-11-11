@@ -15,6 +15,7 @@ import {
 import { useRef, useState } from "react";
 import RankedCard from "../components/home-page/RankedCard";
 import WideCard from "../components/home-page/WideCard";
+import TrendingSubs from "../components/home-page/TrendingSubs";
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   console.log(query);
@@ -62,7 +63,7 @@ const IndexPage = ({ postData, trendingSubs, params }: any) => {
 
   return (
     <Layout title="Reddium">
-      <div className="lg:w-auto lg:mx-12 mx-auto w-full flex main-container max-width-main pb-10">
+      <div className="lg:w-auto lg:mx-12 mx-auto w-full flex main-container max-width-main pb-10 sm:mx-6">
         <MidContainer>
           <LargeCard {...posts[0]} />
         </MidContainer>
@@ -101,57 +102,15 @@ const IndexPage = ({ postData, trendingSubs, params }: any) => {
                 Filter
               </button>
             </div>
-            <div className="mb-6">
-              <div className="mb-5">
-                <p className="heading-text text-sm leading-4 uppercase tracking-wide">
-                  Trending subreddits
-                </p>
-              </div>
-              <div>
-                {trendingSubs.hasOwnProperty("posts") ? (
-                  trendingSubs.posts[0].title
-                    .split(":")[1]
-                    .split(",")
-                    .slice(0, 3)
-                    .map((sub: string, ind: number) => (
-                      <div
-                        key={ind}
-                        className="mb-3 pb-3 sub-bottom-border justify-between flex items-center"
-                      >
-                        <a
-                          className="heading-text tracking-wide"
-                          href={"https://reddit.com" + sub}
-                        >
-                          {sub}
-                        </a>
-                        <button className="px-3 py-1 cursor-pointer rounded btn-outline-green text-sm">
-                          Follow
-                        </button>
-                      </div>
-                    ))
-                ) : (
-                  <div className="shimmer">
-                    <div className="h-4 w-full mb-5 mx-3 pb-3 shimmer-bg"></div>
-                    <div className="h-4 w-full mb-5 mx-3 pb-3 shimmer-bg"></div>
-                    <div className="h-4 w-full mb-5 mx-3 pb-3 shimmer-bg"></div>
-                  </div>
-                )}
-                <a
-                  className="main-green text-sm"
-                  href="https://reddit.com/r/trendingsubreddits"
-                >
-                  See More
-                </a>
-              </div>
-            </div>
+            <TrendingSubs {...trendingSubs}/>
           </div>
         </MidContainer>
       </div>
-      <div className="w-full main-container max-width-main pb-4 pt-10 sub-top-border hidden lg:w-auto lg:mx-12 lg:flex">
-          <MidContainer>
+      <div className="w-full main-container max-width-main pb-4 pt-10 sub-top-border hidden lg:w-auto lg:mx-12 lg:flex sm:mx-6">
+        <MidContainer>
           <div className="h-full">
             <div className="mb-12">
-              <p className="heading-text text-sm leading-4 uppercase tracking-wide">
+              <p className="heading-text text-sm leading-4 uppercase tracking-wide sm:text-xs">
                 Popular posts
               </p>
 
@@ -179,60 +138,18 @@ const IndexPage = ({ postData, trendingSubs, params }: any) => {
               </button>
             </div>
           </div>
-          </MidContainer>
-          <MidContainer>
-          <div className="h-full container-divide pl-8">
-            <div className="mb-6">
-              <div className="mb-5">
-                <p className="heading-text text-sm leading-4 uppercase tracking-wide">
-                  Trending subreddits
-                </p>
-              </div>
-              <div>
-                {trendingSubs.hasOwnProperty("posts") ? (
-                  trendingSubs.posts[0].title
-                    .split(":")[1]
-                    .split(",")
-                    .slice(0, 3)
-                    .map((sub: string, ind: number) => (
-                      <div
-                        key={ind}
-                        className="mb-3 pb-3 sub-bottom-border justify-between flex items-center"
-                      >
-                        <a
-                          className="heading-text tracking-wide"
-                          href={"https://reddit.com" + sub}
-                        >
-                          {sub}
-                        </a>
-                        <button className="px-3 py-1 cursor-pointer rounded btn-outline-green text-sm">
-                          Follow
-                        </button>
-                      </div>
-                    ))
-                ) : (
-                  <div className="shimmer">
-                    <div className="h-4 w-full mb-5 mx-3 pb-3 shimmer-bg"></div>
-                    <div className="h-4 w-full mb-5 mx-3 pb-3 shimmer-bg"></div>
-                    <div className="h-4 w-full mb-5 mx-3 pb-3 shimmer-bg"></div>
-                  </div>
-                )}
-                <a
-                  className="main-green text-sm"
-                  href="https://reddit.com/r/trendingsubreddits"
-                >
-                  See More
-                </a>
-              </div>
-            </div>
+        </MidContainer>
+        <MidContainer>
+          <div className="h-full container-divide pl-8 sm:pl-0">
+            <TrendingSubs {...trendingSubs}/>
           </div>
-          </MidContainer>
+        </MidContainer>
       </div>
-      <div className="w-full flex main-container max-width-main pb-4 pt-10 sub-top-border lg:w-auto lg:mx-12">
+      <div className="w-full flex main-container max-width-main pb-4 pt-10 sub-top-border lg:w-auto lg:mx-12 sm:mx-6">
         <div className="w-full flex mb-4 flex-row items-center">
           <img className="mr-3" src="trending.svg" />
           <div>
-            <p className="heading-text text-sm leading-4 uppercase tracking-wide">
+            <p className="heading-text text-sm leading-4 uppercase tracking-wide sm:text-xs">
               Trending on Reddit
             </p>
           </div>
@@ -243,7 +160,7 @@ const IndexPage = ({ postData, trendingSubs, params }: any) => {
           ))}
         </div>
       </div>
-      <div className="w-full flex main-container max-width-main pb-4 pt-10 sub-top-border posts-grid lg:w-auto lg:mx-12 md:block">
+      <div className="w-full flex main-container max-width-main pb-4 pt-10 sub-top-border posts-grid lg:w-auto lg:mx-12 md:block sm:mx-6">
         <div className="w-full mb-4 grid-left">
           {posts.slice(11, posts.length).map((p: any) => (
             <WideCard key={p.id} {...p} />
@@ -264,7 +181,7 @@ const IndexPage = ({ postData, trendingSubs, params }: any) => {
             <div className="w-full flex mb-4 flex-row items-center">
               <img className="mr-3" src="bookmarks.svg" />
               <div>
-                <p className="heading-text text-sm leading-4 uppercase tracking-wide">
+                <p className="heading-text text-sm leading-4 uppercase tracking-wide sm:text-xs">
                   About Reddium
                 </p>
               </div>

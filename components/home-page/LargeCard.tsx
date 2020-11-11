@@ -1,11 +1,12 @@
 import React from "react";
-import { getIntFromString, getTime, limitText } from "../../functions/common";
+import { getIntFromString, limitText } from "../../functions/common";
 import { PLACEHOLDER_IMAGES, TITLE_MAX } from "../../functions/constants";
 import { Post } from "../../interfaces";
+import { PostMetadata } from "../common";
 
 const LargeCard = (post: Post) =>
   post.hasOwnProperty("title") ? (
-    <div className="max-w-sm overflow-hidden">
+    <div className="overflow-hidden sm-border-b sm:pb-8 sm:mb-6">
       <a href={post.permalink}>
         <div
           className="w-full shimmer-bg"
@@ -46,11 +47,11 @@ const LargeCard = (post: Post) =>
           {limitText(post.selftext, TITLE_MAX)}
         </h4>
       </a>
-      <div className="sub-text mt-2">
-        <span>{getTime(post.created_utc)}</span>
-        <span className="px-2">·</span>
-        <span>{post.subreddit_name_prefixed}</span>
-      </div>
+      <PostMetadata
+        className="sub-text mt-2"
+        created_utc={post.created_utc}
+        subreddit_name_prefixed={post.subreddit_name_prefixed}
+      />
     </div>
   ) : (
     <div className="max-w-sm overflow-hidden shimmer">

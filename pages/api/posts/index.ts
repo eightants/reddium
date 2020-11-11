@@ -1,3 +1,4 @@
+import { SPECIAL_SUBREDDITS } from "../../../functions/constants";
 import { Post, QueryParams } from "../../../interfaces";
 
 export function getPosts() {
@@ -25,6 +26,7 @@ export async function getPopularPosts({
 }
 
 export async function getSubredditInfo({ subreddit }: QueryParams) {
+  if (subreddit && SPECIAL_SUBREDDITS.includes(subreddit)) return {};
   const res = await (
     await fetch(`https://www.reddit.com/r/${subreddit}/about.json`)
   ).json();
@@ -32,15 +34,15 @@ export async function getSubredditInfo({ subreddit }: QueryParams) {
 }
 
 export async function getPostInfo({ subreddit, postid }: QueryParams) {
-    const res = await (
-      await fetch(`https://www.reddit.com/r/${subreddit}/comments/${postid}.json`)
-    ).json();
-    if (!res.hasOwnProperty("error")) {
-        const comments: Post[] = res[1].data.children.map((post: any) => post.data);
-      return {
-        post: res[0].data.children[0].data,
-        comments: comments
-      };
-    }
-    return res;
+  const res = await (
+    await fetch(`https://www.reddit.com/r/${subreddit}/comments/${postid}.json`)
+  ).json();
+  if (!res.hasOwnProperty("error")) {
+    const comments: Post[] = res[1].data.children.map((post: any) => post.data);
+    return {
+      post: res[0].data.children[0].data,
+      comments: comments
+    };
   }
+  return res;
+}

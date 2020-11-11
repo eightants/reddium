@@ -2,7 +2,7 @@ import React from "react";
 
 const Header = ({ subreddit }: any) => (
   <header className="w-full blue-bg">
-    <div className=" flex max-width-sub mx-auto flex-row items-center lg:w-auto lg:mx-12">
+    <div className=" flex max-width-sub mx-auto flex-row items-center lg:w-auto lg:mx-12 sm:mx-6">
       <div>
         <h1 className="tracking-wide text-white heading-font">{`r/${subreddit}`}</h1>
       </div>
