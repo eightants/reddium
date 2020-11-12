@@ -12,7 +12,7 @@ Here's where Reddium comes in: [reddium.vercel.app](https://reddium.vercel.app)
 
 Reddium is a Medium-themed Reddit client. No more worries about being judged while browsing Reddit in public. The Reddium interface converts Reddit posts, discussions, and memes into well-crafted articles. Once remote work is over, Reddium will be the perfect site to visit during your commute.
 
-Built with Next.js, TailwindCSS, and hosted on Vercel. Reddium is currently still in development.
+Built with Next.js, TailwindCSS, and hosted on Vercel. Placeholder images are obtained from [Unsplash](https://unsplash.com), and avatars are generated from [thispersondoesnotexist.com](https://thispersondoesnotexist.com/). Reddium is currently still in development.
 
 <img src="./public/reddit-post.png" width="500px"/>
 
