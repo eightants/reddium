@@ -102,7 +102,7 @@ const IndexPage = ({ postData, trendingSubs, params }: any) => {
                 Filter
               </button>
             </div>
-            <TrendingSubs {...trendingSubs}/>
+            <TrendingSubs {...trendingSubs} />
           </div>
         </MidContainer>
       </div>
@@ -141,7 +141,7 @@ const IndexPage = ({ postData, trendingSubs, params }: any) => {
         </MidContainer>
         <MidContainer>
           <div className="h-full container-divide pl-8 sm:pl-0">
-            <TrendingSubs {...trendingSubs}/>
+            <TrendingSubs {...trendingSubs} />
           </div>
         </MidContainer>
       </div>
@@ -186,9 +186,43 @@ const IndexPage = ({ postData, trendingSubs, params }: any) => {
                 </p>
               </div>
             </div>
-            <div className="w-full">
-              <p>Lorem ipsum dolor sin amet</p>
+            <div className="w-full pb-6">
+              <p className="text-sm">
+                Have you ever wanted to browse Reddit while studying at
+                Starbucks? Or maybe while sitting on the subway to work? In
+                those situations, would people around you judge the subreddits
+                you browse and the posts you read?
+                <br />
+                <br />
+                Now, think about someone browsing Medium in these situations.
+                Just seeing the interface of Medium gives the impression of
+                someone being a "knowledge seeker".
+                <br />
+                <br />
+                Reddium is a Medium-themed Reddit client. The Reddium interface
+                converts Reddit posts, discussions, and memes into well-crafted
+                articles. I hope you enjoy this project! Feel free to suggest
+                any features or report bugs on GitHub. 
+              </p>
             </div>
+            <a
+              href="https://github.com/eightants/reddium/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <button className="mt-2 mx-2 p-2 pl-0 pb-3 cursor-pointer w-full max-w-full btn-black text-white rounded">
+                ✨ Star on GitHub
+              </button>
+            </a>
+            <a
+              href="https://ko-fi.com/eightants"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <button className="mt-2 mx-2 p-2 pl-0 pb-3 cursor-pointer w-full max-w-full btn-outline-black text-white rounded">
+                ☕ Buy me a coffee
+              </button>
+            </a>
           </div>
         </div>
       </div>

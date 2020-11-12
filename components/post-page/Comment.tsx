@@ -1,5 +1,8 @@
 import Link from "next/link";
 import React, { useState } from "react";
+
+import MarkdownView from "react-showdown";
+
 import {
   findThreadDepth,
   getIntFromString,
@@ -24,11 +27,11 @@ export const Comment = ({
 }: any) => {
   const [maxDepth, setMaxDepth] = useState(max_depth);
   const addDepth = () => setMaxDepth(depth + 2);
-  return replies ? (
+  return replies || replies == "" ? (
     <div>
       <div
         className="px-2 pt-3"
-        style={{ paddingLeft: `${depth * 2 + 0.5}rem` }}
+        style={{ paddingLeft: `${Math.min(8, depth) + 0.5}rem` }}
       >
         <div className="sub-bottom-border pb-6">
           <div className="w-full mt-4 flex flex-row justify-between items-center">
@@ -60,7 +63,9 @@ export const Comment = ({
               <img className="" src="/more.svg" />
             </button>
           </div>
-          <h4 className="py-2 main-black">{body}</h4>
+          <h4 className="py-2 main-black">
+            <MarkdownView markdown={body} options={{ emoji: true }} />
+          </h4>
           <div className="w-full mt-4 flex flex-row justify-start items-center">
             <div className="flex flex-row items-center tracking-tight mr-4">
               <img className="cursor-pointer w-6" src="/clap.svg" />

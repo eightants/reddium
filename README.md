@@ -1,41 +1,18 @@
-# TypeScript Next.js example
+<h3 align="center"><img src="./public/reddium-mockup.png" width="600px" style="border-radius: 5px" alt="Whisperify"></h3>
 
-This is a really simple project that shows the usage of Next.js with TypeScript.
+Have you ever wanted to browse Reddit while studying at Starbucks? Or maybe while sitting on the subway to work? In those situations, you might start being self-conscious of Reddit's bright and distinct website. Would people around you judge the subreddits you browse and the posts you read? Now, think about someone browsing Medium in these situations. Just seeing the interface of Medium gives the impression of someone being a "knowledge seeker".
 
-## Deploy your own
+Reddium is a Medium-themed Reddit client. No more worries about being judged while browsing Reddit in public. The Reddium interface converts Reddit posts, discussions, and memes into well-crafted articles. Once remote work is over, Reddium will be the perfect site to visit during your commute.
 
-Deploy the example using [Vercel](https://vercel.com):
+Built with Next.js, TailwindCSS, and hosted on Vercel. Reddium is currently still in development.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/vercel/next.js/tree/canary/examples/with-typescript)
+<figure style="height: 300px; display: inline-block"><img src="./public/reddit-post.png" style="border-radius: 5px"><figcaption style="text-align: center">Distinct Reddit interface</figcaption></figure>
+<figure style="height: 300px; display: inline-block"><img src="./public/reddium-post.png" style="border-radius: 5px"><figcaption style="text-align: center">On Reddium</figcaption></figure>
 
-## How to use it?
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
+## Functionality
 
-```bash
-npx create-next-app --example with-typescript with-typescript-app
-# or
-yarn create next-app --example with-typescript with-typescript-app
-```
-
-Deploy it to the cloud with [Vercel](https://vercel.com/import?filter=next.js&utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
-
-## Notes
-
-This example shows how to integrate the TypeScript type system into Next.js. Since TypeScript is supported out of the box with Next.js, all we have to do is to install TypeScript.
-
-```
-npm install --save-dev typescript
-```
-
-To enable TypeScript's features, we install the type declarations for React and Node.
-
-```
-npm install --save-dev @types/react @types/react-dom @types/node
-```
-
-When we run `next dev` the next time, Next.js will start looking for any `.ts` or `.tsx` files in our project and builds it. It even automatically creates a `tsconfig.json` file for our project with the recommended settings.
-
-Next.js has built-in TypeScript declarations, so we'll get autocompletion for Next.js' modules straight away.
-
-A `type-check` script is also added to `package.json`, which runs TypeScript's `tsc` CLI in `noEmit` mode to run type-checking separately. You can then include this, for example, in your `test` scripts.
+- Browse subreddits, posts, and comments in the Medium interface
+- Search Reddit through the Medium search interface (WIP)
+- Visit user profiles (WIP)
+- Login with Reddit to view your personal subscriptions in Reddium (Planned)

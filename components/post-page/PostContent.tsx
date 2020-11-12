@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from "react";
+import MarkdownView from "react-showdown";
 import {
   getIntFromString,
   getTime,
@@ -28,7 +29,17 @@ const PostContent = ({
     <h3 className="sub-link-grey text-xl sm:text-lg sm:mt-2 sm:leading-5">
       {limitText(selftext, TITLE_MAX)}
     </h3>
-    <div className="w-full mt-4 flex flex-row justify-between items-center">
+    <div className="w-full mt-4 flex flex-row justify-between items-center sm:block">
+      <div className="items-center sub-opacity-54 hidden sm:flex my-4">
+        <a
+          className="w-8/12 truncate hover:underline font-semibold"
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {url}
+        </a>
+      </div>
       <div className="items-center flex">
         <div
           className="rounded-full"
@@ -55,6 +66,16 @@ const PostContent = ({
           </div>
         </div>
       </div>
+      <div className="items-center flex sub-opacity-54 sm:hidden">
+        <a
+          className="w-48 truncate hover:underline font-semibold"
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {url}
+        </a>
+      </div>
     </div>
     <figure className="mt-16">
       {url && (url.includes(".jpg") || url.includes(".gif")) ? (
@@ -80,12 +101,12 @@ const PostContent = ({
         ></div>
       )}
       <figcaption className="mt-2 mx-auto sub-opacity-54 text-center text-sm">
-        {(url &&
-          !(url.includes(".jpg") || url.includes(".gif")) &&
-          PLACEHOLDER_IMAGES[
-            getIntFromString(title, PLACEHOLDER_IMAGES.length)
-          ]) &&
-        (thumbnail && !thumbnail.includes("://")) ? (
+        {url &&
+        !(url.includes(".jpg") || url.includes(".gif")) &&
+        PLACEHOLDER_IMAGES[
+          getIntFromString(title, PLACEHOLDER_IMAGES.length)
+        ] &&
+        (!thumbnail || !thumbnail.includes("://")) ? (
           <div>
             Photo by{" "}
             <span className="capitalize underline">
@@ -105,8 +126,11 @@ const PostContent = ({
         )}
       </figcaption>
     </figure>
-    <div className="mt-12 heading-font text-xl whitespace-pre-line main-black sm:text-lg">
-      {selftext}
+    <div className="mt-12 heading-font text-xl whitespace-pre-line main-black post-content sm:text-lg">
+      <MarkdownView
+        markdown={selftext}
+        options={{ tables: true, emoji: true }}
+      />
     </div>
     <div className="w-full mt-4 pt-4 flex flex-row justify-between items-center">
       <div className="flex flex-row items-center">

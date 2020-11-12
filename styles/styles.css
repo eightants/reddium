@@ -33,6 +33,25 @@ h2 {
   margin: 0;
 }
 
+.post-content {
+  font-weight: 500;
+}
+
+.post-content h1 {
+  line-height: 36px;
+  font-size: 30px;
+} 
+
+.post-content h2 {
+  font-size: 24px;
+  line-height: 28px;
+}
+
+.post-content h3 {
+  font-size: 18px;
+  line-height: 22px;
+}
+
 .site-name {
   font-family: Georgia, "Times New Roman", Times, serif;
 }

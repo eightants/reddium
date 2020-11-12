@@ -82,8 +82,9 @@ export const PostMetadata = ({
 
 export const NavMenu = () => {
   const [showSearch, setShowSearch] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
   return (
-    <div className="items-center flex flex-row h-full">
+    <div className="items-center flex flex-row h-full justify-end">
       <div className="flex flex-row items-center justify-end h-full">
         <img
           className="cursor-pointer p-1 mr-2 ml-3 sub-opacity-68 link-black-hover"
@@ -94,7 +95,8 @@ export const NavMenu = () => {
           <input
             className="search-bar main-black text-base sm:w-3/12"
             placeholder="Search Reddit"
-            value=""
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
         ) : (
           ""
