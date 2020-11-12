@@ -189,9 +189,9 @@ const IndexPage = ({ postData, trendingSubs, params }: any) => {
             <div className="w-full pb-6">
               <p className="text-sm">
                 Have you ever wanted to browse Reddit while studying at
-                Starbucks? Or maybe while sitting on the subway to work? In
-                those situations, would people around you judge the subreddits
-                you browse and the posts you read?
+                Starbucks? Or maybe while sitting on the subway to work? Would
+                people around you judge the subreddits you browse and the posts
+                you read?
                 <br />
                 <br />
                 Now, think about someone browsing Medium in these situations.
@@ -202,7 +202,7 @@ const IndexPage = ({ postData, trendingSubs, params }: any) => {
                 Reddium is a Medium-themed Reddit client. The Reddium interface
                 converts Reddit posts, discussions, and memes into well-crafted
                 articles. I hope you enjoy this project! Feel free to suggest
-                any features or report bugs on GitHub. 
+                any features or report bugs on GitHub.
               </p>
             </div>
             <a
