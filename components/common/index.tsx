@@ -8,7 +8,7 @@ import {
 import { DropdownProps, Props } from "../../interfaces";
 
 export const MidContainer = ({ children }: Props) => (
-  <div className="mid-container px-4">{children}</div>
+  <div className="mid-container px-4 sm:px-0">{children}</div>
 );
 
 export const Dropdown = ({ id, dataObj, updateParams }: DropdownProps) => {
@@ -84,7 +84,7 @@ export const NavMenu = () => {
   const [showSearch, setShowSearch] = useState(false);
   return (
     <div className="items-center flex flex-row h-full">
-      <div className="flex flex-row items-center h-full">
+      <div className="flex flex-row items-center justify-end h-full">
         <img
           className="cursor-pointer p-1 mr-2 ml-3 sub-opacity-68 link-black-hover"
           src="/search.svg"
@@ -92,19 +92,43 @@ export const NavMenu = () => {
         />
         {showSearch ? (
           <input
-            className="search-bar main-black text-base"
+            className="search-bar main-black text-base sm:w-3/12"
             placeholder="Search Reddit"
             value=""
           />
         ) : (
           ""
         )}
-        <img className="h-8 cursor-pointer p-1 ml-2 sub-opacity-68 link-black-hover" src="/coffee.svg" />
-        <img className="h-10 cursor-pointer p-1 ml-2 sub-opacity-68 link-black-hover hidden sm:block" src="/github.svg" />
+        <a
+          href="https://ko-fi.com/eightants"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            className="h-8 cursor-pointer p-1 ml-2 sub-opacity-68 link-black-hover"
+            src="/coffee.svg"
+          />
+        </a>
+        <a
+          href="https://github.com/eightants/reddium/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            className="h-10 cursor-pointer p-1 ml-2 sub-opacity-68 link-black-hover hidden sm:block"
+            src="/github.svg"
+          />
+        </a>
       </div>
-      <button className="sm:hidden my-4 ml-4 p-1 px-3 sub-opacity-68 link-black-hover text-sm cursor-pointer max-w-full btn-outline-black rounded">
-        Star on GitHub
-      </button>
+      <a
+        href="https://github.com/eightants/reddium/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <button className="sm:hidden my-4 ml-4 p-1 px-3 sub-opacity-68 link-black-hover text-sm cursor-pointer max-w-full btn-outline-black rounded">
+          Star on GitHub
+        </button>
+      </a>
     </div>
   );
 };

@@ -30,7 +30,7 @@ const MidCard = ({
           ></div>
           <span className="ml-2 font-semibold">{author}</span>
         </div>
-        <div className="overflow-hidden max-h-16">
+        <div className="overflow-hidden">
           <a href={permalink}>
             <h2 className="mt-2">{limitText(title, TITLE_MAX)}</h2>
           </a>

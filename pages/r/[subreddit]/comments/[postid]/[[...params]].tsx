@@ -6,6 +6,7 @@ import React from "react";
 import PostLayout from "../../../../../components/PostLayout";
 import PostHeader from "../../../../../components/post-page/PostHeader";
 import PostContent from "../../../../../components/post-page/PostContent"
+import PostComments from "../../../../../components/post-page/PostComments";
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const post = await getPostInfo(query);
@@ -17,8 +18,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   };
 };
 
-const PostPage = ({ post, params }: any) => {
-//   const [{ commentList, after }, setCommentList] = useState(comments);
+const PostPage = ({ post, comments, params }: any) => {
   // const [selectedParams, setSelectedParams] = useState({
   //   ...zipObject(POPULAR_PARAM_KEY, POPULAR_PARAM_DEFAULT),
   //   ...params
@@ -32,6 +32,7 @@ const PostPage = ({ post, params }: any) => {
       </section>
       <section className="w-full mx-auto max-w-600 pb-10">
         <div className="sub-bottom-border mb-4 pt-4"></div>
+        <PostComments comments={comments} />
       </section>
     </PostLayout>
   );

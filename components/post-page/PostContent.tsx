@@ -1,6 +1,12 @@
 import Link from "next/link";
 import React from "react";
-import { getIntFromString, getTime, limitText } from "../../functions/common";
+import {
+  getIntFromString,
+  getTime,
+  limitText,
+  replaceGifv,
+  unsplashCredits
+} from "../../functions/common";
 import { PLACEHOLDER_IMAGES, TITLE_MAX } from "../../functions/constants";
 import { Post } from "../../interfaces";
 
@@ -11,7 +17,9 @@ const PostContent = ({
   created_utc,
   author,
   url,
-  ups
+  ups,
+  thumbnail,
+  num_comments
 }: Post) => (
   <div className="w-full mx-auto max-w-600 pb-2 mt-6 sm:mx-6 sm:w-auto">
     <h1 className="heading-font text-5xl font-normal leading-tight sm:text-3xl sm:leading-9">
@@ -49,35 +57,70 @@ const PostContent = ({
       </div>
     </div>
     <figure className="mt-16">
-      <div
-        className="w-full shimmer-bg"
-        style={{
-          backgroundImage:
-            "url(" +
-            (url && url.includes(".jpg")
-              ? url
-              : `/placeholders/${
-                  PLACEHOLDER_IMAGES[
-                    getIntFromString(title, PLACEHOLDER_IMAGES.length)
-                  ] || "default.jpg"
-                }`) +
-            ")",
-          height: "300px",
-          backgroundSize: "cover"
-        }}
-      ></div>
+      {url && (url.includes(".jpg") || url.includes(".gif")) ? (
+        <img
+          className="w-full shimmer-bg"
+          src={replaceGifv(url)}
+          width="100%"
+        />
+      ) : thumbnail && thumbnail.includes("://") ? (
+        <img className="w-full shimmer-bg" src={thumbnail} width="100%" />
+      ) : (
+        <div
+          className="w-full shimmer-bg"
+          style={{
+            backgroundImage: `url(/placeholders/${
+              PLACEHOLDER_IMAGES[
+                getIntFromString(title, PLACEHOLDER_IMAGES.length)
+              ] || "default.jpg"
+            })`,
+            height: "300px",
+            backgroundSize: "cover"
+          }}
+        ></div>
+      )}
       <figcaption className="mt-2 mx-auto sub-opacity-54 text-center text-sm">
-        Photo by{" "}
+        {(url &&
+          !(url.includes(".jpg") || url.includes(".gif")) &&
+          PLACEHOLDER_IMAGES[
+            getIntFromString(title, PLACEHOLDER_IMAGES.length)
+          ]) &&
+        (thumbnail && !thumbnail.includes("://")) ? (
+          <div>
+            Photo by{" "}
+            <span className="capitalize underline">
+              {unsplashCredits(
+                PLACEHOLDER_IMAGES[
+                  getIntFromString(title, PLACEHOLDER_IMAGES.length)
+                ]
+              )}
+            </span>{" "}
+            on{" "}
+            <a href="https://unsplash.com" className="underline">
+              Unsplash
+            </a>
+          </div>
+        ) : (
+          "Original Image"
+        )}
       </figcaption>
     </figure>
     <div className="mt-12 heading-font text-xl whitespace-pre-line main-black sm:text-lg">
       {selftext}
     </div>
     <div className="w-full mt-4 pt-4 flex flex-row justify-between items-center">
-      <div className="flex flex-row items-center sub-opacity-54 tracking-tight">
-        <img className="cursor-pointer w-8" src="/clap.svg" />
-        <div>
-          <p className="ml-2">{`${ups} claps`}</p>
+      <div className="flex flex-row items-center">
+        <div className="flex flex-row items-center sub-opacity-54 tracking-tight">
+          <img className="cursor-pointer w-8" src="/clap.svg" />
+          <div>
+            <p className="ml-2">{`${ups} claps`}</p>
+          </div>
+        </div>
+        <div className="ml-4 flex flex-row items-center sub-opacity-54 tracking-tight">
+          <img className="cursor-pointer w-8 pt-1" src="/comment.svg" />
+          <div>
+            <p className="ml-1">{num_comments}</p>
+          </div>
         </div>
       </div>
       <div className="flex flex-row items-center tracking-normal">
