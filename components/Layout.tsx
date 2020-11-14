@@ -7,9 +7,15 @@ import TitleHead from "./TitleHead";
 const Layout = ({ children, title }: Props) => (
   <div>
     <TitleHead title={title}>
-      <meta name="description" content="Medium-themed Reddit client. " />
+      <meta
+        name="description"
+        content="The Reddit client for Silicon Valley. No longer feel self-conscious when you browse Reddit. "
+      />
       <meta property="og:url" content={DOMAIN} />
-      <meta property="og:description" content="Medium-themed Reddit client. " />
+      <meta
+        property="og:description"
+        content="The Reddit client for Silicon Valley. No longer feel self-conscious when you browse Reddit. "
+      />
       <meta property="og:image" content={`${DOMAIN}/reddium-mockup.png`} />
     </TitleHead>
     <header>

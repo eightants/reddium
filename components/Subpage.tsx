@@ -15,7 +15,7 @@ const Subpage = ({
       <meta name="description" content={`/r/${subreddit} on Reddium`} />
       <meta property="og:url" content={`${DOMAIN}/r/${subreddit}`} />
       <meta property="og:description" content={`/r/${subreddit} on Reddium`} />
-      <meta property="og:image" content={`${DOMAIN}/reddium-mockup.png`} />
+      <meta property="og:image" content={`${DOMAIN}/reddium-sub.png`} />
     </TitleHead>
     <header
       style={{
