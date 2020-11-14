@@ -52,6 +52,24 @@ h2 {
   line-height: 22px;
 }
 
+.post-content a {
+  font-weight: 600;
+  opacity: 0.68;
+}
+
+.post-content a:hover {
+  text-decoration: underline;
+}
+
+a.post-link-clear {
+  font-weight: 500;
+  opacity: 1;
+}
+
+a.post-link-clear:hover {
+  text-decoration: none;
+}
+
 .site-name {
   font-family: Georgia, "Times New Roman", Times, serif;
 }

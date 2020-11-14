@@ -1,11 +1,22 @@
 import React from "react";
+import { DOMAIN } from "../functions/constants";
 import { Props } from "../interfaces";
 import { NavMenu } from "./common";
 import TitleHead from "./TitleHead";
 
-const Subpage = ({ children, title, backgroundColor = "white" }: Props) => (
+const Subpage = ({
+  children,
+  title,
+  subreddit,
+  backgroundColor = "white"
+}: Props) => (
   <div>
-    <TitleHead title={title} />
+    <TitleHead title={title}>
+      <meta name="description" content={`/r/${subreddit} on Reddium`} />
+      <meta property="og:url" content={`${DOMAIN}/r/${subreddit}`} />
+      <meta property="og:description" content={`/r/${subreddit} on Reddium`} />
+      <meta property="og:image" content={`${DOMAIN}/reddium-mockup.png`} />
+    </TitleHead>
     <header
       style={{
         backgroundColor: backgroundColor

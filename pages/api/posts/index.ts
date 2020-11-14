@@ -33,9 +33,16 @@ export async function getSubredditInfo({ subreddit }: QueryParams) {
   return res.data;
 }
 
-export async function getPostInfo({ subreddit, postid }: QueryParams) {
+export async function getPostInfo({
+  subreddit,
+  postid,
+  commentid
+}: QueryParams) {
+  const postReq = commentid == "" ? postid : `${postid}/eightants/${commentid}`;
   const res = await (
-    await fetch(`https://www.reddit.com/r/${subreddit}/comments/${postid}.json`)
+    await fetch(
+      `https://www.reddit.com/r/${subreddit}/comments/${postReq}.json`
+    )
   ).json();
   if (!res.hasOwnProperty("error")) {
     const comments: Post[] = res[1].data.children.map((post: any) => post.data);

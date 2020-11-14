@@ -62,7 +62,7 @@ const IndexPage = ({ postData, trendingSubs, params }: any) => {
   };
 
   return (
-    <Layout title="Reddium">
+    <Layout title="Reddium – Medium-themed Reddit client">
       <div className="lg:w-auto lg:mx-12 mx-auto w-full flex main-container max-width-main pb-10 sm:mx-6">
         <MidContainer>
           <LargeCard {...posts[0]} />
@@ -188,13 +188,13 @@ const IndexPage = ({ postData, trendingSubs, params }: any) => {
             </div>
             <div className="w-full pb-6">
               <p className="text-sm">
-                Have you ever wanted to browse Reddit while studying at
-                Starbucks? Or maybe while sitting on the subway to work? Would
-                people around you judge the subreddits you browse and the posts
-                you read?
+                Ever wanted to browse Reddit while studying at Starbucks? Or
+                while sitting on the subway to work? Worried that people around
+                you would judge the subreddits you browse and the posts you
+                read?
                 <br />
                 <br />
-                Now, think about someone browsing Medium in these situations.
+                Now, think about someone browsing Medium in the same situations.
                 Just seeing the interface of Medium gives the impression of
                 someone being a "knowledge seeker".
                 <br />
@@ -205,12 +205,15 @@ const IndexPage = ({ postData, trendingSubs, params }: any) => {
                 any features or report bugs on GitHub.
               </p>
             </div>
+            <div className="w-full pb-6 hidden">
+              <img className="w-4/12 float-right" src="/signature.png" />
+            </div>
             <a
               href="https://github.com/eightants/reddium/"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <button className="mt-2 mx-2 p-2 pl-0 pb-3 cursor-pointer w-full max-w-full btn-black text-white rounded">
+              <button className="mt-2 mx-1 p-2 pl-0 pb-3 cursor-pointer w-full max-w-full btn-black text-white rounded">
                 ✨ Star on GitHub
               </button>
             </a>
@@ -219,7 +222,7 @@ const IndexPage = ({ postData, trendingSubs, params }: any) => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <button className="mt-2 mx-2 p-2 pl-0 pb-3 cursor-pointer w-full max-w-full btn-outline-black text-white rounded">
+              <button className="mt-2 mx-1 p-2 pl-0 pb-3 cursor-pointer w-full max-w-full btn-outline-black text-white rounded">
                 ☕ Buy me a coffee
               </button>
             </a>

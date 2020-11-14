@@ -4,9 +4,10 @@ import React, { useState } from "react";
 import MarkdownView from "react-showdown";
 
 import {
-  findThreadDepth,
+  findRegularNested,
   getIntFromString,
-  getTime
+  getTime,
+  hasMoreComments
 } from "../../functions/common";
 
 export const RootComment = ({ comment, depth_limit }: any) => {
@@ -22,8 +23,9 @@ export const Comment = ({
   replies,
   ups,
   max_depth,
-  add_depth,
-  depth
+  depth,
+  permalink,
+  checkedForMore
 }: any) => {
   const [maxDepth, setMaxDepth] = useState(max_depth);
   const addDepth = () => setMaxDepth(depth + 2);
@@ -73,36 +75,49 @@ export const Comment = ({
                 <p className="ml-1">{ups}</p>
               </div>
             </div>
-            <div className="flex flex-row items-center tracking-tight">
-              <img className="cursor-pointer w-6 pt-1" src="/comment.svg" />
-              <div>
-                <p className="ml-1">
-                  {replies != "" ? replies.data.children.length : ""}
-                </p>
+            <a href={permalink} className="post-link-clear">
+              <div className="flex flex-row items-center tracking-tight">
+                <img className="cursor-pointer w-6 pt-1" src="/comment.svg" />
+                <div>
+                  <p className="ml-1">
+                    {replies != "" ? replies.data.children.length : ""}
+                  </p>
+                </div>
               </div>
-            </div>
+            </a>
           </div>
         </div>
       </div>
-      {replies != "" && depth < max_depth ? (
+      {replies != "" && depth < maxDepth ? (
         replies.data.children.map((c: any, i: number) => (
           <Comment
             key={i}
             {...c.data}
+            checkedForMore={hasMoreComments(replies) || checkedForMore}
             max_depth={maxDepth}
             add_depth={addDepth}
           />
         ))
-      ) : replies != "" && findThreadDepth({ replies: replies }) > 1 ? (
+      ) : replies != "" && findRegularNested(replies).length > 0 ? (
         <button
           className="my-4 mx-auto p-2 cursor-pointer px-3 max-w-full load-more main-black font-semibold rounded flex flex-row justify-between items-center"
-          onClick={add_depth}
+          onClick={addDepth}
         >
-          <div className="flex-grow text-center">Expand thread</div>
+          <div className="flex-grow text-center">Expand</div>
           <img className="ml-3" src="/down_arrow.svg" />
         </button>
       ) : (
         ""
+      )}
+      {replies != "" && !checkedForMore && hasMoreComments(replies) ? (
+        <a href={permalink} className="post-link-clear">
+          <button className="my-4 mx-auto p-2 cursor-pointer px-3 max-w-full load-more main-black font-semibold rounded flex flex-row justify-between items-center">
+            <div className="flex-grow text-center">Expand thread</div>
+            <img className="ml-3" src="/down_arrow.svg" />
+          </button>{" "}
+        </a>
+      ) : (
+        <h1></h1>
       )}
     </div>
   ) : (

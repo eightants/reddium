@@ -29,6 +29,9 @@ export type Props = {
   children?: ReactNode;
   title?: string;
   backgroundColor?: string;
+  subreddit?: string;
+  permalink?: string;
+  thumbnail?: string;
 };
 
 export type DropdownProps = {
@@ -46,6 +49,7 @@ export type QueryParams = {
   after?: string;
   t?: string;
   postid?: string;
+  commentid?: string;
 };
 
 export type PostList = {
