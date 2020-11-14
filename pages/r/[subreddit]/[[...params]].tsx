@@ -56,7 +56,7 @@ const SubredditPage = ({ postData, subredditInfo, params }: any) => {
   };
 
   return (
-    <Subpage title={subredditInfo.display_name} backgroundColor="rgb(250,250,250)">
+    <Subpage title={subredditInfo.display_name} subreddit={params.subreddit} backgroundColor="rgb(250,250,250)">
       <Header {...params} />
       <section className="w-full mx-auto max-width-sub pb-10 mt-6 lg:w-auto lg:mx-12 sm:mx-6">
         <header className="sub-bottom-border pb-2">

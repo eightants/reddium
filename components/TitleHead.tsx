@@ -2,12 +2,15 @@ import React from "react";
 import Head from "next/head";
 import { Props } from "../interfaces";
 
-const TitleHead = ({ title }: Props) => {
+const TitleHead = ({ title, children }: Props) => {
   return (
     <Head>
       <title>{title}</title>
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      <meta property="og:title" content={title} />
+      <meta property="og:type" content="website" />
+      <meta name="twitter:card" content="summary_large_image"/>
       <link
         rel="apple-touch-icon"
         sizes="180x180"
@@ -25,6 +28,7 @@ const TitleHead = ({ title }: Props) => {
         sizes="16x16"
         href="/favicon-16x16.png"
       />
+      {children}
     </Head>
   );
 };

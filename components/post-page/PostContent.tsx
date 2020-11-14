@@ -78,7 +78,7 @@ const PostContent = ({
       </div>
     </div>
     <figure className="mt-16">
-      {url && (url.includes(".jpg") || url.includes(".gif")) ? (
+      {url && (url.includes(".jpg") || url.includes(".png") || url.includes(".gif")) ? (
         <img
           className="w-full shimmer-bg"
           src={replaceGifv(url)}
@@ -96,7 +96,8 @@ const PostContent = ({
               ] || "default.jpg"
             })`,
             height: "300px",
-            backgroundSize: "cover"
+            backgroundSize: "cover",
+            backgroundPosition: "center"
           }}
         ></div>
       )}

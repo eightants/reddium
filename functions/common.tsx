@@ -40,3 +40,9 @@ export const findThreadDepth = (root: any) =>
         ...root.replies.data.children.map((c: any) => findThreadDepth(c.data))
       )
     : 0);
+
+export const findRegularNested = (replies: any) =>
+  replies.data.children.filter((c: any) => c.kind != "more");
+
+export const hasMoreComments = (replies: any) =>
+  replies.data.children.some((c: any) => c.kind == "more");
