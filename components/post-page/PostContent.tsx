@@ -96,8 +96,7 @@ const PostContent = ({
               ] || "default.jpg"
             })`,
             height: "300px",
-            backgroundSize: "cover",
-            backgroundPosition: "center"
+            backgroundSize: "cover"
           }}
         ></div>
       )}
