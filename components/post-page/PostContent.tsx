@@ -44,17 +44,17 @@ const PostContent = ({
         <div
           className="rounded-full"
           style={{
-            backgroundImage: `url('/avatars/avatar (${getIntFromString(
+            backgroundImage: `url('/avatars/avatar_${getIntFromString(
               author,
               18
-            )}).jpg')`,
+            )}.jpg')`,
             width: "48px",
             height: "48px",
             backgroundSize: "cover"
           }}
         ></div>
         <div className="pl-3">
-          <Link href="/">
+          <Link href={`/user/${author}`}>
             <span className="main-black text-md hover:underline cursor-pointer sm:text-sm">
               {author}
             </span>

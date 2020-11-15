@@ -71,17 +71,19 @@ const SubWideCard = ({
         <div
           className="rounded-full"
           style={{
-            backgroundImage: `url('/avatars/avatar (${getIntFromString(
+            backgroundImage: `url('/avatars/avatar_${getIntFromString(
               author,
               18
-            )}).jpg')`,
+            )}.jpg')`,
             width: "36px",
             height: "36px",
             backgroundSize: "cover"
           }}
         ></div>
         <div className="pl-2 font-semibold">
-          <span className="main-green">{author}</span>
+          <a href={`/user/${author}`}>
+            <span className="main-green">{author}</span>
+          </a>
           <PostMetadata
             className="tracking-5 sub-opacity-68"
             created_utc={created_utc}

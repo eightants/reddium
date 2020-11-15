@@ -41,22 +41,22 @@ export const Comment = ({
               <div
                 className="rounded-full"
                 style={{
-                  backgroundImage: `url('/avatars/avatar (${getIntFromString(
+                  backgroundImage: `url('/avatars/avatar_${getIntFromString(
                     author,
                     18
-                  )}).jpg')`,
+                  )}.jpg')`,
                   width: "32px",
                   height: "32px",
                   backgroundSize: "cover"
                 }}
               ></div>
               <div className="pl-3">
-                <Link href="/">
+                <Link href={`/user/${author}`}>
                   <span className="main-black text-md cursor-pointer sm:text-sm">
                     {author}
                   </span>
                 </Link>
-                <div className="tracking-5 text-sm sub-opacity-68">
+                <div className="tracking-5 text-sm sub-opacity-68 font-normal">
                   <span>{getTime(created_utc)}</span>
                 </div>
               </div>
@@ -65,7 +65,7 @@ export const Comment = ({
               <img className="" src="/more.svg" />
             </button>
           </div>
-          <h4 className="py-2 main-black">
+          <h4 className="py-2 font-normal main-black">
             <MarkdownView markdown={body} options={{ emoji: true }} />
           </h4>
           <div className="w-full mt-4 flex flex-row justify-start items-center">

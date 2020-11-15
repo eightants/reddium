@@ -12,17 +12,19 @@ const SubHeadCard = (post: Post) =>
           <div
             className="rounded-full"
             style={{
-              backgroundImage: `url('/avatars/avatar (${getIntFromString(
+              backgroundImage: `url('/avatars/avatar_${getIntFromString(
                 post.author,
                 18
-              )}).jpg')`,
+              )}.jpg')`,
               width: "36px",
               height: "36px",
               backgroundSize: "cover"
             }}
           ></div>
           <div className="pl-2 font-semibold">
-            <span className="main-green">{post.author}</span>
+            <a href={`/user/${post.author}`}>
+              <span className="main-green">{post.author}</span>
+            </a>
             <PostMetadata
               className="tracking-5 sub-opacity-68"
               created_utc={post.created_utc}

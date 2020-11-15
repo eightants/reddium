@@ -18,7 +18,6 @@ import WideCard from "../components/home-page/WideCard";
 import TrendingSubs from "../components/home-page/TrendingSubs";
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  console.log(query);
   const posts = await getPopularPosts({
     ...query,
     sort_type: query.hasOwnProperty("params") ? query.params[0] : "hot"
@@ -58,7 +57,7 @@ const IndexPage = ({ postData, trendingSubs, params }: any) => {
       ...selectedParams,
       after: after
     });
-    setPostData({ ...next, posts: [...posts, ...next.posts] });
+    setPostData({ posts: [...posts, ...next.posts], after: next.after });
   };
 
   return (

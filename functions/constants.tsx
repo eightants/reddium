@@ -2,6 +2,7 @@ export const DOMAIN = "https://reddium.vercel.app";
 
 export const TITLE_MAX = 100;
 export const DESC_MAX = 200;
+export const BLURB_MAX = 600;
 
 export const SPECIAL_SUBREDDITS = ["all", "popular"];
 

@@ -7,7 +7,6 @@ import PostContent from "../../../../../components/post-page/PostContent";
 import PostComments from "../../../../../components/post-page/PostComments";
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  console.log(query);
   const commentId =
     query.hasOwnProperty("params") && query.params.length > 1
       ? query.params[1]

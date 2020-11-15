@@ -29,3 +29,16 @@ On Reddium
 - Search Reddit through the Medium search interface (WIP)
 - Visit user profiles (WIP)
 - Login with Reddit to view your personal subscriptions in Reddium (Planned)
+
+## Contribute
+
+1. Clone the repository to your local machine. 
+2. Install all packages. 
+```
+$ npm i
+```
+3. Start the development server. 
+```
+$ npm run dev
+```
+4. Make a pull request

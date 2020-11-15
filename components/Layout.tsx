@@ -24,7 +24,7 @@ const Layout = ({ children, title }: Props) => (
           <a href="/">
             <div className="pr-4 nav-img h-8 flex flex-row items-center cursor-pointer sm:border-0">
               <img className="h-full sm:h-6" src="reddium_symbol.svg" />
-              <h1 className="ml-4 site-name text-3xl tracking-tighter sm:hidden">
+              <h1 className="ml-4 site-name text-3xl tracking-tighter sm:hidden text-black">
                 Reddium
               </h1>
             </div>

@@ -30,16 +30,18 @@ const LargeCard = (post: Post) =>
         <div
           className="rounded-full"
           style={{
-            backgroundImage: `url('/avatars/avatar (${getIntFromString(
+            backgroundImage: `url('/avatars/avatar_${getIntFromString(
               post.author,
               18
-            )}).jpg')`,
+            )}.jpg')`,
             width: "20px",
             height: "20px",
             backgroundSize: "cover"
           }}
         ></div>
-        <span className="ml-2 font-semibold">{post.author}</span>
+        <a href={`/user/${post.author}`}>
+          <span className="ml-2 font-semibold">{post.author}</span>
+        </a>
       </div>
       <a href={post.permalink}>
         <h2 className="text-2xl mt-2 leading-6">{post.title}</h2>
