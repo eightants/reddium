@@ -6,6 +6,7 @@ import { NavMenu } from "../../../components/common";
 import UserPost from "../../../components/user-page/UserPost";
 import UserComment from "../../../components/user-page/UserComment";
 import { getIntFromString } from "../../../functions/common";
+import { DOMAIN } from "../../../functions/constants";
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const posts = await getUserPosts(query);
@@ -37,13 +38,23 @@ const UserPage = ({ postData, userInfo, params }: any) => {
   };
   return (
     <div>
-      <TitleHead title={`${userInfo.name} – Reddium`}></TitleHead>
+      <TitleHead title={`${userInfo.name} – Reddium`}>
+        <meta name="description" content={`${userInfo}'s posts on Reddium. `} />
+        <meta property="og:url" content={`${DOMAIN}/user/${userInfo.name}`} />
+        <meta
+          property="og:description"
+          content={`${userInfo}'s posts on Reddium. `}
+        />
+        <meta property="og:image" content={`${DOMAIN}/reddium-sub.png`} />
+      </TitleHead>
       <div className="h-full hidden sm:flex py-3 px-8 items-center sub-bottom-border justify-end max-width-main mx-auto z-50 h-16">
         <div className="flex flex-row items-center">
-              <NavMenu />
-              <a href="/"><img className="ml-4 h-6 logo-opacity" src="/reddium_symbol.svg" /></a>
-            </div>
+          <NavMenu />
+          <a href="/">
+            <img className="ml-4 h-6 logo-opacity" src="/reddium_symbol.svg" />
+          </a>
         </div>
+      </div>
       <header className="sub-bottom-border h-160">
         <nav className="h-full flex px-4 items-center justify-center max-width-main mx-auto z-50 h-16 lg:mx-12 sm:mx-6 sm:px-0">
           <div className="flex w-full items-center justify-center">
@@ -68,7 +79,12 @@ const UserPage = ({ postData, userInfo, params }: any) => {
             </div>
             <div className="flex flex-row items-center sm:hidden">
               <NavMenu />
-              <a href="/"><img className="ml-6 h-6 logo-opacity" src="/reddium_symbol.svg" /></a>
+              <a href="/">
+                <img
+                  className="ml-6 h-6 logo-opacity"
+                  src="/reddium_symbol.svg"
+                />
+              </a>
             </div>
           </div>
         </nav>

@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import TitleHead from "../../components/TitleHead";
 import { NavMenu, SubredditCard, UserCard } from "../../components/common";
 import SearchPost from "../../components/search-page/SearchPost";
+import { DOMAIN } from "../../functions/constants";
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const items = await getSearch(query);
@@ -34,7 +35,18 @@ const SearchPage = ({ searchRes, params }: any) => {
 
   return (
     <div>
-      <TitleHead title={`Search - Reddium`}></TitleHead>
+      <TitleHead title={`Search - Reddium`}>
+        <meta
+          name="description"
+          content={`Results for '${params.q}' on Reddium. `}
+        />
+        <meta property="og:url" content={`${DOMAIN}/search/?q=${params.q}`} />
+        <meta
+          property="og:description"
+          content={`Results for '${params.q}' on Reddium. `}
+        />
+        <meta property="og:image" content={`${DOMAIN}/reddium-sub.png`} />
+      </TitleHead>
       <header className="navbar-shadow">
         <nav className=" flex items-center justify-center max-width-sub mx-auto z-50 h-16 lg:mx-12 sm:mx-6 sm:h-14">
           <div className="flex-grow flex items-center">
