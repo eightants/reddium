@@ -17,7 +17,6 @@ import SubGridCard from "../../../components/subreddit-page/SubGridCard";
 import SubredditInfo from "../../../components/subreddit-page/SubredditInfo";
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  console.log(query);
   const posts = await getPopularPosts({
     ...query,
     sort_type: query.hasOwnProperty("params") ? query.params[0] : "hot"
@@ -52,7 +51,7 @@ const SubredditPage = ({ postData, subredditInfo, params }: any) => {
       ...selectedParams,
       after: after
     });
-    setPostData({ ...next, posts: [...posts, ...next.posts] });
+    setPostData({ posts: [...posts, ...next.posts], after: next.after });
   };
 
   return (

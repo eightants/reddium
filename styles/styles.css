@@ -40,7 +40,7 @@ h2 {
 .post-content h1 {
   line-height: 36px;
   font-size: 30px;
-} 
+}
 
 .post-content h2 {
   font-size: 24px;
@@ -52,9 +52,14 @@ h2 {
   line-height: 22px;
 }
 
+.post-content ul {
+  list-style-type: disc;
+}
+
 .post-content a {
   font-weight: 600;
-  opacity: 0.68;
+  color: rgb(53, 88, 118);
+  opacity: 0.9;
 }
 
 .post-content a:hover {
@@ -95,6 +100,14 @@ a.post-link-clear:hover {
   max-width: 600px;
 }
 
+.w-user {
+  max-width: calc(50% - 300px);
+}
+
+.w-132 {
+  max-width: 132px;
+}
+
 .sub-line-height {
   line-height: 1.3;
 }
@@ -105,6 +118,10 @@ a.post-link-clear:hover {
 
 .text-16 {
   font-size: 15px;
+}
+
+.logo-opacity {
+  opacity: 0.85;
 }
 
 .sub-opacity-68 {
@@ -271,8 +288,20 @@ a.post-link-clear:hover {
   max-height: 64px;
 }
 
+.max-h-200 {
+  max-height: 200px;
+}
+
 .top-8 {
   top: 32px;
+}
+
+.top-150 {
+  top: 150px;
+}
+
+.h-160 {
+  height: 160px;
 }
 
 .shimmer-bg {
@@ -298,6 +327,14 @@ a.post-link-clear:hover {
 
 .input-shadow {
   box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 8px;
+}
+
+.navbar-shadow {
+  box-shadow: 0 4px 12px 0 rgba(0,0,0,.05)
+}
+
+.search-input {
+  border-bottom: 1px solid rgba(0,0,0,.15);
 }
 
 @media (max-width: 1200px) {

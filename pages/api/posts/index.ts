@@ -53,3 +53,50 @@ export async function getPostInfo({
   }
   return res;
 }
+
+export async function getUserPosts({
+  username,
+  sort = "new",
+  category = "",
+  t = "day",
+  after = ""
+}: any) {
+  const res = await (
+    await fetch(
+      `https://www.reddit.com/user/${username}/${category}.json?sort=${sort}&after=${after}&t=${t}`
+    )
+  ).json();
+  const postList = await res.data.children;
+  const posts: Post[] = postList.map((post: any) => ({
+    ...post.data,
+    kind: post.kind
+  }));
+  return {
+    posts: posts,
+    after: res.data.after
+  };
+}
+
+export async function getUserInfo({ username }: any) {
+  const res = await (
+    await fetch(`https://www.reddit.com/user/${username}/about.json`)
+  ).json();
+  return res.data;
+}
+
+export async function getSearch({ q, type = "", after = "" }: any) {
+  const res = await (
+    await fetch(
+      `https://www.reddit.com/search/.json?q=${q}&type=${type}&after=${after}`
+    )
+  ).json();
+  const resList = await res.data.children;
+  const items: any[] = resList.map((item: any) => ({
+    ...item.data,
+    kind: item.kind
+  }));
+  return {
+    items: items,
+    after: res.data.after
+  };
+}

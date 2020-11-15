@@ -19,16 +19,16 @@ const MidCard = ({
           <div
             className="rounded-full"
             style={{
-              backgroundImage: `url('/avatars/avatar (${getIntFromString(
+              backgroundImage: `url('/avatars/avatar_${getIntFromString(
                 author,
                 18
-              )}).jpg')`,
+              )}.jpg')`,
               width: "20px",
               height: "20px",
               backgroundSize: "cover"
             }}
           ></div>
-          <span className="ml-2 font-semibold">{author}</span>
+          <a href={`/user/${author}`}><span className="ml-2 font-semibold">{author}</span></a>
         </div>
         <div className="overflow-hidden">
           <a href={permalink}>

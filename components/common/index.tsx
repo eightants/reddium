@@ -1,6 +1,6 @@
 import { zipObject } from "lodash";
 import React, { useEffect, useRef, useState } from "react";
-import { getTime } from "../../functions/common";
+import { getIntFromString, getTime } from "../../functions/common";
 import {
   POPULAR_PARAM_KEY,
   POPULAR_PARAM_VALUES
@@ -74,7 +74,7 @@ export const PostMetadata = ({
   <div className={className}>
     <span>{getTime(created_utc)}</span>
     <span className="px-2">·</span>
-    <a className="link-black-hover" href={subreddit_name_prefixed}>
+    <a className="link-black-hover" href={`/${subreddit_name_prefixed}`}>
       {subreddit_name_prefixed}
     </a>
   </div>
@@ -83,6 +83,8 @@ export const PostMetadata = ({
 export const NavMenu = () => {
   const [showSearch, setShowSearch] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const newSearch = () => (window.location.href = `/search/?q=${searchTerm}`);
+
   return (
     <div className="items-center flex flex-row h-full justify-end">
       <div className="flex flex-row items-center justify-end h-full">
@@ -97,6 +99,7 @@ export const NavMenu = () => {
             placeholder="Search Reddit"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && newSearch()}
           />
         ) : (
           ""
@@ -134,3 +137,72 @@ export const NavMenu = () => {
     </div>
   );
 };
+
+export const SubredditCard = ({
+  display_name,
+  public_description,
+  url,
+  icon_img
+}: any) => (
+  <div className="pb-4 mb-4 flex flex-row w-full sub-bottom-border">
+    <a href={url}>
+      <div
+        className="rounded"
+        style={{
+          backgroundImage: `url(${
+            icon_img ? icon_img : "/placeholders/default.jpg"
+          })`,
+          width: "60px",
+          height: "60px",
+          backgroundSize: "cover"
+        }}
+      >
+        {" "}
+      </div>
+    </a>
+    <div className="pl-4 flex-grow">
+      <a className="heading-text text-lg" href={url}>
+        <h3 className="mb-1 font-normal">{display_name}</h3>
+      </a>
+      <p className="text-sm mb-1">{public_description}</p>
+    </div>
+    <a href={url}>
+      <button className="px-4 py-1 ml-5 cursor-pointer text-center rounded btn-outline-green">
+        Visit
+      </button>
+    </a>
+  </div>
+);
+
+export const UserCard = ({ name, icon_img }: any) => (
+  <div className="pb-4 mb-4 flex flex-row w-full sub-bottom-border">
+    <a href={`/user/${name}`}>
+      <div
+        className="rounded-full"
+        style={{
+          backgroundImage: `url(${
+            !icon_img.includes("styles")
+              ? icon_img
+              : "/avatars/avatar_" + getIntFromString(name, 18) + ".jpg"
+          })`,
+          width: "60px",
+          height: "60px",
+          backgroundSize: "cover"
+        }}
+      >
+        {" "}
+      </div>
+    </a>
+    <div className="pl-4 flex-grow">
+      <a className="heading-text text-lg" href={`/user/${name}`}>
+        <h3 className="mb-1 font-normal">{name}</h3>
+      </a>
+      <p className="text-sm mb-1"></p>
+    </div>
+    <a href={`/user/${name}`}>
+      <button className="px-4 py-1 ml-5 cursor-pointer text-center rounded btn-outline-green">
+        Visit
+      </button>
+    </a>
+  </div>
+);
