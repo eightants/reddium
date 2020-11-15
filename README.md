@@ -6,13 +6,15 @@
   <a href="https://ko-fi.com/eightants" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/buy_me_a-coffee-ff69b4.svg"></a>
 </p>
 
-Have you ever wanted to browse Reddit while studying at Starbucks? Or maybe while sitting on the subway to work? In those situations, you might start being self-conscious of Reddit's bright and distinct website. Would people around you judge the subreddits you browse and the posts you read? Now, think about someone browsing Medium in these situations. Just seeing the interface of Medium gives the impression of someone being a "knowledge seeker".
+Have you ever wanted to browse Reddit while studying at Starbucks? Or maybe while sitting on the subway to work? In those situations, you might start being self-conscious of Reddit's bright and distinct website. What if people around you judge the subreddits you browse and the posts you read? Now, think about someone browsing Medium in the same situations. Just seeing the interface of Medium gives the impression of someone being a "knowledge seeker".
 
-Here's where Reddium comes in: [reddium.vercel.app](https://reddium.vercel.app)
+On the other hand, the Reddit experience on a mobile browser is lacking at best. Many functionalities require you to download the Reddit app. Is there a way to improve the experience without downloading the app?
 
-Reddium is a Medium-themed Reddit client. No more worries about being judged while browsing Reddit in public. The Reddium interface converts Reddit posts, discussions, and memes into well-crafted articles. Once remote work is over, Reddium will be the perfect site to visit during your commute.
+Enter Reddium: [reddium.vercel.app](https://reddium.vercel.app)
 
-Built with Next.js, TailwindCSS, and hosted on Vercel. Placeholder images are obtained from [Unsplash](https://unsplash.com), and avatars are generated from [thispersondoesnotexist.com](https://thispersondoesnotexist.com/). Reddium is currently still in development.
+Reddium is a Medium-themed Reddit client. No longer worry about being judged while browsing Reddit in public. The Reddium interface converts Reddit posts, discussions, and memes into well-crafted articles. Once remote work is over, Reddium will be the perfect site to visit during your commute.
+
+Built with Next.js, TailwindCSS, and hosted on Vercel. Reddium is built with optimization in mind, making use of Next.js 10's analytics and server-side rendering. Placeholder images are obtained from [Unsplash](https://unsplash.com), and avatars are generated from [thispersondoesnotexist.com](https://thispersondoesnotexist.com/). Reddium is currently still in development.
 
 <img src="./public/reddit-post.png" width="500px"/>
 
@@ -26,8 +28,9 @@ On Reddium
 ## Functionality
 
 - Browse subreddits, posts, and comments in the Medium interface
-- Search Reddit through the Medium search interface (WIP)
-- Visit user profiles (WIP)
+- Search Reddit through the Medium search interface
+- Visit user profiles
+- Quality of life features to recreate the Reddit experience as closely as possible (WIP)
 - Login with Reddit to view your personal subscriptions in Reddium (Planned)
 
 ## Contribute
