@@ -8,7 +8,7 @@ import {
   replaceGifv
 } from "../../functions/common";
 import {
-  BLURB_MAX,
+  DESC_MAX,
   PLACEHOLDER_IMAGES,
   TITLE_MAX
 } from "../../functions/constants";
@@ -44,11 +44,11 @@ const SearchPost = ({
         <div className="pl-3 text-sm">
           <div className="flex items-center main-black">
             <Link href={`/user/${author}`}>
-              <span className="main-green font-semibold">{author}</span>
+              <span className="main-green font-semibold cursor-pointer">{author}</span>
             </Link>
             <span className="ml-1 sub-link-grey">in </span>
             <Link href={`/${subreddit_name_prefixed}`}>
-              <span className="ml-1 main-green font-semibold">
+              <span className="ml-1 main-green font-semibold cursor-pointer">
                 {subreddit_name_prefixed}
               </span>
             </Link>
@@ -61,7 +61,7 @@ const SearchPost = ({
     </div>
     <a href={permalink}>
       <h1 className="text-3xl mt-6 font-normal leading-tight sm:text-2xl sm:leading-9">
-        {limitText(title, BLURB_MAX)}
+        {limitText(title, DESC_MAX)}
       </h1>
     </a>
     <figure className="mt-8">

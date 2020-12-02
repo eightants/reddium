@@ -32,8 +32,7 @@ export const Comment = ({
   return replies || replies == "" ? (
     <div>
       <div
-        className="px-2 pt-3"
-        style={{ paddingLeft: `${Math.min(8, depth) + 0.5}rem` }}
+        className="pr-0 pl-3 pt-3"
       >
         <div className="sub-bottom-border pb-6">
           <div className="w-full mt-4 flex flex-row justify-between items-center">
@@ -65,7 +64,7 @@ export const Comment = ({
               <img className="" src="/more.svg" />
             </button>
           </div>
-          <h4 className="py-2 font-normal main-black">
+          <h4 className="py-2 font-normal main-black break-words">
             <MarkdownView markdown={body} options={{ emoji: true }} />
           </h4>
           <div className="w-full mt-4 flex flex-row justify-start items-center">
@@ -76,7 +75,7 @@ export const Comment = ({
               </div>
             </div>
             <a href={permalink} className="post-link-clear">
-              <div className="flex flex-row items-center tracking-tight">
+              <div className="flex flex-row items-center tracking-tight text-black">
                 <img className="cursor-pointer w-6 pt-1" src="/comment.svg" />
                 <div>
                   <p className="ml-1">
@@ -87,28 +86,28 @@ export const Comment = ({
             </a>
           </div>
         </div>
+        {replies != "" && depth < maxDepth ? (
+          replies.data.children.map((c: any, i: number) => (
+            <Comment
+              key={i}
+              {...c.data}
+              checkedForMore={hasMoreComments(replies) || checkedForMore}
+              max_depth={maxDepth}
+              add_depth={addDepth}
+            />
+          ))
+        ) : replies != "" && findRegularNested(replies).length > 0 ? (
+          <button
+            className="my-4 mx-auto p-2 cursor-pointer px-3 max-w-full load-more main-black font-semibold rounded flex flex-row justify-between items-center"
+            onClick={addDepth}
+          >
+            <div className="flex-grow text-center">Expand</div>
+            <img className="ml-3" src="/down_arrow.svg" />
+          </button>
+        ) : (
+          ""
+        )}
       </div>
-      {replies != "" && depth < maxDepth ? (
-        replies.data.children.map((c: any, i: number) => (
-          <Comment
-            key={i}
-            {...c.data}
-            checkedForMore={hasMoreComments(replies) || checkedForMore}
-            max_depth={maxDepth}
-            add_depth={addDepth}
-          />
-        ))
-      ) : replies != "" && findRegularNested(replies).length > 0 ? (
-        <button
-          className="my-4 mx-auto p-2 cursor-pointer px-3 max-w-full load-more main-black font-semibold rounded flex flex-row justify-between items-center"
-          onClick={addDepth}
-        >
-          <div className="flex-grow text-center">Expand</div>
-          <img className="ml-3" src="/down_arrow.svg" />
-        </button>
-      ) : (
-        ""
-      )}
       {replies != "" && !checkedForMore && hasMoreComments(replies) ? (
         <a href={permalink} className="post-link-clear">
           <button className="my-4 mx-auto p-2 cursor-pointer px-3 max-w-full load-more main-black font-semibold rounded flex flex-row justify-between items-center">

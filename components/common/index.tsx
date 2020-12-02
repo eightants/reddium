@@ -1,17 +1,20 @@
 import { zipObject } from "lodash";
 import React, { useEffect, useRef, useState } from "react";
-import { getIntFromString, getTime } from "../../functions/common";
-import {
-  POPULAR_PARAM_KEY,
-  POPULAR_PARAM_VALUES
-} from "../../functions/constants";
+import { getIntFromString, getTime, limitText } from "../../functions/common";
+import { DESC_MAX } from "../../functions/constants";
 import { DropdownProps, Props } from "../../interfaces";
 
 export const MidContainer = ({ children }: Props) => (
   <div className="mid-container px-4 sm:px-0">{children}</div>
 );
 
-export const Dropdown = ({ id, dataObj, updateParams }: DropdownProps) => {
+export const Dropdown = ({
+  id,
+  dataObj,
+  paramKey,
+  paramVal,
+  updateParams
+}: DropdownProps) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdown = useRef<HTMLDivElement>(null);
 
@@ -41,23 +44,21 @@ export const Dropdown = ({ id, dataObj, updateParams }: DropdownProps) => {
       </button>
       {showDropdown ? (
         <div
-          className="dropdown-select w-48 max-w-full absolute"
+          className="dropdown-select w-48 max-w-full absolute z-10"
           ref={dropdown}
         >
-          {zipObject(POPULAR_PARAM_KEY, POPULAR_PARAM_VALUES)[id].map(
-            (value: string, ind) => (
-              <div
-                className="my-1 px-4 mx-1 p-2 cursor-pointer"
-                key={ind}
-                onClick={() => {
-                  updateParams({ ...dataObj, [id]: value });
-                  setShowDropdown(false);
-                }}
-              >
-                {value}
-              </div>
-            )
-          )}
+          {zipObject(paramKey, paramVal)[id].map((value: string, ind) => (
+            <div
+              className="my-1 px-4 mx-1 p-2 cursor-pointer"
+              key={ind}
+              onClick={() => {
+                updateParams({ ...dataObj, [id]: value });
+                setShowDropdown(false);
+              }}
+            >
+              {value}
+            </div>
+          ))}
         </div>
       ) : (
         <div></div>
@@ -160,11 +161,11 @@ export const SubredditCard = ({
         {" "}
       </div>
     </a>
-    <div className="pl-4 flex-grow">
+    <div className="pl-4 flex-grow break-words overflow-hidden">
       <a className="heading-text text-lg" href={url}>
         <h3 className="mb-1 font-normal">{display_name}</h3>
       </a>
-      <p className="text-sm mb-1">{public_description}</p>
+      <p className="text-sm mb-1">{limitText(public_description, DESC_MAX)}</p>
     </div>
     <a href={url}>
       <button className="px-4 py-1 ml-5 cursor-pointer text-center rounded btn-outline-green">
@@ -181,7 +182,7 @@ export const UserCard = ({ name, icon_img }: any) => (
         className="rounded-full"
         style={{
           backgroundImage: `url(${
-            !icon_img.includes("styles")
+            icon_img && !icon_img.includes("styles")
               ? icon_img
               : "/avatars/avatar_" + getIntFromString(name, 18) + ".jpg"
           })`,
@@ -193,11 +194,11 @@ export const UserCard = ({ name, icon_img }: any) => (
         {" "}
       </div>
     </a>
-    <div className="pl-4 flex-grow">
+    <div className="pl-4 flex-grow break-words overflow-hidden">
       <a className="heading-text text-lg" href={`/user/${name}`}>
         <h3 className="mb-1 font-normal">{name}</h3>
       </a>
-      <p className="text-sm mb-1"></p>
+      <p className="text-sm mb-1">User</p>
     </div>
     <a href={`/user/${name}`}>
       <button className="px-4 py-1 ml-5 cursor-pointer text-center rounded btn-outline-green">

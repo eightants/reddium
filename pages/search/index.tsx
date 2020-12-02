@@ -2,9 +2,22 @@ import { GetServerSideProps } from "next";
 import { getSearch } from "../api/posts";
 import React, { useState } from "react";
 import TitleHead from "../../components/TitleHead";
-import { NavMenu, SubredditCard, UserCard } from "../../components/common";
+import {
+  Dropdown,
+  NavMenu,
+  SubredditCard,
+  UserCard
+} from "../../components/common";
 import SearchPost from "../../components/search-page/SearchPost";
-import { DOMAIN } from "../../functions/constants";
+import {
+  DOMAIN,
+  SEARCH_PARAM_DEFAULT,
+  SEARCH_PARAM_KEY,
+  SEARCH_PARAM_VALUES,
+  SORT_PARAM,
+  TIME_FILTER
+} from "../../functions/constants";
+import { zipObject } from "lodash";
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const items = await getSearch(query);
@@ -19,10 +32,14 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 const SearchPage = ({ searchRes, params }: any) => {
   const [{ items, after }, setSearchData] = useState(searchRes);
   const [searchTerm, setSearchTerm] = useState(params.q);
-  // const [selectedParams, setSelectedParams] = useState({
-  //   ...zipObject(POPULAR_PARAM_KEY, POPULAR_PARAM_DEFAULT),
-  //   ...params
-  // });
+  const [selectedParams, setSelectedParams] = useState({
+    ...zipObject(SEARCH_PARAM_KEY, SEARCH_PARAM_DEFAULT),
+    ...params
+  });
+
+  const filterPopular = () => {
+    window.location.href = `/search/?q=${searchTerm}&sort=${selectedParams.sort}&t=${selectedParams.t}`;
+  };
   const fetchMorePosts = async () => {
     const next = await getSearch({
       ...params,
@@ -107,14 +124,48 @@ const SearchPage = ({ searchRes, params }: any) => {
                       : "Stories"}
                   </h3>
                 </header>
+                <div className="hidden md:block mb-8">
+                  <Dropdown
+                    key={SORT_PARAM}
+                    id={SORT_PARAM}
+                    paramKey={SEARCH_PARAM_KEY}
+                    paramVal={SEARCH_PARAM_VALUES}
+                    dataObj={selectedParams}
+                    updateParams={setSelectedParams}
+                  />
+                  {selectedParams.sort != "new" ? (
+                    <Dropdown
+                      key={TIME_FILTER}
+                      id={TIME_FILTER}
+                      paramKey={SEARCH_PARAM_KEY}
+                      paramVal={SEARCH_PARAM_VALUES}
+                      dataObj={selectedParams}
+                      updateParams={setSelectedParams}
+                    />
+                  ) : (
+                    ""
+                  )}
+                  <button
+                    className="my-4 p-2 cursor-pointer w-48 max-w-full btn-black text-white rounded"
+                    onClick={filterPopular}
+                  >
+                    Filter
+                  </button>
+                </div>
                 <div>
-                  {items.map((item: any, ind: number) =>
-                    item.kind == "t3" ? (
-                      <SearchPost key={ind} {...item} />
-                    ) : item.kind == "t5" ? (
-                      <SubredditCard key={ind} {...item} />
-                    ) : (
-                      <UserCard key={ind} {...item} />
+                  {items.length < 1 ? (
+                    <h2 className="text-3xl leading-6 sm:text-2xl">
+                      No results found.{" "}
+                    </h2>
+                  ) : (
+                    items.map((item: any, ind: number) =>
+                      item.kind == "t3" ? (
+                        <SearchPost key={ind} {...item} />
+                      ) : item.kind == "t5" ? (
+                        <SubredditCard key={ind} {...item} />
+                      ) : (
+                        <UserCard key={ind} {...item} />
+                      )
                     )
                   )}
                   {after ? (
@@ -130,7 +181,39 @@ const SearchPage = ({ searchRes, params }: any) => {
                   )}
                 </div>
               </div>
-              <div className="w-3/12 px-4 float-right sm:hidden"></div>
+              <div className="w-3/12 px-4 float-right md:hidden">
+                <header className="sub-top-border sm:border-0">
+                  <h3 className="pt-4 mb-10 uppercase tracking-wider sm:hidden">
+                    Filter
+                  </h3>
+                </header>
+                <Dropdown
+                  key={SORT_PARAM}
+                  id={SORT_PARAM}
+                  paramKey={SEARCH_PARAM_KEY}
+                  paramVal={SEARCH_PARAM_VALUES}
+                  dataObj={selectedParams}
+                  updateParams={setSelectedParams}
+                />
+                {selectedParams.sort != "new" ? (
+                  <Dropdown
+                    key={TIME_FILTER}
+                    id={TIME_FILTER}
+                    paramKey={SEARCH_PARAM_KEY}
+                    paramVal={SEARCH_PARAM_VALUES}
+                    dataObj={selectedParams}
+                    updateParams={setSelectedParams}
+                  />
+                ) : (
+                  ""
+                )}
+                <button
+                  className="my-4 p-2 cursor-pointer w-48 max-w-full btn-black text-white rounded"
+                  onClick={filterPopular}
+                >
+                  Filter
+                </button>
+              </div>
             </div>
           </div>
         </div>

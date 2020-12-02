@@ -120,6 +120,21 @@ a.post-link-clear:hover {
   font-size: 15px;
 }
 
+.h-video {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+}
+
+.h-video-frame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
 .logo-opacity {
   opacity: 0.85;
 }
@@ -209,6 +224,10 @@ a.post-link-clear:hover {
 
 .max-width-sub {
   max-width: 1032px;
+}
+
+.max-width-filter {
+  max-width: 400px;
 }
 
 .thumbnail-img {

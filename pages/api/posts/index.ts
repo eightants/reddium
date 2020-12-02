@@ -36,12 +36,13 @@ export async function getSubredditInfo({ subreddit }: QueryParams) {
 export async function getPostInfo({
   subreddit,
   postid,
-  commentid
+  commentid,
+  sort = "confidence"
 }: QueryParams) {
   const postReq = commentid == "" ? postid : `${postid}/eightants/${commentid}`;
   const res = await (
     await fetch(
-      `https://www.reddit.com/r/${subreddit}/comments/${postReq}.json`
+      `https://www.reddit.com/r/${subreddit}/comments/${postReq}.json?sort=${sort}`
     )
   ).json();
   if (!res.hasOwnProperty("error")) {
@@ -84,12 +85,22 @@ export async function getUserInfo({ username }: any) {
   return res.data;
 }
 
-export async function getSearch({ q, type = "", after = "" }: any) {
+export async function getSearch({
+  q,
+  sort = "relevance",
+  t = "all",
+  after = ""
+}: any) {
   const res = await (
     await fetch(
-      `https://www.reddit.com/search/.json?q=${q}&type=${type}&after=${after}`
+      `https://www.reddit.com/search/.json?q=${q}&sort=${sort}&t=${t}&after=${after}`
     )
   ).json();
+  if (res.hasOwnProperty("error") || !res.hasOwnProperty("data"))
+    return {
+      items: [],
+      after: null
+    };
   const resList = await res.data.children;
   const items: any[] = resList.map((item: any) => ({
     ...item.data,

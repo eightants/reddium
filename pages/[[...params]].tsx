@@ -10,7 +10,8 @@ import {
   POPULAR_PARAM_KEY,
   POPULAR_PARAM_DEFAULT,
   SORT_TYPE,
-  TIME_FILTER
+  TIME_FILTER,
+  POPULAR_PARAM_VALUES
 } from "../functions/constants";
 import { useRef, useState } from "react";
 import RankedCard from "../components/home-page/RankedCard";
@@ -81,6 +82,8 @@ const IndexPage = ({ postData, trendingSubs, params }: any) => {
               <Dropdown
                 key={SORT_TYPE}
                 id={SORT_TYPE}
+                paramKey={POPULAR_PARAM_KEY}
+                paramVal={POPULAR_PARAM_VALUES}
                 dataObj={selectedParams}
                 updateParams={setSelectedParams}
               />
@@ -88,6 +91,8 @@ const IndexPage = ({ postData, trendingSubs, params }: any) => {
                 <Dropdown
                   key={TIME_FILTER}
                   id={TIME_FILTER}
+                  paramKey={POPULAR_PARAM_KEY}
+                  paramVal={POPULAR_PARAM_VALUES}
                   dataObj={selectedParams}
                   updateParams={setSelectedParams}
                 />
@@ -116,6 +121,8 @@ const IndexPage = ({ postData, trendingSubs, params }: any) => {
               <Dropdown
                 key={SORT_TYPE}
                 id={SORT_TYPE}
+                paramKey={POPULAR_PARAM_KEY}
+                paramVal={POPULAR_PARAM_VALUES}
                 dataObj={selectedParams}
                 updateParams={setSelectedParams}
               />
@@ -123,6 +130,8 @@ const IndexPage = ({ postData, trendingSubs, params }: any) => {
                 <Dropdown
                   key={TIME_FILTER}
                   id={TIME_FILTER}
+                  paramKey={POPULAR_PARAM_KEY}
+                  paramVal={POPULAR_PARAM_VALUES}
                   dataObj={selectedParams}
                   updateParams={setSelectedParams}
                 />

@@ -37,6 +37,8 @@ export type Props = {
 export type DropdownProps = {
   id: string;
   dataObj: any;
+  paramKey: Array<string>;
+  paramVal: Array<Array<string>>;
   updatePosts?: any;
   updateParams?: any;
 };
@@ -50,6 +52,7 @@ export type QueryParams = {
   t?: string;
   postid?: string;
   commentid?: string;
+  sort?: string;
 };
 
 export type PostList = {

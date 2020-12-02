@@ -7,16 +7,37 @@ export const BLURB_MAX = 600;
 export const SPECIAL_SUBREDDITS = ["all", "popular"];
 
 export const SORT_TYPE = "sort_type";
+export const SORT_PARAM = "sort";
 export const GEO_FILTER = "geo_filter";
 export const TIME_FILTER = "t";
 
+export const TIME_PARAM_VALUES = [
+  "hour",
+  "day",
+  "week",
+  "month",
+  "year",
+  "all"
+];
+export const SORT_TYPES_COMMENT = [
+  "confidence",
+  "top",
+  "new",
+  "controversial",
+  "old",
+  "qa"
+];
+export const COMMENT_PARAM_KEY = ["sort"];
+export const COMMENT_PARAM_DEFAULT = ["confidence"];
+export const COMMENT_PARAM_VALUES = [SORT_TYPES_COMMENT];
+export const SORT_TYPES_SEARCH = ["relevance", "top", "hot", "new", "comments"];
+export const SEARCH_PARAM_KEY = ["sort", "t"];
+export const SEARCH_PARAM_DEFAULT = ["relevance", "all"];
+export const SEARCH_PARAM_VALUES = [SORT_TYPES_SEARCH, TIME_PARAM_VALUES];
 export const SORT_TYPES = ["top", "hot", "new", "rising"];
 export const POPULAR_PARAM_KEY = ["sort_type", "t"];
 export const POPULAR_PARAM_DEFAULT = ["hot", "day"];
-export const POPULAR_PARAM_VALUES = [
-  SORT_TYPES,
-  ["hour", "day", "week", "month", "year", "all"]
-];
+export const POPULAR_PARAM_VALUES = [SORT_TYPES, TIME_PARAM_VALUES];
 
 export const PLACEHOLDER_IMAGES = [
   "amanda-frank-e4ING8JYKgI-unsplash.jpg",

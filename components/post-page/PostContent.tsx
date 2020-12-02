@@ -2,8 +2,11 @@ import Link from "next/link";
 import React from "react";
 import MarkdownView from "react-showdown";
 import {
+  getEmbedLink,
   getIntFromString,
   getTime,
+  isImage,
+  isVideo,
   limitText,
   replaceGifv,
   unsplashCredits
@@ -78,13 +81,17 @@ const PostContent = ({
       </div>
     </div>
     <figure className="mt-16">
-      {url && (url.includes(".jpg") || url.includes(".png") || url.includes(".gif")) ? (
+      {url && isVideo(url) ? (
+        <div className="w-full shimmer-bg h-video">
+          <iframe className="h-video-frame" src={getEmbedLink(url)}></iframe>
+        </div>
+      ) : url && isImage(url) ? (
         <img
           className="w-full shimmer-bg"
           src={replaceGifv(url)}
           width="100%"
         />
-      ) : thumbnail && thumbnail.includes("://") ? (
+      ) : thumbnail && isImage(thumbnail) ? (
         <img className="w-full shimmer-bg" src={thumbnail} width="100%" />
       ) : (
         <div
@@ -102,7 +109,7 @@ const PostContent = ({
       )}
       <figcaption className="mt-2 mx-auto sub-opacity-54 text-center text-sm">
         {url &&
-        !(url.includes(".jpg") || url.includes(".gif")) &&
+        !isImage(url) &&
         PLACEHOLDER_IMAGES[
           getIntFromString(title, PLACEHOLDER_IMAGES.length)
         ] &&

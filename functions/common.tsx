@@ -46,3 +46,18 @@ export const findRegularNested = (replies: any) =>
 
 export const hasMoreComments = (replies: any) =>
   replies.data.children.some((c: any) => c.kind == "more");
+
+export const isImage = (url: string) =>
+  url.includes(".jpg") || url.includes(".gif") || url.includes(".png");
+
+export const isVideo = (url: string) =>
+  url.includes("youtube.com/watch") || url.includes("youtu.be")
+
+export const getEmbedLink = (url: string) => {
+  if (url.includes("youtube.com/watch")) {
+    return `https://youtube.com/embed/${url.split("=")[1]}`
+  }
+  if (url.includes("youtu.be")) {
+    return `https://youtube.com/embed${url.split(".be")[1]}`
+  }
+}
