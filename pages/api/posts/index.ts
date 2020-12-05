@@ -196,3 +196,18 @@ export async function getProfile({ token }: any) {
     await fetch(`https://oauth.reddit.com/api/v1/me`, headerOptions)
   ).json();
 }
+
+export async function getMoreCommentsJSON({ link_id, children }: any) {
+  const res = await (
+    await fetch(
+      `https://www.reddit.com/api/morechildren?api_type=json&link_id=${link_id}&children=${children}`
+    )
+  ).json();
+  if (!res.hasOwnProperty("error")) {
+    const comments: Post[] = res.json.data.things.map(
+      (comment: any) => comment.data
+    );
+    return comments;
+  }
+  return res;
+}

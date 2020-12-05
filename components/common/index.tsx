@@ -193,7 +193,7 @@ export const NavMenu = ({ token = "" }: any) => {
             "read vote save identity subscribe"
           )}`}
         >
-          <button className="sm:hidden my-4 ml-4 p-1 px-3 text-sm cursor-pointer max-w-full btn-black text-white outline-1px rounded">
+          <button className="my-4 ml-4 p-1 px-3 text-sm cursor-pointer max-w-full btn-black text-white outline-1px rounded">
             Login
           </button>
         </a>

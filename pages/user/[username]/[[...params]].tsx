@@ -79,7 +79,7 @@ const UserPage = ({ postData, userInfo, params }: any) => {
           <div className="w-full flex items-start flex-col">
               <div className="mr-8 flex flex-row items-center cursor-pointer">
                 <a className="main-black my-10" href={`/user/${userInfo.name}`}>
-                  <h2 className="text-5xl leading-loose font-bold sm:text-4xl sm:mt-8">{userInfo.name}</h2>
+                  <h2 className="text-5xl leading-loose font-bold sm:text-3xl sm:mt-8">{userInfo.name}</h2>
                 </a>
               </div>
               <div className="flex flex-row items-center sub-link-grey sm:mt-2 h-16 my-2">
