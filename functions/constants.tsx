@@ -1,5 +1,6 @@
 export const DOMAIN = "https://reddium.vercel.app";
-export const REDIRECT_URI = "http://localhost:3000/login";
+export const REDIRECT_URI = "https://reddium.vercel.app/login";
+// export const REDIRECT_URI = "http://localhost:3000/login";
 
 export const TITLE_MAX = 100;
 export const DESC_MAX = 200;
