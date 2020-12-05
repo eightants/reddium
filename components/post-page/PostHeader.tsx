@@ -11,9 +11,11 @@ const PostHeader = ({ subreddit }: any) => (
       <nav className="flex justify-between items-center flex-row leading-4 flex-grow py-2">
         <div></div>
         <div>
+        <a href={`/r/${subreddit}`}>
           <button className="my-2 p-1 px-3 text-sm cursor-pointer max-w-full btn-outline-white rounded">
-            Follow
+            Visit
           </button>
+          </a>
         </div>
       </nav>
     </div>

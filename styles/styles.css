@@ -172,6 +172,10 @@ a.post-link-clear:hover {
   background-color: rgb(53, 88, 118);
 }
 
+.blue-clr {
+  color: rgb(53, 88, 118);
+}
+
 .main-grey {
   color: rgb(230, 230, 230);
 }
@@ -204,6 +208,10 @@ a.post-link-clear:hover {
   background-color: transparent;
   color: white;
   border: 1px solid white;
+}
+
+.outline-1px {
+  border: 1px solid;
 }
 
 .main-container {
@@ -321,6 +329,10 @@ a.post-link-clear:hover {
 
 .h-160 {
   height: 160px;
+}
+
+.h-264 {
+  min-height: 264px;
 }
 
 .shimmer-bg {

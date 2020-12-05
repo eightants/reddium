@@ -5,7 +5,7 @@ import { Props } from "../interfaces";
 import { NavMenu } from "./common";
 import TitleHead from "./TitleHead";
 
-const PostLayout = ({ children, title, permalink, thumbnail }: Props) => (
+const PostLayout = ({ children, title, permalink, thumbnail, token }: Props) => (
   <div>
     <TitleHead title={title}>
       <meta name="description" content={`Read on Reddium`} />
@@ -33,7 +33,7 @@ const PostLayout = ({ children, title, permalink, thumbnail }: Props) => (
             </div>
           </a>
         </div>
-        <NavMenu />
+        <NavMenu token={token}/>
       </nav>
     </header>
     {children}

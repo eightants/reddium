@@ -8,26 +8,35 @@ import {
   POPULAR_PARAM_KEY,
   POPULAR_PARAM_DEFAULT,
   SORT_TYPE,
-  TIME_FILTER
+  TIME_FILTER,
+  POPULAR_PARAM_VALUES
 } from "../../../functions/constants";
 import React, { useState } from "react";
 import Header from "../../../components/subreddit-page/Header";
 import SubWideCard from "../../../components/subreddit-page/SubWideCard";
 import SubGridCard from "../../../components/subreddit-page/SubGridCard";
 import SubredditInfo from "../../../components/subreddit-page/SubredditInfo";
+import Cookies from "cookies";
 
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+  res,
+  query
+}) => {
   const posts = await getPopularPosts({
     ...query,
     sort_type: query.hasOwnProperty("params") ? query.params[0] : "hot"
   });
-  const subredditInfo = await getSubredditInfo(query);
+  const cookies = new Cookies(req, res);
+  const token = cookies.get("token") || "";
+  const subredditInfo = await getSubredditInfo({ ...query, token: token });
   return {
     props: {
       postData: { ...posts },
       subredditInfo,
       params: {
         ...query,
+        token: token,
         sort_type: query.hasOwnProperty("params") ? query.params[0] : "hot"
       }
     }
@@ -55,8 +64,13 @@ const SubredditPage = ({ postData, subredditInfo, params }: any) => {
   };
 
   return (
-    <Subpage title={subredditInfo.display_name} subreddit={params.subreddit} backgroundColor="rgb(250,250,250)">
-      <Header {...params} />
+    <Subpage
+      title={subredditInfo.display_name}
+      subreddit={params.subreddit}
+      token={params.token}
+      backgroundColor="rgb(250,250,250)"
+    >
+      <Header {...params} {...subredditInfo} />
       <section className="w-full mx-auto max-width-sub pb-10 mt-6 lg:w-auto lg:mx-12 sm:mx-6">
         <header className="sub-bottom-border pb-2">
           <span className="text-lg sub-opacity-68">Featured</span>
@@ -68,37 +82,41 @@ const SubredditPage = ({ postData, subredditInfo, params }: any) => {
         </div>
       </section>
       <section className="hidden mx-12 w-auto max-width-sub pb-10 mt-6 md:block sm:mx-6">
-            <SubredditInfo {...subredditInfo} />
-            <div className="h-full pt-8">
-              <div className="mb-12">
-                <p className="heading-text text-sm leading-4 uppercase tracking-wide">
-                  Popular posts
-                </p>
+        <SubredditInfo {...subredditInfo} />
+        <div className="h-full pt-8">
+          <div className="mb-12">
+            <p className="heading-text text-sm leading-4 uppercase tracking-wide">
+              Popular posts
+            </p>
 
-                <Dropdown
-                  key={SORT_TYPE}
-                  id={SORT_TYPE}
-                  dataObj={selectedParams}
-                  updateParams={setSelectedParams}
-                />
-                {selectedParams.sort_type == "top" ? (
-                  <Dropdown
-                    key={TIME_FILTER}
-                    id={TIME_FILTER}
-                    dataObj={selectedParams}
-                    updateParams={setSelectedParams}
-                  />
-                ) : (
-                  ""
-                )}
-                <button
-                  className="my-4 p-2 cursor-pointer w-48 max-w-full btn-black text-white rounded"
-                  onClick={filterPopular}
-                >
-                  Filter
-                </button>
-              </div>
-            </div>
+            <Dropdown
+              key={SORT_TYPE}
+              id={SORT_TYPE}
+              paramKey={POPULAR_PARAM_KEY}
+              paramVal={POPULAR_PARAM_VALUES}
+              dataObj={selectedParams}
+              updateParams={setSelectedParams}
+            />
+            {selectedParams.sort_type == "top" ? (
+              <Dropdown
+                key={TIME_FILTER}
+                id={TIME_FILTER}
+                paramKey={POPULAR_PARAM_KEY}
+                paramVal={POPULAR_PARAM_VALUES}
+                dataObj={selectedParams}
+                updateParams={setSelectedParams}
+              />
+            ) : (
+              ""
+            )}
+            <button
+              className="my-4 p-2 cursor-pointer w-48 max-w-full btn-black text-white rounded"
+              onClick={filterPopular}
+            >
+              Filter
+            </button>
+          </div>
+        </div>
       </section>
       <div className="w-full flex main-container max-width-sub pb-4 posts-grid md:block lg:w-auto lg:mx-12 sm:mx-6">
         <div className="w-full mb-4 grid-left">
@@ -130,6 +148,8 @@ const SubredditPage = ({ postData, subredditInfo, params }: any) => {
                 <Dropdown
                   key={SORT_TYPE}
                   id={SORT_TYPE}
+                  paramKey={POPULAR_PARAM_KEY}
+                  paramVal={POPULAR_PARAM_VALUES}
                   dataObj={selectedParams}
                   updateParams={setSelectedParams}
                 />
@@ -137,6 +157,8 @@ const SubredditPage = ({ postData, subredditInfo, params }: any) => {
                   <Dropdown
                     key={TIME_FILTER}
                     id={TIME_FILTER}
+                    paramKey={POPULAR_PARAM_KEY}
+                    paramVal={POPULAR_PARAM_VALUES}
                     dataObj={selectedParams}
                     updateParams={setSelectedParams}
                   />

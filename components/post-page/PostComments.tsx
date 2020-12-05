@@ -1,7 +1,7 @@
 import React from "react";
 import { Comment } from "./Comment";
 
-const PostComments = ({ comments, backToPost }: any) => {
+const PostComments = ({ comments, backToPost, token }: any) => {
   return (
     <div className="w-full mx-auto max-w-600 pb-2 mt-6 sm:mx-6 sm:w-auto post-content">
       <div className="my-2 mx-4 px-6 py-3 input-shadow rounded">
@@ -19,7 +19,13 @@ const PostComments = ({ comments, backToPost }: any) => {
         <div></div>
       )}
       {comments.map((comment: any, ind: number) => (
-        <Comment key={ind} {...comment} max_depth={2} checkedForMore={false}/>
+        <Comment
+          key={ind}
+          {...comment}
+          max_depth={2}
+          token={token}
+          checkedForMore={false}
+        />
       ))}
     </div>
   );

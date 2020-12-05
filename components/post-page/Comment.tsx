@@ -9,6 +9,7 @@ import {
   getTime,
   hasMoreComments
 } from "../../functions/common";
+import { upvote } from "../../pages/api/posts";
 
 export const RootComment = ({ comment, depth_limit }: any) => {
   const [maxDepth, setMaxDepth] = useState(depth_limit);
@@ -18,6 +19,8 @@ export const RootComment = ({ comment, depth_limit }: any) => {
 
 export const Comment = ({
   author,
+  name,
+  likes,
   body,
   created_utc,
   replies,
@@ -25,15 +28,26 @@ export const Comment = ({
   max_depth,
   depth,
   permalink,
+  token = "",
   checkedForMore
 }: any) => {
   const [maxDepth, setMaxDepth] = useState(max_depth);
   const addDepth = () => setMaxDepth(depth + 2);
+  const [upvoted, setUpvoted] = useState(likes || false);
+  const castVote = (dir: number) => {
+    if (token != "") {
+      upvote({ postid: name, dir: dir, token }).then(() => {
+        if (dir == 0) {
+          setUpvoted(false);
+        } else {
+          setUpvoted(true);
+        }
+      });
+    }
+  };
   return replies || replies == "" ? (
     <div>
-      <div
-        className="pr-0 pl-3 pt-3"
-      >
+      <div className="pr-0 pl-3 pt-3">
         <div className="sub-bottom-border pb-6">
           <div className="w-full mt-4 flex flex-row justify-between items-center">
             <div className="items-center flex">
@@ -67,9 +81,21 @@ export const Comment = ({
           <h4 className="py-2 font-normal main-black break-words">
             <MarkdownView markdown={body} options={{ emoji: true }} />
           </h4>
-          <div className="w-full mt-4 flex flex-row justify-start items-center">
+          <div className="w-full mt-4 flex flex-row justify-start items-center font-normal">
             <div className="flex flex-row items-center tracking-tight mr-4">
-              <img className="cursor-pointer w-6" src="/clap.svg" />
+              {upvoted ? (
+                <img
+                  className="cursor-pointer w-6"
+                  src="/clap1.svg"
+                  onClick={() => castVote(0)}
+                />
+              ) : (
+                <img
+                  className="cursor-pointer w-6"
+                  src="/clap.svg"
+                  onClick={() => castVote(1)}
+                />
+              )}
               <div>
                 <p className="ml-1">{ups}</p>
               </div>
@@ -78,7 +104,7 @@ export const Comment = ({
               <div className="flex flex-row items-center tracking-tight text-black">
                 <img className="cursor-pointer w-6 pt-1" src="/comment.svg" />
                 <div>
-                  <p className="ml-1">
+                  <p className="ml-1 font-normal">
                     {replies != "" ? replies.data.children.length : ""}
                   </p>
                 </div>
@@ -91,6 +117,7 @@ export const Comment = ({
             <Comment
               key={i}
               {...c.data}
+              token={token}
               checkedForMore={hasMoreComments(replies) || checkedForMore}
               max_depth={maxDepth}
               add_depth={addDepth}

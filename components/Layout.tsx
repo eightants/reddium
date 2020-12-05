@@ -1,10 +1,11 @@
 import React from "react";
+import { getTimeOfDay } from "../functions/common";
 import { DOMAIN } from "../functions/constants";
 import { Props } from "../interfaces";
 import { NavMenu } from "./common";
 import TitleHead from "./TitleHead";
 
-const Layout = ({ children, title }: Props) => (
+const Layout = ({ children, title, token }: Props) => (
   <div>
     <TitleHead title={title}>
       <meta
@@ -31,11 +32,11 @@ const Layout = ({ children, title }: Props) => (
           </a>
           <div className="pl-4">
             <h1 className="font-bold text-lg leading-6 nav-greeting sm:hidden">
-              Good morning
+              {getTimeOfDay()}
             </h1>
           </div>
         </div>
-        <NavMenu />
+        <NavMenu token={token} />
       </nav>
     </header>
     {children}

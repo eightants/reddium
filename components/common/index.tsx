@@ -1,12 +1,63 @@
 import { zipObject } from "lodash";
 import React, { useEffect, useRef, useState } from "react";
 import { getIntFromString, getTime, limitText } from "../../functions/common";
-import { DESC_MAX } from "../../functions/constants";
+import { DESC_MAX, REDIRECT_URI } from "../../functions/constants";
 import { DropdownProps, Props } from "../../interfaces";
 
 export const MidContainer = ({ children }: Props) => (
   <div className="mid-container px-4 sm:px-0">{children}</div>
 );
+
+const ProfileOptions = () => {
+  const [showDropdown, setShowDropdown] = useState(false);
+  const dropdown = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!showDropdown) return;
+    function handleClick(e: any) {
+      if (dropdown.current && !dropdown.current.contains(e.target)) {
+        setShowDropdown(false);
+      }
+    }
+    window.addEventListener("click", handleClick);
+    return () => window.removeEventListener("click", handleClick);
+  });
+
+  return (
+    <div className="main-black relative">
+      <div
+        className="main-border w-10 h-10 sm:h-8 sm:w-8 flex justify-between items-center rounded-full ml-4 cursor-pointer"
+        style={{
+          backgroundImage: `url("/avatar.svg")`,
+          backgroundSize: "cover",
+          backgroundPosition: "center"
+        }}
+        onClick={() => setShowDropdown(!showDropdown)}
+      ></div>
+      {showDropdown ? (
+        <div
+          className="dropdown-select absolute w-48 mt-6 z-20 right-0 left-auto rounded sub-text"
+          ref={dropdown}
+        >
+          <a
+            className="my-1 px-5 p-2 cursor-pointer link-black-hover block"
+            href="/me"
+          >
+            View Profile
+          </a>
+          <a
+            className="my-1 px-5 p-2 cursor-pointer link-black-hover block"
+            href="/logout"
+          >
+            Sign out
+          </a>
+        </div>
+      ) : (
+        <div></div>
+      )}
+    </div>
+  );
+};
 
 export const Dropdown = ({
   id,
@@ -81,11 +132,10 @@ export const PostMetadata = ({
   </div>
 );
 
-export const NavMenu = () => {
+export const NavMenu = ({ token = "" }: any) => {
   const [showSearch, setShowSearch] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const newSearch = () => (window.location.href = `/search/?q=${searchTerm}`);
-
   return (
     <div className="items-center flex flex-row h-full justify-end">
       <div className="flex flex-row items-center justify-end h-full">
@@ -121,7 +171,7 @@ export const NavMenu = () => {
           rel="noopener noreferrer"
         >
           <img
-            className="h-10 cursor-pointer p-1 ml-2 sub-opacity-68 link-black-hover hidden sm:block"
+            className="h-10 cursor-pointer p-1 ml-2 sub-opacity-68 link-black-hover hidden md:block"
             src="/github.svg"
           />
         </a>
@@ -131,10 +181,23 @@ export const NavMenu = () => {
         target="_blank"
         rel="noopener noreferrer"
       >
-        <button className="sm:hidden my-4 ml-4 p-1 px-3 sub-opacity-68 link-black-hover text-sm cursor-pointer max-w-full btn-outline-black rounded">
+        <button className="md:hidden my-4 ml-4 p-1 px-3 sub-opacity-68 link-black-hover text-sm cursor-pointer max-w-full btn-outline-black rounded">
           Star on GitHub
         </button>
       </a>
+      {token != "" ? (
+        <ProfileOptions />
+      ) : (
+        <a
+          href={`https://www.reddit.com/api/v1/authorize.compact?client_id=DT8MZ0k_rAtJ8w&response_type=code&state=testing&redirect_uri=${REDIRECT_URI}&duration=temporary&scope=${encodeURIComponent(
+            "read vote save identity subscribe"
+          )}`}
+        >
+          <button className="sm:hidden my-4 ml-4 p-1 px-3 text-sm cursor-pointer max-w-full btn-black text-white outline-1px rounded">
+            Login
+          </button>
+        </a>
+      )}
     </div>
   );
 };

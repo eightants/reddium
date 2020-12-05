@@ -8,6 +8,7 @@ const Subpage = ({
   children,
   title,
   subreddit,
+  token,
   backgroundColor = "white"
 }: Props) => (
   <div>
@@ -30,7 +31,7 @@ const Subpage = ({
             </div>
           </a>
         </div>
-        <NavMenu />
+        <NavMenu token={token}/>
       </nav>
     </header>
     {children}

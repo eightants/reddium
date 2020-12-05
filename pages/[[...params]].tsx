@@ -1,5 +1,6 @@
 import Layout from "../components/Layout";
 import { zipObject } from "lodash";
+import Cookies from "cookies";
 
 import MidCard from "../components/home-page/MidCard";
 import { Dropdown, MidContainer } from "../components/common";
@@ -11,45 +12,54 @@ import {
   POPULAR_PARAM_DEFAULT,
   SORT_TYPE,
   TIME_FILTER,
-  POPULAR_PARAM_VALUES
+  POPULAR_PARAM_VALUES,
+  LOADING_POST_LIST
 } from "../functions/constants";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import RankedCard from "../components/home-page/RankedCard";
 import WideCard from "../components/home-page/WideCard";
 import TrendingSubs from "../components/home-page/TrendingSubs";
 
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  const posts = await getPopularPosts({
-    ...query,
-    sort_type: query.hasOwnProperty("params") ? query.params[0] : "hot"
-  });
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+  res,
+  query
+}) => {
   const trendingSubs = await getPopularPosts({
     subreddit: "trendingsubreddits",
     sort_type: "new",
     limit: 1
   });
+  const cookies = new Cookies(req, res);
   return {
     props: {
-      postData: { ...posts },
       trendingSubs,
       params: {
         ...query,
+        token: cookies.get("token") || "",
         sort_type: query.hasOwnProperty("params") ? query.params[0] : "hot"
       }
     }
   };
 };
 
-const IndexPage = ({ postData, trendingSubs, params }: any) => {
-  const [{ posts, after }, setPostData] = useState(postData);
+const IndexPage = ({ trendingSubs, params }: any) => {
+  const [{ posts, after }, setPostData] = useState(LOADING_POST_LIST);
   const [selectedParams, setSelectedParams] = useState({
     ...zipObject(POPULAR_PARAM_KEY, POPULAR_PARAM_DEFAULT),
     ...params
   });
   const loader = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    console.log(selectedParams);
+    getPopularPosts(selectedParams).then((res) => {
+      setPostData(res);
+    });
+  }, []);
+
   const filterPopular = () => {
-    setPostData({ posts: new Array(15).fill({}) });
+    setPostData(LOADING_POST_LIST);
     window.location.href = `/${selectedParams.sort_type}?t=${selectedParams.t}&limit=${selectedParams.limit}`;
   };
 
@@ -62,14 +72,14 @@ const IndexPage = ({ postData, trendingSubs, params }: any) => {
   };
 
   return (
-    <Layout title="Reddium – Medium-themed Reddit client">
+    <Layout title="Reddium – Medium-themed Reddit client" token={params.token}>
       <div className="lg:w-auto lg:mx-12 mx-auto w-full flex main-container max-width-main pb-10 sm:mx-6">
         <MidContainer>
           <LargeCard {...posts[0]} />
         </MidContainer>
         <MidContainer>
-          {posts.slice(1, 5).map((p: any) => (
-            <MidCard key={p.id} {...p} />
+          {posts.slice(1, 5).map((p: any, ind: number) => (
+            <MidCard key={ind} {...p} />
           ))}
         </MidContainer>
         <MidContainer>
@@ -164,14 +174,14 @@ const IndexPage = ({ postData, trendingSubs, params }: any) => {
         </div>
         <div className="w-full flex mb-4 flex-row items-start flex-wrap">
           {posts.slice(5, 11).map((p: any, ind: number) => (
-            <RankedCard key={p.id} rank={ind + 6} {...p} />
+            <RankedCard key={ind} rank={ind + 6} {...p} />
           ))}
         </div>
       </div>
       <div className="w-full flex main-container max-width-main pb-4 pt-10 sub-top-border posts-grid lg:w-auto lg:mx-12 md:block sm:mx-6">
         <div className="w-full mb-4 grid-left">
-          {posts.slice(11, posts.length).map((p: any) => (
-            <WideCard key={p.id} {...p} />
+          {posts.slice(11, posts.length).map((p: any, ind: number) => (
+            <WideCard key={ind} {...p} />
           ))}
           <div className="w-full text-center" ref={loader}>
             {/* <WideCard {...({} as Post)} /> */}

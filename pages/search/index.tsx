@@ -18,13 +18,23 @@ import {
   TIME_FILTER
 } from "../../functions/constants";
 import { zipObject } from "lodash";
+import Cookies from "cookies";
 
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  const items = await getSearch(query);
+export const getServerSideProps: GetServerSideProps = async ({
+  req,
+  res,
+  query
+}) => {
+  const cookies = new Cookies(req, res);
+  const token = cookies.get("token") || "";
+  const items = await getSearch({ ...query, token });
   return {
     props: {
       searchRes: { ...items },
-      params: query
+      params: {
+        ...query,
+        token: token
+      }
     }
   };
 };
@@ -76,7 +86,7 @@ const SearchPage = ({ searchRes, params }: any) => {
               </div>
             </a>
           </div>
-          <NavMenu />
+          <NavMenu token={params.token}/>
         </nav>
       </header>
       <section className="lg:w-auto lg:mx-12 sm:mx-2">
@@ -160,7 +170,7 @@ const SearchPage = ({ searchRes, params }: any) => {
                   ) : (
                     items.map((item: any, ind: number) =>
                       item.kind == "t3" ? (
-                        <SearchPost key={ind} {...item} />
+                        <SearchPost key={ind} {...item} token={params.token} />
                       ) : item.kind == "t5" ? (
                         <SubredditCard key={ind} {...item} />
                       ) : (

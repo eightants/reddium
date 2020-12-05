@@ -10,13 +10,20 @@ export async function getPopularPosts({
   sort_type = "hot",
   t = "day",
   limit = 25,
-  after = ""
+  after = "",
+  token = ""
 }: QueryParams) {
-  const res = await (
-    await fetch(
-      `https://www.reddit.com/r/${subreddit}/${sort_type}.json?limit=${limit}&after=${after}&t=${t}`
-    )
-  ).json();
+  const url =
+    token != ""
+      ? `https://oauth.reddit.com/${sort_type}?limit=${limit}&after=${after}&t=${t}`
+      : `https://www.reddit.com/r/${subreddit}/${sort_type}.json?limit=${limit}&after=${after}&t=${t}`;
+  const headerOptions =
+    token != ""
+      ? {
+          headers: { Authorization: `Bearer ${token}` }
+        }
+      : {};
+  const res = await (await fetch(url, headerOptions)).json();
   const postList = await res.data.children;
   const posts: Post[] = postList.map((post: any) => post.data);
   return {
@@ -25,11 +32,19 @@ export async function getPopularPosts({
   };
 }
 
-export async function getSubredditInfo({ subreddit }: QueryParams) {
+export async function getSubredditInfo({ subreddit, token = "" }: QueryParams) {
   if (subreddit && SPECIAL_SUBREDDITS.includes(subreddit)) return {};
-  const res = await (
-    await fetch(`https://www.reddit.com/r/${subreddit}/about.json`)
-  ).json();
+  const url =
+    token != ""
+      ? `https://oauth.reddit.com/r/${subreddit}/about`
+      : `https://www.reddit.com/r/${subreddit}/about.json`;
+  const headerOptions =
+    token != ""
+      ? {
+          headers: { Authorization: `Bearer ${token}` }
+        }
+      : {};
+  const res = await (await fetch(url, headerOptions)).json();
   return res.data;
 }
 
@@ -37,14 +52,21 @@ export async function getPostInfo({
   subreddit,
   postid,
   commentid,
-  sort = "confidence"
+  sort = "confidence",
+  token = ""
 }: QueryParams) {
   const postReq = commentid == "" ? postid : `${postid}/eightants/${commentid}`;
-  const res = await (
-    await fetch(
-      `https://www.reddit.com/r/${subreddit}/comments/${postReq}.json?sort=${sort}`
-    )
-  ).json();
+  const url =
+    token != ""
+      ? `https://oauth.reddit.com/r/${subreddit}/comments/${postReq}?sort=${sort}`
+      : `https://www.reddit.com/r/${subreddit}/comments/${postReq}.json?sort=${sort}`;
+  const headerOptions =
+    token != ""
+      ? {
+          headers: { Authorization: `Bearer ${token}` }
+        }
+      : {};
+  const res = await (await fetch(url, headerOptions)).json();
   if (!res.hasOwnProperty("error")) {
     const comments: Post[] = res[1].data.children.map((post: any) => post.data);
     return {
@@ -89,13 +111,21 @@ export async function getSearch({
   q,
   sort = "relevance",
   t = "all",
-  after = ""
+  type = "",
+  after = "",
+  token = ""
 }: any) {
-  const res = await (
-    await fetch(
-      `https://www.reddit.com/search/.json?q=${q}&sort=${sort}&t=${t}&after=${after}`
-    )
-  ).json();
+  const url =
+    token != ""
+      ? `https://oauth.reddit.com/search?q=${q}&sort=${sort}&t=${t}&after=${after}&type=${type}`
+      : `https://www.reddit.com/search/.json?q=${q}&sort=${sort}&t=${t}&after=${after}&type=${type}`;
+  const headerOptions =
+    token != ""
+      ? {
+          headers: { Authorization: `Bearer ${token}` }
+        }
+      : {};
+  const res = await (await fetch(url, headerOptions)).json();
   if (res.hasOwnProperty("error") || !res.hasOwnProperty("data"))
     return {
       items: [],
@@ -110,4 +140,59 @@ export async function getSearch({
     items: items,
     after: res.data.after
   };
+}
+
+export async function upvote({ postid, token, dir = 1 }: any) {
+  const headerOptions = {
+    method: "POST",
+    headers: { Authorization: `Bearer ${token}` }
+  };
+  return await fetch(
+    `https://oauth.reddit.com/api/vote?id=${postid}&dir=${dir}`,
+    headerOptions
+  );
+}
+
+export async function postSubscribe({ sub, token, action }: any) {
+  const headerOptions = {
+    method: "POST",
+    headers: { Authorization: `Bearer ${token}` }
+  };
+  return await fetch(
+    `https://oauth.reddit.com/api/subscribe?sr=${sub}&action=${action}&action_source=a${
+      action == "sub" ? "&skip_initial_defaults=true" : ""
+    }`,
+    headerOptions
+  );
+}
+
+export async function sendSave({ postid, token }: any) {
+  const headerOptions = {
+    method: "POST",
+    headers: { Authorization: `Bearer ${token}` }
+  };
+  return await fetch(
+    `https://oauth.reddit.com/api/save?id=${postid}`,
+    headerOptions
+  );
+}
+
+export async function sendUnsave({ postid, token }: any) {
+  const headerOptions = {
+    method: "POST",
+    headers: { Authorization: `Bearer ${token}` }
+  };
+  return await fetch(
+    `https://oauth.reddit.com/api/unsave?id=${postid}`,
+    headerOptions
+  );
+}
+
+export async function getProfile({ token }: any) {
+  const headerOptions = {
+    headers: { Authorization: `Bearer ${token}` }
+  };
+  return await (
+    await fetch(`https://oauth.reddit.com/api/v1/me`, headerOptions)
+  ).json();
 }

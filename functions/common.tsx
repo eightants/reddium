@@ -15,6 +15,17 @@ export function getTime(unixTime: number) {
   return `${postedDate.getDate()}/${postedDate.getMonth()}/${postedDate.getFullYear()}`;
 }
 
+export function getTimeOfDay() {
+  const today = new Date();
+  const currHour = today.getHours();
+  if (currHour < 12) {
+    return "Good morning";
+  } else if (currHour < 18) {
+    return "Good afternoon";
+  }
+  return "Good evening";
+}
+
 export function getRandomInt(max: number) {
   return Math.floor(Math.random() * Math.floor(max));
 }
@@ -51,13 +62,13 @@ export const isImage = (url: string) =>
   url.includes(".jpg") || url.includes(".gif") || url.includes(".png");
 
 export const isVideo = (url: string) =>
-  url.includes("youtube.com/watch") || url.includes("youtu.be")
+  url.includes("youtube.com/watch") || url.includes("youtu.be");
 
 export const getEmbedLink = (url: string) => {
   if (url.includes("youtube.com/watch")) {
-    return `https://youtube.com/embed/${url.split("=")[1]}`
+    return `https://youtube.com/embed/${url.split("=")[1]}`;
   }
   if (url.includes("youtu.be")) {
-    return `https://youtube.com/embed${url.split(".be")[1]}`
+    return `https://youtube.com/embed${url.split(".be")[1]}`;
   }
-}
+};

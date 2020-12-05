@@ -1,4 +1,5 @@
 export const DOMAIN = "https://reddium.vercel.app";
+export const REDIRECT_URI = "http://localhost:3000/login";
 
 export const TITLE_MAX = 100;
 export const DESC_MAX = 200;
@@ -38,6 +39,8 @@ export const SORT_TYPES = ["top", "hot", "new", "rising"];
 export const POPULAR_PARAM_KEY = ["sort_type", "t"];
 export const POPULAR_PARAM_DEFAULT = ["hot", "day"];
 export const POPULAR_PARAM_VALUES = [SORT_TYPES, TIME_PARAM_VALUES];
+
+export const LOADING_POST_LIST = { posts: new Array(15).fill({}), after: "" };
 
 export const PLACEHOLDER_IMAGES = [
   "amanda-frank-e4ING8JYKgI-unsplash.jpg",

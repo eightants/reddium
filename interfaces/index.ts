@@ -23,6 +23,10 @@ export type Post = {
   num_comments: number;
   thumbnail?: string;
   created_utc: number;
+  name: string;
+  likes?: boolean;
+  saved?: boolean;
+  token?: string;
 };
 
 export type Props = {
@@ -32,6 +36,7 @@ export type Props = {
   subreddit?: string;
   permalink?: string;
   thumbnail?: string;
+  token?: string;
 };
 
 export type DropdownProps = {
@@ -53,6 +58,7 @@ export type QueryParams = {
   postid?: string;
   commentid?: string;
   sort?: string;
+  token?: string;
 };
 
 export type PostList = {
