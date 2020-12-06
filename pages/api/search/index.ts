@@ -5,20 +5,17 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const {
-    subreddit = "popular",
-    sort_type = "hot",
-    t = "day",
-    limit = 25,
+    q,
+    sort = "relevance",
+    t = "all",
+    type = "",
     after = "",
-    token = "",
-    home = false
+    token = ""
   } = JSON.parse(req.body);
   const url =
     token != ""
-      ? home
-        ? `https://oauth.reddit.com/${sort_type}?limit=${limit}&after=${after}&t=${t}`
-        : `https://oauth.reddit.com/r/${subreddit}/${sort_type}?limit=${limit}&after=${after}&t=${t}`
-      : `https://www.reddit.com/r/${subreddit}/${sort_type}.json?limit=${limit}&after=${after}&t=${t}`;
+      ? `https://oauth.reddit.com/search?q=${q}&sort=${sort}&t=${t}&after=${after}&type=${type}`
+      : `https://www.reddit.com/search/.json?q=${q}&sort=${sort}&t=${t}&after=${after}&type=${type}`;
   const headerOptions =
     token != ""
       ? {

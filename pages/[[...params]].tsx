@@ -5,7 +5,7 @@ import Cookies from "cookies";
 import MidCard from "../components/home-page/MidCard";
 import { Dropdown, MidContainer } from "../components/common";
 import { GetServerSideProps } from "next";
-import { getPopularPosts } from "./api/posts";
+import { getPopularPosts, getPopularPostsClient } from "../functions/service";
 import LargeCard from "../components/home-page/LargeCard";
 import {
   POPULAR_PARAM_KEY,
@@ -52,8 +52,7 @@ const IndexPage = ({ trendingSubs, params }: any) => {
   const loader = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    console.log(selectedParams);
-    getPopularPosts(selectedParams).then((res) => {
+    getPopularPostsClient({ ...selectedParams, home: true }).then((res) => {
       setPostData(res);
     });
   }, []);

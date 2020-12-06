@@ -3,7 +3,11 @@ import { zipObject } from "lodash";
 
 import { Dropdown } from "../../../components/common";
 import { GetServerSideProps } from "next";
-import { getPopularPosts, getSubredditInfo } from "../../api/posts";
+import {
+  getPopularPosts,
+  getPopularPostsClient,
+  getSubredditInfo
+} from "../../../functions/service";
 import {
   POPULAR_PARAM_KEY,
   POPULAR_PARAM_DEFAULT,
@@ -56,7 +60,7 @@ const SubredditPage = ({ postData, subredditInfo, params }: any) => {
   };
 
   const fetchMorePosts = async () => {
-    const next = await getPopularPosts({
+    const next = await getPopularPostsClient({
       ...selectedParams,
       after: after
     });
@@ -76,8 +80,8 @@ const SubredditPage = ({ postData, subredditInfo, params }: any) => {
           <span className="text-lg sub-opacity-68">Featured</span>
         </header>
         <div className="my-6 flex flex-row flex-wrap sm-border-b sm:pb-4">
-          {posts.slice(0, 3).map((p: any) => (
-            <SubGridCard key={p.id} {...p} />
+          {posts.slice(0, 3).map((p: any, ind: number) => (
+            <SubGridCard key={ind} {...p} />
           ))}
         </div>
       </section>
@@ -123,8 +127,8 @@ const SubredditPage = ({ postData, subredditInfo, params }: any) => {
           <header className="sub-bottom-border pb-2">
             <span className="text-lg sub-opacity-68">Trending</span>
           </header>
-          {posts.slice(3, posts.length).map((p: any) => (
-            <SubWideCard key={p.id} {...p} />
+          {posts.slice(3, posts.length).map((p: any, ind: number) => (
+            <SubWideCard key={ind} {...p} />
           ))}
           <div className="w-full text-center">
             <button

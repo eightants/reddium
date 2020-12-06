@@ -1,5 +1,4 @@
 import { GetServerSideProps } from "next";
-import { getSearch } from "../api/posts";
 import React, { useState } from "react";
 import TitleHead from "../../components/TitleHead";
 import {
@@ -19,6 +18,7 @@ import {
 } from "../../functions/constants";
 import { zipObject } from "lodash";
 import Cookies from "cookies";
+import { getSearch, getSearchClient } from "../../functions/service";
 
 export const getServerSideProps: GetServerSideProps = async ({
   req,
@@ -51,7 +51,7 @@ const SearchPage = ({ searchRes, params }: any) => {
     window.location.href = `/search/?q=${searchTerm}&sort=${selectedParams.sort}&t=${selectedParams.t}`;
   };
   const fetchMorePosts = async () => {
-    const next = await getSearch({
+    const next = await getSearchClient({
       ...params,
       after: after
     });

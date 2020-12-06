@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { postSubscribe } from "../../pages/api/posts";
+import { postSubscribe } from "../../functions/service";
 
 const Header = ({ subreddit, user_is_subscriber, name, token }: any) => {
   const [following, setFollowing] = useState(user_is_subscriber);

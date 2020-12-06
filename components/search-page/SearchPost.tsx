@@ -13,11 +13,12 @@ import {
   TITLE_MAX
 } from "../../functions/constants";
 import { Post } from "../../interfaces";
-import { sendSave, sendUnsave, upvote } from "../../pages/api/posts";
+import { sendSave, sendUnsave, upvote } from "../../functions/service";
 
 const SearchPost = ({
   author,
   title,
+  name,
   selftext,
   subreddit_name_prefixed,
   created_utc,

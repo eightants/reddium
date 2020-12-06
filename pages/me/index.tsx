@@ -1,5 +1,10 @@
 import { GetServerSideProps } from "next";
-import { getProfile, getUserInfo, getUserPosts } from "../api/posts";
+import {
+  getProfile,
+  getUserInfo,
+  getUserPosts,
+  getUserPostsClient
+} from "../../functions/service";
 import React, { useState } from "react";
 import TitleHead from "../../components/TitleHead";
 import { NavMenu } from "../../components/common";
@@ -49,7 +54,7 @@ const MePage = ({ postData, userInfo, params }: any) => {
   //   ...params
   // });
   const fetchMorePosts = async () => {
-    const next = await getUserPosts({
+    const next = await getUserPostsClient({
       ...params,
       after: after
     });

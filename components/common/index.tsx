@@ -1,7 +1,7 @@
 import { zipObject } from "lodash";
 import React, { useEffect, useRef, useState } from "react";
 import { getIntFromString, getTime, limitText } from "../../functions/common";
-import { DESC_MAX, REDIRECT_URI } from "../../functions/constants";
+import { CLIENT_ID, DESC_MAX, REDIRECT_URI } from "../../functions/constants";
 import { DropdownProps, Props } from "../../interfaces";
 
 export const MidContainer = ({ children }: Props) => (
@@ -26,7 +26,7 @@ const ProfileOptions = () => {
   return (
     <div className="main-black relative">
       <div
-        className="main-border w-10 h-10 sm:h-8 sm:w-8 flex justify-between items-center rounded-full ml-4 cursor-pointer"
+        className="w-10 h-10 sm:h-8 sm:w-8 flex justify-between items-center rounded-full ml-4 cursor-pointer"
         style={{
           backgroundImage: `url("/avatar.svg")`,
           backgroundSize: "cover",
@@ -189,7 +189,7 @@ export const NavMenu = ({ token = "" }: any) => {
         <ProfileOptions />
       ) : (
         <a
-          href={`https://www.reddit.com/api/v1/authorize.compact?client_id=DT8MZ0k_rAtJ8w&response_type=code&state=testing&redirect_uri=${REDIRECT_URI}&duration=temporary&scope=${encodeURIComponent(
+          href={`https://www.reddit.com/api/v1/authorize.compact?client_id=${CLIENT_ID}&response_type=code&state=testing&redirect_uri=${REDIRECT_URI}&duration=temporary&scope=${encodeURIComponent(
             "read vote save identity subscribe"
           )}`}
         >

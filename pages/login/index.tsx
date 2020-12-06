@@ -1,7 +1,7 @@
 import { GetServerSideProps } from "next";
 import React from "react";
 import Cookies from "cookies";
-import { REDIRECT_URI } from "../../functions/constants";
+import { CLIENT_ID, REDIRECT_URI } from "../../functions/constants";
 
 export const getServerSideProps: GetServerSideProps = async ({
   req,
@@ -15,7 +15,7 @@ export const getServerSideProps: GetServerSideProps = async ({
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
         Authorization: `Basic ${Buffer.from(
-          `DT8MZ0k_rAtJ8w:${process.env.CLIENT_SECRET}`
+          `${CLIENT_ID}:${process.env.CLIENT_SECRET}`
         ).toString("base64")}`
       },
       body: new URLSearchParams({

@@ -1,5 +1,4 @@
 import { GetServerSideProps } from "next";
-import { getPostInfo } from "../../../../api/posts";
 import React, { useState } from "react";
 import PostLayout from "../../../../../components/PostLayout";
 import PostHeader from "../../../../../components/post-page/PostHeader";
@@ -14,6 +13,7 @@ import {
 } from "../../../../../functions/constants";
 import { zipObject } from "lodash";
 import Cookies from "cookies";
+import { getPostInfo } from "../../../../../functions/service";
 
 export const getServerSideProps: GetServerSideProps = async ({
   req,

@@ -59,6 +59,7 @@ export type QueryParams = {
   commentid?: string;
   sort?: string;
   token?: string;
+  home?: boolean;
 };
 
 export type PostList = {

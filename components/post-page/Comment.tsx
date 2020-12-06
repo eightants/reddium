@@ -9,7 +9,7 @@ import {
   getTime,
   hasMoreComments
 } from "../../functions/common";
-import { upvote } from "../../pages/api/posts";
+import { upvote } from "../../functions/service";
 
 export const RootComment = ({ comment, depth_limit }: any) => {
   const [maxDepth, setMaxDepth] = useState(depth_limit);

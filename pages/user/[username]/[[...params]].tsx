@@ -1,5 +1,5 @@
 import { GetServerSideProps } from "next";
-import { getUserInfo, getUserPosts } from "../../api/posts";
+import { getUserInfo, getUserPosts, getUserPostsClient } from "../../../functions/service";
 import React, { useState } from "react";
 import TitleHead from "../../../components/TitleHead";
 import { NavMenu } from "../../../components/common";
@@ -36,9 +36,8 @@ const UserPage = ({ postData, userInfo, params }: any) => {
   //   ...zipObject(POPULAR_PARAM_KEY, POPULAR_PARAM_DEFAULT),
   //   ...params
   // });
-  console.log(params)
   const fetchMorePosts = async () => {
-    const next = await getUserPosts({
+    const next = await getUserPostsClient({
       ...params,
       after: after
     });

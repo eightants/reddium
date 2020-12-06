@@ -13,7 +13,7 @@ import {
 } from "../../functions/common";
 import { PLACEHOLDER_IMAGES, TITLE_MAX } from "../../functions/constants";
 import { Post } from "../../interfaces";
-import { sendSave, sendUnsave, upvote } from "../../pages/api/posts";
+import { sendSave, sendUnsave, upvote } from "../../functions/service";
 
 const PostContent = ({
   title,

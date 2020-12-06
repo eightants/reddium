@@ -2,6 +2,9 @@ export const DOMAIN = "https://reddium.vercel.app";
 export const REDIRECT_URI = "https://reddium.vercel.app/login";
 // export const REDIRECT_URI = "http://localhost:3000/login";
 
+// export const CLIENT_ID = "RCOnAetgJAnYxQ";
+export const CLIENT_ID = "DT8MZ0k_rAtJ8w";
+
 export const TITLE_MAX = 100;
 export const DESC_MAX = 200;
 export const BLURB_MAX = 600;
