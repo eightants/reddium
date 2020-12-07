@@ -229,12 +229,12 @@ export async function getProfile({ token }: any) {
   ).json();
 }
 
-export async function getMoreCommentsJSON({ link_id, children }: any) {
-  const res = await (
-    await fetch(
-      `https://www.reddit.com/api/morechildren?api_type=json&link_id=${link_id}&children=${children}`
-    )
-  ).json();
+export async function getMoreCommentsClient(params: any) {
+  const headerOptions = {
+    method: "POST",
+    body: JSON.stringify(params)
+  };
+  const res = await (await fetch("/api/morecomments", headerOptions)).json();
   if (!res.hasOwnProperty("error")) {
     const comments: Post[] = res.json.data.things.map(
       (comment: any) => comment.data

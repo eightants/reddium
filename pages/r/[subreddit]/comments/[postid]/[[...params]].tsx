@@ -44,6 +44,8 @@ export const getServerSideProps: GetServerSideProps = async ({
 };
 
 const PostPage = ({ post, comments, params, commentId }: any) => {
+  // const [moreIndex, setMoreIndex] = useState(0);
+  // const [commentList, setCommentList] = useState(comments);
   const [selectedParams, setSelectedParams] = useState({
     ...zipObject(COMMENT_PARAM_KEY, COMMENT_PARAM_DEFAULT),
     ...params
@@ -53,6 +55,22 @@ const PostPage = ({ post, comments, params, commentId }: any) => {
   };
   const returnToPost = () =>
     (window.location.href = `/r/${params.subreddit}/comments/${params.postid}`);
+  // const fetchMoreComments = async () => {
+  //   const moreObject = comments[comments.length - 1];
+  //   const moreComments = await getMoreCommentsClient({
+  //     link_id: moreObject.parent_id,
+  //     children: moreObject.children.slice(
+  //       moreIndex,
+  //       Math.min(moreIndex + 30, moreObject.children.length)
+  //     )
+  //   });
+  //   if (moreIndex + 30 >= moreObject.children.length) {
+  //     setMoreIndex(-1);
+  //   } else {
+  //     setMoreIndex(moreIndex + 30);
+  //   }
+  //   // setCommentList([...commentList, ...moreComments]);
+  // };
   return (
     <PostLayout
       title={`${post.title} | ${params.subreddit}`}
@@ -67,7 +85,7 @@ const PostPage = ({ post, comments, params, commentId }: any) => {
       <section className="w-full mx-auto max-w-600 pb-10">
         <div className="sub-bottom-border mb-4 pt-4"></div>
         <div className="flex justify-start mb-8">
-          <div className="max-width-filter flex">
+          <div className="max-width-filter flex w-full px-4">
             <Dropdown
               key={SORT_PARAM}
               id={SORT_PARAM}
@@ -77,7 +95,7 @@ const PostPage = ({ post, comments, params, commentId }: any) => {
               updateParams={setSelectedParams}
             />
             <button
-              className="my-4 p-2 cursor-pointer w-48 max-w-full btn-black text-white rounded"
+              className="ml-2 my-4 p-2 cursor-pointer w-48 max-w-full btn-black text-white rounded"
               onClick={filterPopular}
             >
               Filter
