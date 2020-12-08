@@ -10,12 +10,12 @@ const Layout = ({ children, title, token }: Props) => (
     <TitleHead title={title}>
       <meta
         name="description"
-        content="The Reddit client for Silicon Valley. No longer feel self-conscious when you browse Reddit. "
+        content="The Reddit client for Silicon Valley. "
       />
       <meta property="og:url" content={DOMAIN} />
       <meta
         property="og:description"
-        content="The Reddit client for Silicon Valley. No longer feel self-conscious when you browse Reddit. "
+        content="The Reddit client for Silicon Valley. "
       />
       <meta property="og:image" content={`${DOMAIN}/reddium-mockup.png`} />
     </TitleHead>
