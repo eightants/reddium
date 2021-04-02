@@ -11,7 +11,6 @@ const TitleHead = ({ title, children }: Props) => {
       <meta property="og:title" content={title} />
       <meta property="og:type" content="website" />
       <meta name="twitter:card" content="summary_large_image"/>
-      <script data-ad-client="ca-pub-9998047142509585" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
       <link
         rel="apple-touch-icon"
         sizes="180x180"

@@ -1,6 +1,6 @@
 import React from "react";
 
-const TrendingSubs = (trendingSubs: any) =>  (
+const TrendingSubs = (trendingSubs: any) => (
   <div className="mb-6">
     <div className="mb-5">
       <p className="heading-text text-sm leading-4 uppercase tracking-wide sm:text-xs">
@@ -11,7 +11,8 @@ const TrendingSubs = (trendingSubs: any) =>  (
       {trendingSubs.hasOwnProperty("posts") ? (
         trendingSubs.posts[0].title
           .split(":")[1]
-          .split(",").slice(0,3)
+          .split(",")
+          .slice(0, 3)
           .map((sub: string, ind: number) => (
             <div
               key={ind}
@@ -34,10 +35,7 @@ const TrendingSubs = (trendingSubs: any) =>  (
           <div className="h-4 w-full mb-5 mx-3 pb-3 shimmer-bg"></div>
         </div>
       )}
-      <a
-        className="main-green text-sm"
-        href="https://reddit.com/r/trendingsubreddits"
-      >
+      <a className="main-green text-sm" href="/r/trendingsubreddits">
         See More
       </a>
     </div>

@@ -1,9 +1,15 @@
-import React, { useEffect } from 'react'
-import { AppProps } from 'next/app'
-import '../styles/styles.css'
-import { useRouter } from 'next/dist/client/router';
+import React, { useEffect } from "react";
+import { AppProps } from "next/app";
+import "../styles/styles.css";
+import { useRouter } from "next/dist/client/router";
 import * as gtag from "../functions/gtag";
-	
+import CookieBanner from "../components/CookieBanner";
+import { H } from "highlight.run";
+
+if (typeof window !== "undefined") {
+  H.init("5ldw65eo");
+}
+
 const App = ({ Component, pageProps }: AppProps) => {
   const router = useRouter();
 
@@ -17,7 +23,12 @@ const App = ({ Component, pageProps }: AppProps) => {
     };
   }, [router.events]);
 
-  return <Component {...pageProps} />;
+  return (
+    <div>
+      <Component {...pageProps} />
+      <CookieBanner />
+    </div>
+  );
 };
 
 export default App;

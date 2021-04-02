@@ -5,7 +5,11 @@ import Cookies from "cookies";
 import MidCard from "../components/home-page/MidCard";
 import { Dropdown, MidContainer } from "../components/common";
 import { GetServerSideProps } from "next";
-import { getPopularPosts, getPopularPostsClient } from "../functions/service";
+import {
+  getPopularPosts,
+  getPopularPostsClient,
+  getProfile
+} from "../functions/service";
 import LargeCard from "../components/home-page/LargeCard";
 import {
   POPULAR_PARAM_KEY,
@@ -19,6 +23,7 @@ import { useEffect, useRef, useState } from "react";
 import RankedCard from "../components/home-page/RankedCard";
 import WideCard from "../components/home-page/WideCard";
 import TrendingSubs from "../components/home-page/TrendingSubs";
+import { H } from "highlight.run";
 
 export const getServerSideProps: GetServerSideProps = async ({
   req,
@@ -31,19 +36,22 @@ export const getServerSideProps: GetServerSideProps = async ({
     limit: 1
   });
   const cookies = new Cookies(req, res);
+  const token = cookies.get("token") || "";
+  const profile = token === "" ? {} : await getProfile({ token });
   return {
     props: {
       trendingSubs,
+      profile,
       params: {
         ...query,
-        token: cookies.get("token") || "",
+        token: token,
         sort_type: query.hasOwnProperty("params") ? query.params[0] : "hot"
       }
     }
   };
 };
 
-const IndexPage = ({ trendingSubs, params }: any) => {
+const IndexPage = ({ trendingSubs, profile, params }: any) => {
   const [{ posts, after }, setPostData] = useState(LOADING_POST_LIST);
   const [selectedParams, setSelectedParams] = useState({
     ...zipObject(POPULAR_PARAM_KEY, POPULAR_PARAM_DEFAULT),
@@ -51,8 +59,12 @@ const IndexPage = ({ trendingSubs, params }: any) => {
   });
   const loader = useRef<HTMLDivElement>(null);
 
+  if (typeof window !== "undefined" && profile?.name) {
+    H.identify(profile.name, { id: profile.name });
+  }
+
   useEffect(() => {
-    getPopularPostsClient({ ...selectedParams, home: true }).then((res) => {
+    getPopularPostsClient({ ...selectedParams, home: true }).then(res => {
       setPostData(res);
     });
   }, []);
@@ -211,15 +223,14 @@ const IndexPage = ({ trendingSubs, params }: any) => {
                 read?
                 <br />
                 <br />
-                Now, think about someone browsing Medium in the same situations.
-                Just seeing the interface of Medium gives the impression of
-                someone being a "knowledge seeker".
-                <br />
-                <br />
                 Reddium is a Medium-themed Reddit client. The Reddium interface
                 converts Reddit posts, discussions, and memes into well-crafted
-                articles. I hope you enjoy this project! Feel free to suggest
-                any features or report bugs on GitHub.
+                articles. Medium's layout feels a little more readable than
+                Reddit's, removing all distractions and clutter. It also
+                bypasses Reddit's frustrating mobile browser.
+                <br />
+                <br />I hope you enjoy this project! Feel free to suggest any
+                features or report bugs on GitHub.
               </p>
             </div>
             <div className="w-full pb-6 hidden">
