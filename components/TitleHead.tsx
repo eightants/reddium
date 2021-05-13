@@ -10,7 +10,8 @@ const TitleHead = ({ title, children }: Props) => {
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       <meta property="og:title" content={title} />
       <meta property="og:type" content="website" />
-      <meta name="twitter:card" content="summary_large_image"/>
+      <meta name="twitter:site" content="@Reddium" />
+      <meta name="twitter:card" content="summary_large_image" />
       <link
         rel="apple-touch-icon"
         sizes="180x180"
