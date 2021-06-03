@@ -1,5 +1,5 @@
 import { GetServerSideProps } from "next";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PostLayout from "../../../../../components/PostLayout";
 import PostHeader from "../../../../../components/post-page/PostHeader";
 import PostContent from "../../../../../components/post-page/PostContent";
@@ -14,6 +14,7 @@ import {
 import { zipObject } from "lodash";
 import Cookies from "cookies";
 import { getPostInfo } from "../../../../../functions/service";
+import { H } from "highlight.run";
 
 export const getServerSideProps: GetServerSideProps = async ({
   req,
@@ -55,6 +56,15 @@ const PostPage = ({ post, comments, params, commentId }: any) => {
   };
   const returnToPost = () =>
     (window.location.href = `/r/${params.subreddit}/comments/${params.postid}`);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      H.track(
+        "Post", 
+        {subredditName: params.subreddit, nsfw: post.over_18}
+      );
+    }
+  });
   // const fetchMoreComments = async () => {
   //   const moreObject = comments[comments.length - 1];
   //   const moreComments = await getMoreCommentsClient({

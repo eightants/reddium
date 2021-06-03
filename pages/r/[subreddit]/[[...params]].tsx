@@ -15,12 +15,13 @@ import {
   TIME_FILTER,
   POPULAR_PARAM_VALUES
 } from "../../../functions/constants";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../../../components/subreddit-page/Header";
 import SubWideCard from "../../../components/subreddit-page/SubWideCard";
 import SubGridCard from "../../../components/subreddit-page/SubGridCard";
 import SubredditInfo from "../../../components/subreddit-page/SubredditInfo";
 import Cookies from "cookies";
+import { H } from "highlight.run";
 
 export const getServerSideProps: GetServerSideProps = async ({
   req,
@@ -66,6 +67,15 @@ const SubredditPage = ({ postData, subredditInfo, params }: any) => {
     });
     setPostData({ posts: [...posts, ...next.posts], after: next.after });
   };
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      H.track(
+        "Subreddit", 
+        {subredditName: subredditInfo.display_name, nsfw: subredditInfo.over18}
+      );
+    }
+  });
 
   return (
     <Subpage
