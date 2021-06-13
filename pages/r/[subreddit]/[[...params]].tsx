@@ -70,9 +70,10 @@ const SubredditPage = ({ postData, subredditInfo, params }: any) => {
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
+      console.log(subredditInfo.over18)
       H.track(
         "Subreddit", 
-        {subredditName: subredditInfo.display_name, nsfw: subredditInfo.over18}
+        {subredditName: subredditInfo.display_name, nsfw: subredditInfo.over18.toString()}
       );
     }
   });

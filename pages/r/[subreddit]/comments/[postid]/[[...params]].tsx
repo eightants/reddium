@@ -61,7 +61,7 @@ const PostPage = ({ post, comments, params, commentId }: any) => {
     if (typeof window !== 'undefined') {
       H.track(
         "Post", 
-        {subredditName: params.subreddit, nsfw: post.over_18}
+        {subredditName: params.subreddit, nsfw: post.over_18.toString()}
       );
     }
   });
