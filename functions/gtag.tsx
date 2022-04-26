@@ -1,8 +1,12 @@
 export const GA_TRACKING_ID = "UA-132344171-4";
+export const GA4_ID = "G-Y7P28R1T38";
 
 // https://developers.google.com/analytics/devguides/collection/gtagjs/pages
 export const pageview = (url: URL) => {
   window.gtag("config", GA_TRACKING_ID, {
+    page_path: url
+  });
+  window.gtag("config", GA4_ID, {
     page_path: url
   });
 };
