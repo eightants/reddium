@@ -8,7 +8,7 @@ import { GetServerSideProps } from "next";
 import {
   getPopularPosts,
   getPopularPostsClient,
-  getProfile
+  getProfile,
 } from "../functions/service";
 import LargeCard from "../components/home-page/LargeCard";
 import {
@@ -17,7 +17,7 @@ import {
   SORT_TYPE,
   TIME_FILTER,
   POPULAR_PARAM_VALUES,
-  LOADING_POST_LIST
+  LOADING_POST_LIST,
 } from "../functions/constants";
 import { useEffect, useRef, useState } from "react";
 import RankedCard from "../components/home-page/RankedCard";
@@ -28,12 +28,12 @@ import { H } from "highlight.run";
 export const getServerSideProps: GetServerSideProps = async ({
   req,
   res,
-  query
+  query,
 }) => {
   const trendingSubs = await getPopularPosts({
     subreddit: "trendingsubreddits",
     sort_type: "new",
-    limit: 1
+    limit: 1,
   });
   const cookies = new Cookies(req, res);
   const token = cookies.get("token") || "";
@@ -45,9 +45,9 @@ export const getServerSideProps: GetServerSideProps = async ({
       params: {
         ...query,
         token: token,
-        sort_type: query.hasOwnProperty("params") ? query.params[0] : "hot"
-      }
-    }
+        sort_type: query.params ? query?.params[0] : "hot",
+      },
+    },
   };
 };
 
@@ -55,7 +55,7 @@ const IndexPage = ({ trendingSubs, profile, params }: any) => {
   const [{ posts, after }, setPostData] = useState(LOADING_POST_LIST);
   const [selectedParams, setSelectedParams] = useState({
     ...zipObject(POPULAR_PARAM_KEY, POPULAR_PARAM_DEFAULT),
-    ...params
+    ...params,
   });
   const loader = useRef<HTMLDivElement>(null);
 
@@ -64,7 +64,7 @@ const IndexPage = ({ trendingSubs, profile, params }: any) => {
   }
 
   useEffect(() => {
-    getPopularPostsClient({ ...selectedParams, home: true }).then(res => {
+    getPopularPostsClient({ ...selectedParams, home: true }).then((res) => {
       setPostData(res);
     });
   }, []);
@@ -77,7 +77,7 @@ const IndexPage = ({ trendingSubs, profile, params }: any) => {
   const fetchMorePosts = async () => {
     const next = await getPopularPosts({
       ...selectedParams,
-      after: after
+      after: after,
     });
     setPostData({ posts: [...posts, ...next.posts], after: next.after });
   };
@@ -223,11 +223,11 @@ const IndexPage = ({ trendingSubs, profile, params }: any) => {
                 read?
                 <br />
                 <br />
-                Reddium is a Medium-themed Reddit client. The Reddium interface
+                {`Reddium is a Medium-themed Reddit client. The Reddium interface
                 converts Reddit posts, discussions, and memes into well-crafted
                 articles. Medium's layout feels a little more readable than
                 Reddit's, removing all distractions and clutter. It also
-                bypasses Reddit's frustrating mobile browser.
+                bypasses Reddit's frustrating mobile browser.`}
                 <br />
                 <br />I hope you enjoy this project! Feel free to suggest any
                 features or report bugs on GitHub.

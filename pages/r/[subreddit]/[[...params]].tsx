@@ -6,14 +6,14 @@ import { GetServerSideProps } from "next";
 import {
   getPopularPosts,
   getPopularPostsClient,
-  getSubredditInfo
+  getSubredditInfo,
 } from "../../../functions/service";
 import {
   POPULAR_PARAM_KEY,
   POPULAR_PARAM_DEFAULT,
   SORT_TYPE,
   TIME_FILTER,
-  POPULAR_PARAM_VALUES
+  POPULAR_PARAM_VALUES,
 } from "../../../functions/constants";
 import React, { useEffect, useState } from "react";
 import Header from "../../../components/subreddit-page/Header";
@@ -22,15 +22,17 @@ import SubGridCard from "../../../components/subreddit-page/SubGridCard";
 import SubredditInfo from "../../../components/subreddit-page/SubredditInfo";
 import Cookies from "cookies";
 import { H } from "highlight.run";
+import Image from "next/image";
+import VideoRecapAd from "../../../public/videorecap.png";
 
 export const getServerSideProps: GetServerSideProps = async ({
   req,
   res,
-  query
+  query,
 }) => {
   const posts = await getPopularPosts({
     ...query,
-    sort_type: query.hasOwnProperty("params") ? query.params[0] : "hot"
+    sort_type: query.params ? query.params[0] : "hot",
   });
   const cookies = new Cookies(req, res);
   const token = cookies.get("token") || "";
@@ -42,9 +44,9 @@ export const getServerSideProps: GetServerSideProps = async ({
       params: {
         ...query,
         token: token,
-        sort_type: query.hasOwnProperty("params") ? query.params[0] : "hot"
-      }
-    }
+        sort_type: query.params ? query.params[0] : "hot",
+      },
+    },
   };
 };
 
@@ -52,7 +54,7 @@ const SubredditPage = ({ postData, subredditInfo, params }: any) => {
   const [{ posts, after }, setPostData] = useState(postData);
   const [selectedParams, setSelectedParams] = useState({
     ...zipObject(POPULAR_PARAM_KEY, POPULAR_PARAM_DEFAULT),
-    ...params
+    ...params,
   });
 
   const filterPopular = () => {
@@ -63,18 +65,18 @@ const SubredditPage = ({ postData, subredditInfo, params }: any) => {
   const fetchMorePosts = async () => {
     const next = await getPopularPostsClient({
       ...selectedParams,
-      after: after
+      after: after,
     });
     setPostData({ posts: [...posts, ...next.posts], after: next.after });
   };
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      console.log(subredditInfo.over18)
-      H.track(
-        "Subreddit", 
-        {subredditName: subredditInfo.display_name, nsfw: subredditInfo.over18.toString()}
-      );
+    if (typeof window !== "undefined") {
+      console.log(subredditInfo.over18);
+      H.track("Subreddit", {
+        subredditName: subredditInfo.display_name,
+        nsfw: subredditInfo.over18.toString(),
+      });
     }
   });
 

@@ -3,7 +3,7 @@ import {
   getProfile,
   getUserInfo,
   getUserPosts,
-  getUserPostsClient
+  getUserPostsClient,
 } from "../../functions/service";
 import React, { useState } from "react";
 import TitleHead from "../../components/TitleHead";
@@ -17,7 +17,7 @@ import Cookies from "cookies";
 export const getServerSideProps: GetServerSideProps = async ({
   req,
   res,
-  query
+  query,
 }) => {
   const cookies = new Cookies(req, res);
   const token = cookies.get("token") || "";
@@ -25,7 +25,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     const profile = await getProfile({ token });
     const posts = await getUserPosts({
       ...query,
-      username: profile.name || ""
+      username: profile.name || "",
     });
     const userInfo = await getUserInfo({ ...query, username: profile.name });
     return {
@@ -35,9 +35,9 @@ export const getServerSideProps: GetServerSideProps = async ({
         params: {
           ...query,
           token: token,
-          category: query.hasOwnProperty("params") ? query.params[0] : ""
-        }
-      }
+          category: query.params ? query.params[0] : "",
+        },
+      },
     };
   } catch (error) {
     res.statusCode = 302;
@@ -56,7 +56,7 @@ const MePage = ({ postData, userInfo, params }: any) => {
   const fetchMorePosts = async () => {
     const next = await getUserPostsClient({
       ...params,
-      after: after
+      after: after,
     });
     setPostData({ posts: [...posts, ...next.posts], after: next.after });
   };

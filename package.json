@@ -2,9 +2,11 @@
   "name": "with-typescript",
   "version": "1.0.0",
   "scripts": {
+    "legacy-install": "npm install --legacy-peer-deps",
     "dev": "next",
     "build": "next build",
     "start": "next start",
+    "lint": "next lint --quiet",
     "type-check": "tsc"
   },
   "dependencies": {
@@ -17,18 +19,20 @@
     "cookies": "^0.8.0",
     "cookies-js": "^1.2.3",
     "highlight.run": "^1.5.0",
-    "next": "latest",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
+    "next": "^12.3.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-showdown": "^2.1.0"
   },
   "devDependencies": {
-    "@types/node": "^12.12.21",
-    "@types/react": "^16.9.16",
-    "@types/react-dom": "^16.9.4",
+    "@types/node": "^18.11.3",
+    "@types/react": "18.0.21",
+    "@types/react-dom": "18.0.6",
+    "eslint": "8.29.0",
+    "eslint-config-next": "13.0.6",
     "postcss-preset-env": "^6.7.0",
     "tailwindcss": "^1.9.6",
-    "typescript": "4.0"
+    "typescript": "4.8.4"
   },
   "license": "MIT"
 }

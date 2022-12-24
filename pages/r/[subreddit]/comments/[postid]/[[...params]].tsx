@@ -9,7 +9,7 @@ import {
   COMMENT_PARAM_DEFAULT,
   COMMENT_PARAM_KEY,
   COMMENT_PARAM_VALUES,
-  SORT_PARAM
+  SORT_PARAM,
 } from "../../../../../functions/constants";
 import { zipObject } from "lodash";
 import Cookies from "cookies";
@@ -19,28 +19,26 @@ import { H } from "highlight.run";
 export const getServerSideProps: GetServerSideProps = async ({
   req,
   res,
-  query
+  query,
 }) => {
   const cookies = new Cookies(req, res);
   const token = cookies.get("token") || "";
   const commentId =
-    query.hasOwnProperty("params") && query.params.length > 1
-      ? query.params[1]
-      : "";
+    query.params && query.params.length > 1 ? query.params[1] : "";
   const post = await getPostInfo({
     ...query,
     commentid: commentId,
-    token: token
+    token: token,
   });
   return {
     props: {
       ...post,
       params: {
         ...query,
-        token: token
+        token: token,
       },
-      commentId: commentId
-    }
+      commentId: commentId,
+    },
   };
 };
 
@@ -49,7 +47,7 @@ const PostPage = ({ post, comments, params, commentId }: any) => {
   // const [commentList, setCommentList] = useState(comments);
   const [selectedParams, setSelectedParams] = useState({
     ...zipObject(COMMENT_PARAM_KEY, COMMENT_PARAM_DEFAULT),
-    ...params
+    ...params,
   });
   const filterPopular = () => {
     window.location.href = `/r/${params.subreddit}/comments/${params.postid}?sort=${selectedParams[SORT_PARAM]}`;
@@ -58,11 +56,11 @@ const PostPage = ({ post, comments, params, commentId }: any) => {
     (window.location.href = `/r/${params.subreddit}/comments/${params.postid}`);
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      H.track(
-        "Post", 
-        {subredditName: params.subreddit, nsfw: post.over_18.toString()}
-      );
+    if (typeof window !== "undefined") {
+      H.track("Post", {
+        subredditName: params.subreddit,
+        nsfw: post.over_18.toString(),
+      });
     }
   });
   // const fetchMoreComments = async () => {

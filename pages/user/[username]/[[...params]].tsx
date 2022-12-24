@@ -1,5 +1,9 @@
 import { GetServerSideProps } from "next";
-import { getUserInfo, getUserPosts, getUserPostsClient } from "../../../functions/service";
+import {
+  getUserInfo,
+  getUserPosts,
+  getUserPostsClient,
+} from "../../../functions/service";
 import React, { useState } from "react";
 import TitleHead from "../../../components/TitleHead";
 import { NavMenu } from "../../../components/common";
@@ -11,7 +15,7 @@ import Cookies from "cookies";
 export const getServerSideProps: GetServerSideProps = async ({
   req,
   res,
-  query
+  query,
 }) => {
   const cookies = new Cookies(req, res);
   const token = cookies.get("token") || "";
@@ -24,9 +28,9 @@ export const getServerSideProps: GetServerSideProps = async ({
       params: {
         ...query,
         token: token,
-        category: query.hasOwnProperty("params") ? query.params[0] : ""
-      }
-    }
+        category: query.params ? query.params[0] : "",
+      },
+    },
   };
 };
 
@@ -39,7 +43,7 @@ const UserPage = ({ postData, userInfo, params }: any) => {
   const fetchMorePosts = async () => {
     const next = await getUserPostsClient({
       ...params,
-      after: after
+      after: after,
     });
     setPostData({ posts: [...posts, ...next.posts], after: next.after });
   };
@@ -56,7 +60,7 @@ const UserPage = ({ postData, userInfo, params }: any) => {
       </TitleHead>
       <div className="h-full hidden sm:flex py-3 px-8 items-center sub-bottom-border justify-end max-width-main mx-auto z-50 h-16">
         <div className="flex flex-row items-center">
-          <NavMenu token={params.token}/>
+          <NavMenu token={params.token} />
           <a href="/">
             <img className="ml-4 h-6 logo-opacity" src="/reddium_symbol.svg" />
           </a>
@@ -66,7 +70,7 @@ const UserPage = ({ postData, userInfo, params }: any) => {
         <nav className="h-full px-4 max-width-main mx-auto z-50 h-264 lg:mx-12 sm:mx-6 sm:px-0">
           <div className="flex w-full items-center justify-end mt-6">
             <div className="flex flex-row items-center sm:hidden">
-              <NavMenu token={params.token}/>
+              <NavMenu token={params.token} />
               <a href="/">
                 <img
                   className="ml-6 h-6 logo-opacity"
@@ -76,24 +80,23 @@ const UserPage = ({ postData, userInfo, params }: any) => {
             </div>
           </div>
           <div className="w-full flex items-start flex-col">
-              <div className="mr-8 flex flex-row items-center cursor-pointer">
-                <a className="main-black my-10" href={`/user/${userInfo.name}`}>
-                  <h2 className="text-5xl leading-loose font-bold sm:text-3xl sm:mt-8">{userInfo.name}</h2>
+            <div className="mr-8 flex flex-row items-center cursor-pointer">
+              <a className="main-black my-10" href={`/user/${userInfo.name}`}>
+                <h2 className="text-5xl leading-loose font-bold sm:text-3xl sm:mt-8">
+                  {userInfo.name}
+                </h2>
+              </a>
+            </div>
+            <div className="flex flex-row items-center sub-link-grey sm:mt-2 h-16 my-2">
+              <div className="mr-2 sm:ml-0">{`${userInfo.total_karma} Karma`}</div>
+              <span className="px-2">·</span>
+              <div className="mx-2">
+                <a className="link-black-hover" href={`/user/${userInfo.name}`}>
+                  Overview
                 </a>
               </div>
-              <div className="flex flex-row items-center sub-link-grey sm:mt-2 h-16 my-2">
-                <div className="mr-2 sm:ml-0">{`${userInfo.total_karma} Karma`}</div>
-                <span className="px-2">·</span>
-                <div className="mx-2">
-                  <a
-                    className="link-black-hover"
-                    href={`/user/${userInfo.name}`}
-                  >
-                    Overview
-                  </a>
-                </div>
-              </div>
             </div>
+          </div>
         </nav>
       </header>
       <section className="mt-12">

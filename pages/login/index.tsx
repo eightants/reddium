@@ -6,7 +6,7 @@ import { CLIENT_ID, REDIRECT_URI } from "../../functions/constants";
 export const getServerSideProps: GetServerSideProps = async ({
   req,
   res,
-  query
+  query,
 }) => {
   const cookies = new Cookies(req, res);
   if (query.hasOwnProperty("code")) {
@@ -16,13 +16,13 @@ export const getServerSideProps: GetServerSideProps = async ({
         "Content-Type": "application/x-www-form-urlencoded",
         Authorization: `Basic ${Buffer.from(
           `${CLIENT_ID}:${process.env.CLIENT_SECRET}`
-        ).toString("base64")}`
+        ).toString("base64")}`,
       },
       body: new URLSearchParams({
         grant_type: "authorization_code",
-        code: query.code.toString(),
-        redirect_uri: REDIRECT_URI
-      })
+        code: query.code ? query.code.toString() : "",
+        redirect_uri: REDIRECT_URI,
+      }),
     };
     const resp = await (
       await fetch("https://www.reddit.com/api/v1/access_token", requestOptions)
@@ -34,7 +34,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   res.setHeader("Location", `/`);
   res.end();
   return {
-    props: {}
+    props: {},
   };
 };
 

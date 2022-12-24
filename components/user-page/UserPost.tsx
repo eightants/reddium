@@ -5,12 +5,12 @@ import {
   getTime,
   limitText,
   replaceGifv,
-  unsplashCredits
+  unsplashCredits,
 } from "../../functions/common";
 import {
   BLURB_MAX,
   PLACEHOLDER_IMAGES,
-  TITLE_MAX
+  TITLE_MAX,
 } from "../../functions/constants";
 import { Post } from "../../interfaces";
 
@@ -23,13 +23,15 @@ const UserPost = ({
   url,
   ups,
   thumbnail,
-  num_comments
+  num_comments,
 }: Post) => (
   <div className="w-full mx-auto max-w-600 pb-2 mb-6 sm:mx-6 sm:w-auto">
     <div className="flex items-center text-sm">
       <div className="flex items-center main-black">
         <span>Published in </span>
-        <a href={`/${subreddit_name_prefixed}`}><span className="font-bold ml-1">{subreddit_name_prefixed}</span></a>
+        <a href={`/${subreddit_name_prefixed.replace("u/", "r/u_")}`}>
+          <span className="font-bold ml-1">{subreddit_name_prefixed}</span>
+        </a>
       </div>
       <span className="px-1 sub-link-grey">·</span>
       <span className="sub-link-grey">{getTime(created_utc)}</span>
@@ -62,7 +64,7 @@ const UserPost = ({
               ] || "default.jpg"
             })`,
             height: "300px",
-            backgroundSize: "cover"
+            backgroundSize: "cover",
           }}
         ></div>
       )}

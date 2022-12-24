@@ -12,7 +12,9 @@ export function getTime(unixTime: number) {
     return `${Math.floor((timeDiff * 24) / DAY_MILLISECONDS)} hours ago`;
   }
   const postedDate = new Date(postedTime);
-  return `${postedDate.getDate()}/${postedDate.getMonth()}/${postedDate.getFullYear()}`;
+  return `${postedDate.getDate()}/${
+    postedDate.getMonth() + 1
+  }/${postedDate.getFullYear()}`;
 }
 
 export function getTimeOfDay() {
