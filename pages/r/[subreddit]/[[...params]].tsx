@@ -22,8 +22,6 @@ import SubGridCard from "../../../components/subreddit-page/SubGridCard";
 import SubredditInfo from "../../../components/subreddit-page/SubredditInfo";
 import Cookies from "cookies";
 import { H } from "highlight.run";
-import Image from "next/image";
-import VideoRecapAd from "../../../public/videorecap.png";
 
 export const getServerSideProps: GetServerSideProps = async ({
   req,

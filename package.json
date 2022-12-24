@@ -6,7 +6,7 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint --quiet",
+    "lint": "next lint",
     "type-check": "tsc"
   },
   "dependencies": {
