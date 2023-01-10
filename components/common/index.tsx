@@ -30,7 +30,7 @@ const ProfileOptions = () => {
         style={{
           backgroundImage: `url("/avatar.svg")`,
           backgroundSize: "cover",
-          backgroundPosition: "center"
+          backgroundPosition: "center",
         }}
         onClick={() => setShowDropdown(!showDropdown)}
       ></div>
@@ -64,7 +64,7 @@ export const Dropdown = ({
   dataObj,
   paramKey,
   paramVal,
-  updateParams
+  updateParams,
 }: DropdownProps) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdown = useRef<HTMLDivElement>(null);
@@ -73,7 +73,7 @@ export const Dropdown = ({
     if (!showDropdown) return;
     function handleClick(e: any) {
       if (dropdown.current && !dropdown.current.contains(e.target)) {
-        setShowDropdown(false);
+        // setShowDropdown(false);
       }
     }
     window.addEventListener("click", handleClick);
@@ -121,7 +121,7 @@ export const Dropdown = ({
 export const PostMetadata = ({
   className,
   created_utc,
-  subreddit_name_prefixed
+  subreddit_name_prefixed,
 }: any) => (
   <div className={className}>
     <span>{getTime(created_utc)}</span>
@@ -206,7 +206,7 @@ export const SubredditCard = ({
   display_name,
   public_description,
   url,
-  icon_img
+  icon_img,
 }: any) => (
   <div className="pb-4 mb-4 flex flex-row w-full sub-bottom-border">
     <a href={url}>
@@ -218,7 +218,7 @@ export const SubredditCard = ({
           })`,
           width: "60px",
           height: "60px",
-          backgroundSize: "cover"
+          backgroundSize: "cover",
         }}
       >
         {" "}
@@ -251,7 +251,7 @@ export const UserCard = ({ name, icon_img }: any) => (
           })`,
           width: "60px",
           height: "60px",
-          backgroundSize: "cover"
+          backgroundSize: "cover",
         }}
       >
         {" "}
