@@ -1,5 +1,6 @@
 module.exports = {
-    images: {
-        domains: ["a.thumbs.redditmedia.com"]
-    }
-}
+  images: {
+    unoptimized: true,
+    domains: ["a.thumbs.redditmedia.com"],
+  },
+};
