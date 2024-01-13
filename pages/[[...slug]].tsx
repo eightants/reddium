@@ -69,7 +69,7 @@ const LandingPage = () => {
             </a>
           </div>
           <div className="overflow-hidden w-1/2 sm:pb-8 sm:mb-6 border border-solid border-gray-300 p-2 px-3 rounded-md hover:bg-gray-100">
-            <a href="https://videorecap.viewodyssey.com/">
+            <a href="https://videorecap.viewodyssey.com/?ref=reddium">
               <div
                 className="w-full shimmer-bg rounded"
                 style={{
@@ -81,7 +81,7 @@ const LandingPage = () => {
                 }}
               ></div>
             </a>
-            <a href="https://whisperify.net/">
+            <a href="https://whisperify.net/?ref=reddium">
               <h2 className="text-xl mt-4 leading-6">
                 Whisperify - Spotify Quiz and Music Analysis
               </h2>
