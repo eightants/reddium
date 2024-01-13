@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/(.+)",
+      "destination": "/notice",
+      "statusCode": 301
+    }
+  ]
+}
