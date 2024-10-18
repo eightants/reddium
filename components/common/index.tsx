@@ -1,8 +1,9 @@
-import { zipObject } from "lodash";
+import _ from 'lodash';
 import React, { useEffect, useRef, useState } from "react";
 import { getIntFromString, getTime, limitText } from "../../functions/common";
 import { CLIENT_ID, DESC_MAX, REDIRECT_URI } from "../../functions/constants";
 import { DropdownProps, Props } from "../../interfaces";
+import { useConfig } from '../../lib/ConfigContext'; 
 
 export const MidContainer = ({ children }: Props) => (
   <div className="mid-container px-4 sm:px-0">{children}</div>
@@ -98,7 +99,7 @@ export const Dropdown = ({
           className="dropdown-select w-48 max-w-full absolute z-10"
           ref={dropdown}
         >
-          {zipObject(paramKey, paramVal)[id].map((value: string, ind) => (
+          {_.zipObject(paramKey, paramVal)[id].map((value: string, ind) => (
             <div
               className="my-1 px-4 mx-1 p-2 cursor-pointer"
               key={ind}
@@ -135,7 +136,10 @@ export const PostMetadata = ({
 export const NavMenu = ({ token = "" }: any) => {
   const [showSearch, setShowSearch] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const config = useConfig();
+
   const newSearch = () => (window.location.href = `/search/?q=${searchTerm}`);
+
   return (
     <div className="items-center flex flex-row h-full justify-end">
       <div className="flex flex-row items-center justify-end h-full">
@@ -143,6 +147,7 @@ export const NavMenu = ({ token = "" }: any) => {
           className="cursor-pointer p-1 mr-2 ml-3 sub-opacity-68 link-black-hover"
           src="/search.svg"
           onClick={() => setShowSearch(!showSearch)}
+          alt="Search"
         />
         {showSearch ? (
           <input
@@ -155,36 +160,44 @@ export const NavMenu = ({ token = "" }: any) => {
         ) : (
           ""
         )}
-        <a
-          href="https://ko-fi.com/eightants"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img
-            className="h-8 cursor-pointer p-1 ml-2 sub-opacity-68 link-black-hover"
-            src="/coffee.svg"
-          />
-        </a>
+        {!config.REDDIUM_DISABLE_KOFI_LINK && (
+          <a
+            href="https://ko-fi.com/eightants"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              className="h-8 cursor-pointer p-1 ml-2 sub-opacity-68 link-black-hover"
+              src="/coffee.svg"
+              alt="Ko-fi"
+            />
+          </a>
+        )}
+        {!config.REDDIUM_DISABLE_GITHUB_LINK && (
+          <a
+            href="https://github.com/eightants/reddium/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              className="h-10 cursor-pointer p-1 ml-2 sub-opacity-68 link-black-hover hidden md:block"
+              src="/github.svg"
+              alt="GitHub"
+            />
+          </a>
+        )}
+      </div>
+      {!config.REDDIUM_DISABLE_GITHUB_LINK && (
         <a
           href="https://github.com/eightants/reddium/"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <img
-            className="h-10 cursor-pointer p-1 ml-2 sub-opacity-68 link-black-hover hidden md:block"
-            src="/github.svg"
-          />
+          <button className="md:hidden my-4 ml-4 p-1 px-3 sub-opacity-68 link-black-hover text-sm cursor-pointer max-w-full btn-outline-black rounded">
+            Star on GitHub
+          </button>
         </a>
-      </div>
-      <a
-        href="https://github.com/eightants/reddium/"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <button className="md:hidden my-4 ml-4 p-1 px-3 sub-opacity-68 link-black-hover text-sm cursor-pointer max-w-full btn-outline-black rounded">
-          Star on GitHub
-        </button>
-      </a>
+      )}
       {token != "" ? (
         <ProfileOptions />
       ) : (

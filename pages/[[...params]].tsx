@@ -24,6 +24,7 @@ import RankedCard from "../components/home-page/RankedCard";
 import WideCard from "../components/home-page/WideCard";
 import TrendingSubs from "../components/home-page/TrendingSubs";
 import { H } from "highlight.run";
+import getConfig from 'next/config';
 
 export const getServerSideProps: GetServerSideProps = async ({
   req,
@@ -62,6 +63,11 @@ const IndexPage = ({ trendingSubs, profile, params }: any) => {
   if (typeof window !== "undefined" && profile?.name) {
     H.identify(profile.name, { id: profile.name });
   }
+
+  const { publicRuntimeConfig } = getConfig();
+  const showAboutSection = publicRuntimeConfig.REDDIUM_SHOW_ABOUT;
+  const showKofiLink = publicRuntimeConfig.REDDIUM_DISABLE_KOFI_LINK;
+  const showGithubLink = publicRuntimeConfig.REDDIUM_DISABLE_GITHUB_LINK;
 
   useEffect(() => {
     getPopularPostsClient({ ...selectedParams, home: true }).then((res) => {
@@ -205,57 +211,63 @@ const IndexPage = ({ trendingSubs, profile, params }: any) => {
             </button>
           </div>
         </div>
-        <div className="grid-right md:hidden">
-          <div className="sticky top-8 p-8 about-bg flex flex-col">
-            <div className="w-full flex mb-4 flex-row items-center">
-              <img className="mr-3" src="bookmarks.svg" />
-              <div>
-                <p className="heading-text text-sm leading-4 uppercase tracking-wide sm:text-xs">
-                  About Reddium
+        {showAboutSection && (
+          <div className="grid-right md:hidden">
+            <div className="sticky top-8 p-8 about-bg flex flex-col">
+              <div className="w-full flex mb-4 flex-row items-center">
+                <img className="mr-3" src="bookmarks.svg" alt="Bookmarks icon" />
+                <div>
+                  <p className="heading-text text-sm leading-4 uppercase tracking-wide sm:text-xs">
+                    About Reddium
+                  </p>
+                </div>
+              </div>
+              <div className="w-full pb-6">
+                <p className="text-sm">
+                  Ever wanted to browse Reddit while studying at Starbucks? Or
+                  while sitting on the subway to work? Worried that people around
+                  you would judge the subreddits you browse and the posts you
+                  read?
+                  <br />
+                  <br />
+                  {`Reddium is a Medium-themed Reddit client. The Reddium interface
+                  converts Reddit posts, discussions, and memes into well-crafted
+                  articles. Medium's layout feels a little more readable than
+                  Reddit's, removing all distractions and clutter. It also
+                  bypasses Reddit's frustrating mobile browser.`}
+                  <br />
+                  <br />I hope you enjoy this project! Feel free to suggest any
+                  features or report bugs on GitHub.
                 </p>
               </div>
+              <div className="w-full pb-6 hidden">
+                <img className="w-4/12 float-right" src="/signature.png" alt="Signature" />
+              </div>
+              {showGithubLink && (
+                <a
+                  href="https://github.com/eightants/reddium/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <button className="mt-2 mx-1 p-2 pl-0 pb-3 cursor-pointer w-full max-w-full btn-black text-white rounded">
+                    ✨ Star on GitHub
+                  </button>
+                </a>
+              )}
+              {showKofiLink && (
+                <a
+                  href="https://ko-fi.com/eightants"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <button className="mt-2 mx-1 p-2 pl-0 pb-3 cursor-pointer w-full max-w-full btn-outline-black text-white rounded">
+                    ☕ Buy me a coffee
+                  </button>
+                </a>
+              )}
             </div>
-            <div className="w-full pb-6">
-              <p className="text-sm">
-                Ever wanted to browse Reddit while studying at Starbucks? Or
-                while sitting on the subway to work? Worried that people around
-                you would judge the subreddits you browse and the posts you
-                read?
-                <br />
-                <br />
-                {`Reddium is a Medium-themed Reddit client. The Reddium interface
-                converts Reddit posts, discussions, and memes into well-crafted
-                articles. Medium's layout feels a little more readable than
-                Reddit's, removing all distractions and clutter. It also
-                bypasses Reddit's frustrating mobile browser.`}
-                <br />
-                <br />I hope you enjoy this project! Feel free to suggest any
-                features or report bugs on GitHub.
-              </p>
-            </div>
-            <div className="w-full pb-6 hidden">
-              <img className="w-4/12 float-right" src="/signature.png" />
-            </div>
-            <a
-              href="https://github.com/eightants/reddium/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <button className="mt-2 mx-1 p-2 pl-0 pb-3 cursor-pointer w-full max-w-full btn-black text-white rounded">
-                ✨ Star on GitHub
-              </button>
-            </a>
-            <a
-              href="https://ko-fi.com/eightants"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <button className="mt-2 mx-1 p-2 pl-0 pb-3 cursor-pointer w-full max-w-full btn-outline-black text-white rounded">
-                ☕ Buy me a coffee
-              </button>
-            </a>
           </div>
-        </div>
+        )}
       </div>
     </Layout>
   );

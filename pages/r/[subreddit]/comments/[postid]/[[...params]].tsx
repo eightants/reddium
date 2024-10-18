@@ -11,7 +11,7 @@ import {
   COMMENT_PARAM_VALUES,
   SORT_PARAM,
 } from "../../../../../functions/constants";
-import { zipObject } from "lodash";
+import _ from 'lodash';
 import Cookies from "cookies";
 import { getPostInfo } from "../../../../../functions/service";
 import { H } from "highlight.run";
@@ -46,7 +46,7 @@ const PostPage = ({ post, comments, params, commentId }: any) => {
   // const [moreIndex, setMoreIndex] = useState(0);
   // const [commentList, setCommentList] = useState(comments);
   const [selectedParams, setSelectedParams] = useState({
-    ...zipObject(COMMENT_PARAM_KEY, COMMENT_PARAM_DEFAULT),
+    ..._.zipObject(COMMENT_PARAM_KEY, COMMENT_PARAM_DEFAULT),
     ...params,
   });
   const filterPopular = () => {

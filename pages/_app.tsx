@@ -5,6 +5,7 @@ import { useRouter } from "next/dist/client/router";
 import * as gtag from "../functions/gtag";
 import CookieBanner from "../components/CookieBanner";
 import { H } from "highlight.run";
+import { ConfigProvider } from '../lib/ConfigContext'
 
 if (typeof window !== "undefined") {
   H.init("5ldw65eo");
@@ -24,10 +25,12 @@ const App = ({ Component, pageProps }: AppProps) => {
   }, [router.events]);
 
   return (
-    <div>
-      <Component {...pageProps} />
-      <CookieBanner />
-    </div>
+    <ConfigProvider>
+      <div>
+        <Component {...pageProps} />
+        <CookieBanner />
+      </div>
+    </ConfigProvider>
   );
 };
 

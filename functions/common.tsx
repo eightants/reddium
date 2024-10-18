@@ -1,4 +1,4 @@
-import { capitalize } from "lodash";
+import _ from 'lodash';
 
 const DAY_MILLISECONDS = 1000 * 60 * 60 * 24;
 const HOUR_MILLISECONDS = 1000 * 60 * 60;
@@ -44,7 +44,7 @@ export function limitText(text: string, max: number) {
 export const replaceGifv = (text: string) => text.replace(".gifv", ".gif");
 
 export const unsplashCredits = (filename: string) =>
-  capitalize(filename.split("-").slice(0, -2).join(" "));
+  _.capitalize(filename.split("-").slice(0, -2).join(" "));
 
 export const findThreadDepth = (root: any) =>
   1 +
