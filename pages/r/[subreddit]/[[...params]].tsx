@@ -148,13 +148,7 @@ const SubredditPage = ({ postData, subredditInfo, params }: any) => {
               onClick={fetchMorePosts}
             >
               <div className="flex-grow text-center">Show More</div>
-              <Image 
-                className="ml-3" 
-                src="/down_arrow.svg" 
-                alt="Show more" 
-                width={24} 
-                height={24}
-              />
+              <Image className="ml-3" src="/down_arrow.svg" alt="Show more" width={24} height={24} />
             </button>
           </div>
         </div>

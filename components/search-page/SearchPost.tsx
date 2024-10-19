@@ -59,7 +59,7 @@ const SearchPost = ({
     }
   };
   return (
-    <div className="w-full max-w-600 pb-2 mb-4 sm:mx-0 sm:w-auto">
+    <div className="w-full max-w-[80%] pb-2 mb-4 sm:mx-0 sm:w-auto">
       <div className="w-full mt-4 flex flex-row justify-between items-center sm:block">
         <div className="items-center flex">
           <div

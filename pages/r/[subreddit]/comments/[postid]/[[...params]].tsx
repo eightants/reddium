@@ -90,24 +90,26 @@ const PostPage = ({ post, comments, params, commentId }: any) => {
       <section>
         <PostContent {...post} token={selectedParams.token} />
       </section>
-      <section className="w-full mx-auto max-w-600 pb-10">
+      <section className="w-full mx-auto pb-10">
         <div className="sub-bottom-border mb-4 pt-4"></div>
-        <div className="flex justify-start mb-8">
-          <div className="max-width-filter flex w-full px-4">
-            <Dropdown
-              key={SORT_PARAM}
-              id={SORT_PARAM}
-              paramKey={COMMENT_PARAM_KEY}
-              paramVal={COMMENT_PARAM_VALUES}
-              dataObj={selectedParams}
-              updateParams={setSelectedParams}
-            />
-            <button
-              className="ml-2 my-4 p-2 cursor-pointer w-48 max-w-full btn-black text-white rounded"
-              onClick={filterPopular}
-            >
-              Filter
-            </button>
+        <div className="flex justify-start mb-8 max-w-[80%] mx-auto">
+          <div className="w-full">
+            <div className="flex items-center">
+              <Dropdown
+                key={SORT_PARAM}
+                id={SORT_PARAM}
+                paramKey={COMMENT_PARAM_KEY}
+                paramVal={COMMENT_PARAM_VALUES}
+                dataObj={selectedParams}
+                updateParams={setSelectedParams}
+              />
+              <button
+                className="ml-2 p-2 cursor-pointer w-48 btn-black text-white rounded"
+                onClick={filterPopular}
+              >
+                Filter
+              </button>
+            </div>
           </div>
         </div>
         <PostComments

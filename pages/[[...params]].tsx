@@ -25,7 +25,7 @@ import RankedCard from "../components/home-page/RankedCard";
 import WideCard from "../components/home-page/WideCard";
 import TrendingSubs from "../components/home-page/TrendingSubs";
 import { H } from "highlight.run";
-import getConfig from 'next/config';
+import { useConfig } from '../functions/useConfig';  // Adjust the import path as needed
 
 export const getServerSideProps: GetServerSideProps = async ({
   req,
@@ -65,10 +65,12 @@ const IndexPage = ({ trendingSubs, profile, params }: any) => {
     H.identify(profile.name, { id: profile.name });
   }
 
-  const { publicRuntimeConfig } = getConfig();
-  const showAboutSection = publicRuntimeConfig.REDDIUM_SHOW_ABOUT;
-  const showKofiLink = publicRuntimeConfig.REDDIUM_DISABLE_KOFI_LINK;
-  const showGithubLink = publicRuntimeConfig.REDDIUM_DISABLE_GITHUB_LINK;
+  const { config } = useConfig();
+
+  // Use optional chaining to safely access config properties
+  const showAboutSection = config?.REDDIUM_SHOW_ABOUT;
+  const showKofiLink = config?.REDDIUM_DISABLE_KOFI_LINK;
+  const showGithubLink = config?.REDDIUM_DISABLE_GITHUB_LINK;
 
   useEffect(() => {
     getPopularPostsClient({ ...selectedParams, home: true }).then((res) => {
@@ -269,7 +271,7 @@ const IndexPage = ({ trendingSubs, profile, params }: any) => {
               </div>
               {showGithubLink && (
                 <a
-                  href="https://github.com/eightants/reddium/"
+                  href="https://github.com/joestump/reddium"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -280,7 +282,7 @@ const IndexPage = ({ trendingSubs, profile, params }: any) => {
               )}
               {showKofiLink && (
                 <a
-                  href="https://ko-fi.com/eightants"
+                  href="https://ko-fi.com/joestump"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

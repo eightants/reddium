@@ -22,12 +22,26 @@
   font-weight: 500;
 }
 
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.navbar-shadow {
+  box-shadow: 0 4px 12px 0 var(--shadow-color);
+}
+
+.search-input {
+  border-bottom: 1px solid var(--input-border-color);
+}
+
+
 h1,
 h2 {
   font-family: "Sohne", sans-serif;
   font-weight: 700;
   letter-spacing: 0px;
-  color: rgb(41, 41, 41);
+  color: var(--text-color);
   line-height: 20px;
   font-size: 16px;
   margin: 0;
@@ -58,7 +72,7 @@ h2 {
 
 .post-content a {
   font-weight: 600;
-  color: rgb(53, 88, 118);
+  color: var(--secondary-color);
   opacity: 0.9;
 }
 
@@ -86,14 +100,14 @@ a.post-link-clear:hover {
 .heading-text {
   font-family: "Sohne", sans-serif;
   font-weight: 700;
-  color: rgb(41, 41, 41);
+  color: var(--text-color);
   margin: 0;
 }
 
 .sub-text {
   font-size: 13px;
   line-height: 20px;
-  color: rgb(117, 117, 117);
+  color: var(--sub-text-color);
 }
 
 .max-w-600 {
@@ -148,20 +162,20 @@ a.post-link-clear:hover {
 }
 
 .sub-link-grey {
-  color: #717272;
+  color: var(--sub-text-color);
 }
 
 .link-black-hover:hover {
-  color: rgb(41, 41, 41);
+  color: var(--link-hover-color);
   opacity: 1;
 }
 
 .link-green-hover:hover {
-  color: rgb(7, 59, 6);
+  color: var(--link-green-hover-color);
 }
 
 .about-bg {
-  background-color: rgb(250, 250, 250);
+  background-color: var(--about-bg-color);
 }
 
 .green-bg {
@@ -169,11 +183,11 @@ a.post-link-clear:hover {
 }
 
 .blue-bg {
-  background-color: rgb(53, 88, 118);
+  background-color: var(--secondary-color);
 }
 
 .blue-clr {
-  color: rgb(53, 88, 118);
+  color: var(--secondary-color);
 }
 
 .main-grey {
@@ -181,27 +195,27 @@ a.post-link-clear:hover {
 }
 
 .main-black {
-  color: rgb(41, 41, 41);
+  color: var(--text-color);
 }
 
 .main-green {
-  color: rgb(26, 137, 23);
+  color: var(--primary-color);
 }
 
 .btn-black {
-  background-color: rgb(25, 25, 25);
+  background-color: var(--btn-black-color);
 }
 
 .btn-outline-green {
   background-color: transparent;
-  color: rgb(26, 137, 23);
-  border: 1px solid rgb(26, 137, 23);
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
 }
 
 .btn-outline-black {
   background-color: transparent;
-  color: rgb(41, 41, 41);
-  border: 1px solid rgb(41, 41, 41);
+  color: var(--text-color);
+  border: 1px solid var(--text-color);
 }
 
 .btn-outline-white {
@@ -255,7 +269,9 @@ a.post-link-clear:hover {
 }
 
 .nav-img {
-  border-right: 1px solid rgb(230, 230, 230);
+  border-color: var(--nav-img-border-color);
+  border-width: var(--nav-img-border-width);
+  border-style: var(--nav-img-border-style);
 }
 
 .nav-greeting {
@@ -263,36 +279,36 @@ a.post-link-clear:hover {
 }
 
 .container-divide {
-  border-left: 1px solid rgb(230, 230, 230);
+  border-left: 1px solid var(--border-color);
 }
 
 .sub-bottom-border {
-  border-bottom: 1px solid rgb(230, 230, 230);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .sub-top-border {
-  border-top: 1px solid rgb(230, 230, 230);
+  border-top: 1px solid var(--border-color);
 }
 
 .dropdown-select {
   overflow-y: auto;
   border-top: 0px;
-  box-shadow: rgb(230, 230, 230) 0px 1px 4px;
-  border: 1px solid rgb(230, 230, 230);
-  background: white none repeat scroll 0 0;
+  box-shadow: var(--border-color) 0px 1px 4px;
+  border: 1px solid var(--border-color);
+  background: var(--background-color) none repeat scroll 0 0;
   max-height: 400px;
 }
 
 .dropdown-select div:hover {
-  background: rgb(242, 242, 242) none repeat scroll 0 0;
+  background: var(--dropdown-hover-color) none repeat scroll 0 0;
 }
 
 .main-border {
-  border: 1px solid rgb(230, 230, 230);
+  border: 1px solid var(--border-color);
 }
 
 .main-border:hover {
-  border-color: rgb(168, 168, 168);
+  border-color: var(--border-hover-color);
 }
 
 .posts-grid {
@@ -336,7 +352,7 @@ a.post-link-clear:hover {
 }
 
 .shimmer-bg {
-  background-color: rgba(242, 242, 242, 1);
+  background-color: var(--shimmer-bg-color);
 }
 
 .shimmer {
@@ -349,7 +365,7 @@ a.post-link-clear:hover {
 }
 
 .load-more:hover {
-  background: rgb(242, 242, 242) none repeat scroll 0 0;
+  background: var(--dropdown-hover-color) none repeat scroll 0 0;
 }
 
 .sm-border-b {
@@ -361,11 +377,11 @@ a.post-link-clear:hover {
 }
 
 .navbar-shadow {
-  box-shadow: 0 4px 12px 0 rgba(0,0,0,.05)
+  box-shadow: 0 4px 12px 0 var(--shadow-color);
 }
 
 .search-input {
-  border-bottom: 1px solid rgba(0,0,0,.15);
+  border-bottom: 1px solid var(--input-border-color);
 }
 
 .cookie-banner {
@@ -429,4 +445,85 @@ a.post-link-clear:hover {
   100% {
     opacity: 0.8;
   }
+}
+
+:root {
+  /* Default theme variables */
+  --primary-color: rgb(26, 137, 23);
+  --secondary-color: rgb(53, 88, 118);
+  --text-color: rgb(41, 41, 41);
+  --background-color: white;
+  --border-color: rgb(230, 230, 230);
+  --sub-text-color: rgb(117, 117, 117);
+  --link-hover-color: rgb(41, 41, 41);
+  --link-green-hover-color: rgb(7, 59, 6);
+  --about-bg-color: rgb(250, 250, 250);
+  --btn-black-color: rgb(25, 25, 25);
+  --dropdown-hover-color: rgb(242, 242, 242);
+  --border-hover-color: rgb(168, 168, 168);
+  --shimmer-bg-color: rgb(242, 242, 242);
+  --shadow-color: rgba(0, 0, 0, 0.05);
+  --input-border-color: rgba(0, 0, 0, 0.15);
+  --nav-img-border-color: white;
+  --nav-img-border-width: 1px;
+  --nav-img-border-style: solid;
+}
+
+/* Theme definitions */
+[data-theme="dark"] {
+  --primary-color: rgb(46, 164, 43);
+  --secondary-color: rgb(83, 118, 148);
+  --text-color: rgb(230, 230, 230);
+  --background-color: rgb(28, 28, 28);
+  --border-color: rgb(60, 60, 60);
+  --sub-text-color: rgb(180, 180, 180);
+  --link-hover-color: rgb(200, 200, 200);
+  --link-green-hover-color: rgb(100, 200, 100);
+  --about-bg-color: rgb(40, 40, 40);
+  --btn-black-color: rgb(200, 200, 200);
+  --dropdown-hover-color: rgb(50, 50, 50);
+  --border-hover-color: rgb(100, 100, 100);
+  --shimmer-bg-color: rgb(50, 50, 50);
+  --shadow-color: rgba(255, 255, 255, 0.05);
+  --input-border-color: rgba(255, 255, 255, 0.15);
+  --nav-img-border-color: rgb(60, 60, 60);
+}
+
+[data-theme="blue"] {
+  --primary-color: rgb(0, 123, 255);
+  --secondary-color: rgb(108, 117, 125);
+  --text-color: rgb(33, 37, 41);
+  --background-color: rgb(248, 249, 250);
+  --border-color: rgb(222, 226, 230);
+  --sub-text-color: rgb(108, 117, 125);
+  --link-hover-color: rgb(0, 86, 179);
+  --link-green-hover-color: rgb(0, 86, 179);
+  --about-bg-color: rgb(233, 236, 239);
+  --btn-black-color: rgb(52, 58, 64);
+  --dropdown-hover-color: rgb(233, 236, 239);
+  --border-hover-color: rgb(176, 190, 197);
+  --shimmer-bg-color: rgb(233, 236, 239);
+  --shadow-color: rgba(0, 0, 0, 0.05);
+  --input-border-color: rgba(0, 0, 0, 0.15);
+  --nav-img-border-color: rgb(222, 226, 230);
+}
+
+[data-theme="tokyo-night"] {
+  --primary-color: rgb(86, 182, 194);        /* Neon cyan */
+  --secondary-color: rgb(191, 97, 255);      /* More vibrant neon purple */
+  --text-color: rgb(220, 223, 228);          /* Light gray for readability */
+  --background-color: rgb(26, 27, 38);       /* Dark blue-gray background */
+  --border-color: rgb(86, 95, 137);          /* Muted purple for borders */
+  --sub-text-color: rgb(168, 177, 194);      /* Lighter gray for secondary text */
+  --link-hover-color: rgb(255, 121, 198);    /* Neon pink for hover effects */
+  --link-green-hover-color: rgb(0, 255, 127); /* Brighter neon green for alternative hover */
+  --about-bg-color: rgb(41, 46, 66);         /* Slightly lighter background for contrast */
+  --btn-black-color: rgb(86, 182, 194);      /* Neon cyan for buttons */
+  --dropdown-hover-color: rgb(33, 34, 44);   /* Darker shade for dropdown hover */
+  --border-hover-color: rgb(191, 97, 255);   /* More vibrant neon purple for border hover */
+  --shimmer-bg-color: rgb(41, 46, 66);       /* Slightly lighter background for shimmer effect */
+  --shadow-color: rgba(86, 182, 194, 0.1);   /* Subtle cyan shadow */
+  --input-border-color: rgba(191, 97, 255, 0.3); /* More vibrant purple input border */
+  --nav-img-border-color: transparent;       /* No border around the logo */
+  --nav-bg-color: rgb(31, 33, 45);           /* Darker background for navigation/search */
 }

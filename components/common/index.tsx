@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import React, { useEffect, useRef, useState } from "react";
 import Image from 'next/image';
+import Link from 'next/link';
 import { getIntFromString, getTime, limitText } from "../../functions/common";
 import { CLIENT_ID, DESC_MAX, REDIRECT_URI } from "../../functions/constants";
 import { DropdownProps, Props } from "../../interfaces";
@@ -41,18 +42,12 @@ const ProfileOptions = () => {
           className="dropdown-select absolute w-48 mt-6 z-20 right-0 left-auto rounded sub-text"
           ref={dropdown}
         >
-          <a
-            className="my-1 px-5 p-2 cursor-pointer link-black-hover block"
-            href="/me"
-          >
+          <Link href="/me" className="my-1 px-5 p-2 cursor-pointer link-black-hover block">
             View Profile
-          </a>
-          <a
-            className="my-1 px-5 p-2 cursor-pointer link-black-hover block"
-            href="/logout"
-          >
+          </Link>
+          <Link href="/logout" className="my-1 px-5 p-2 cursor-pointer link-black-hover block">
             Sign out
-          </a>
+          </Link>
         </div>
       ) : (
         <div></div>
@@ -128,9 +123,9 @@ export const PostMetadata = ({
   <div className={className}>
     <span>{getTime(created_utc)}</span>
     <span className="px-2">·</span>
-    <a className="link-black-hover" href={`/${subreddit_name_prefixed}`}>
+    <Link href={`/${subreddit_name_prefixed}`} className="link-black-hover">
       {subreddit_name_prefixed}
-    </a>
+    </Link>
   </div>
 );
 
@@ -164,11 +159,7 @@ export const NavMenu = ({ token = "" }: any) => {
           ""
         )}
         {!config.REDDIUM_DISABLE_KOFI_LINK && (
-          <a
-            href="https://ko-fi.com/eightants"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <Link href="https://ko-fi.com/joestump" target="_blank" rel="noopener noreferrer">
             <Image
               className="h-8 cursor-pointer p-1 ml-2 sub-opacity-68 link-black-hover"
               src="/coffee.svg"
@@ -176,14 +167,10 @@ export const NavMenu = ({ token = "" }: any) => {
               width={32}
               height={32}
             />
-          </a>
+          </Link>
         )}
         {!config.REDDIUM_DISABLE_GITHUB_LINK && (
-          <a
-            href="https://github.com/eightants/reddium/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <Link href="https://github.com/joestump/reddium/" target="_blank" rel="noopener noreferrer">
             <Image
               className="h-10 cursor-pointer p-1 ml-2 sub-opacity-68 link-black-hover hidden md:block"
               src="/github.svg"
@@ -191,32 +178,26 @@ export const NavMenu = ({ token = "" }: any) => {
               width={40}
               height={40}
             />
-          </a>
+          </Link>
         )}
       </div>
       {!config.REDDIUM_DISABLE_GITHUB_LINK && (
-        <a
-          href="https://github.com/eightants/reddium/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <Link href="https://github.com/joestump/reddium/" target="_blank" rel="noopener noreferrer">
           <button className="md:hidden my-4 ml-4 p-1 px-3 sub-opacity-68 link-black-hover text-sm cursor-pointer max-w-full btn-outline-black rounded">
             Star on GitHub
           </button>
-        </a>
+        </Link>
       )}
       {token != "" ? (
         <ProfileOptions />
       ) : (
-        <a
-          href={`https://www.reddit.com/api/v1/authorize.compact?client_id=${CLIENT_ID}&response_type=code&state=testing&redirect_uri=${REDIRECT_URI}&duration=temporary&scope=${encodeURIComponent(
-            "read vote save identity subscribe"
-          )}`}
-        >
+        <Link href={`https://www.reddit.com/api/v1/authorize.compact?client_id=${CLIENT_ID}&response_type=code&state=testing&redirect_uri=${REDIRECT_URI}&duration=temporary&scope=${encodeURIComponent(
+          "read vote save identity subscribe"
+        )}`}>
           <button className="my-4 ml-4 p-1 px-3 text-sm cursor-pointer max-w-full btn-black text-white outline-1px rounded">
             Login
           </button>
-        </a>
+        </Link>
       )}
     </div>
   );
@@ -229,7 +210,7 @@ export const SubredditCard = ({
   icon_img,
 }: any) => (
   <div className="pb-4 mb-4 flex flex-row w-full sub-bottom-border">
-    <a href={url}>
+    <Link href={url}>
       <div
         className="rounded"
         style={{
@@ -243,24 +224,24 @@ export const SubredditCard = ({
       >
         {" "}
       </div>
-    </a>
+    </Link>
     <div className="pl-4 flex-grow break-words overflow-hidden">
-      <a className="heading-text text-lg" href={url}>
+      <Link href={url} className="heading-text text-lg">
         <h3 className="mb-1 font-normal">{display_name}</h3>
-      </a>
+      </Link>
       <p className="text-sm mb-1">{limitText(public_description, DESC_MAX)}</p>
     </div>
-    <a href={url}>
+    <Link href={url}>
       <button className="px-4 py-1 ml-5 cursor-pointer text-center rounded btn-outline-green">
         Visit
       </button>
-    </a>
+    </Link>
   </div>
 );
 
 export const UserCard = ({ name, icon_img }: any) => (
   <div className="pb-4 mb-4 flex flex-row w-full sub-bottom-border">
-    <a href={`/user/${name}`}>
+    <Link href={`/user/${name}`}>
       <div
         className="rounded-full"
         style={{
@@ -276,17 +257,17 @@ export const UserCard = ({ name, icon_img }: any) => (
       >
         {" "}
       </div>
-    </a>
+    </Link>
     <div className="pl-4 flex-grow break-words overflow-hidden">
-      <a className="heading-text text-lg" href={`/user/${name}`}>
+      <Link href={`/user/${name}`} className="heading-text text-lg">
         <h3 className="mb-1 font-normal">{name}</h3>
-      </a>
+      </Link>
       <p className="text-sm mb-1">User</p>
     </div>
-    <a href={`/user/${name}`}>
+    <Link href={`/user/${name}`}>
       <button className="px-4 py-1 ml-5 cursor-pointer text-center rounded btn-outline-green">
         Visit
       </button>
-    </a>
+    </Link>
   </div>
 );

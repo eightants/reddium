@@ -4,7 +4,7 @@ import { Comment } from "./Comment";
 
 const PostComments = ({ comments, backToPost, token }: any) => {
   return (
-    <div className="w-full mx-auto max-w-600 pb-2 mt-6 sm:mx-6 sm:w-auto post-content">
+    <div className="w-full mx-auto max-w-[80%] pb-2 mt-6 sm:mx-6 sm:w-auto post-content">
       <div className="my-2 mx-4 px-6 py-3 input-shadow rounded">
         <h4 className="sub-opacity-54 text-sm">Add a comment...</h4>
       </div>

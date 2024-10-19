@@ -14,7 +14,7 @@ const UserComment = ({
   subreddit_name_prefixed
 }: any) => {
   return replies || replies == "" ? (
-    <div className="w-full mx-auto max-w-600 pb-2 mb-6 sm:mx-6 sm:w-auto">
+    <div className="w-full mx-auto max-w-[80%] pb-2 mb-6 sm:mx-6 sm:w-auto">
       <div className="flex items-center text-sm">
         <div className="flex items-center main-black">
           <span>Commented in </span>

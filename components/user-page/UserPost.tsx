@@ -1,5 +1,6 @@
 import React from "react";
 import Image from 'next/image';
+import Link from 'next/link';
 import MarkdownView from "react-showdown";
 import {
   getIntFromString,
@@ -26,22 +27,22 @@ const UserPost = ({
   thumbnail,
   num_comments,
 }: Post) => (
-  <div className="w-full mx-auto max-w-600 pb-2 mb-6 sm:mx-6 sm:w-auto">
+  <div className="w-full mx-auto max-w-[80%] pb-2 mb-6 sm:mx-6 sm:w-auto">
     <div className="flex items-center text-sm">
       <div className="flex items-center main-black">
         <span>Published in </span>
-        <a href={`/${subreddit_name_prefixed.replace("u/", "r/u_")}`}>
+        <Link href={`/${subreddit_name_prefixed.replace("u/", "r/u_")}`}>
           <span className="font-bold ml-1">{subreddit_name_prefixed}</span>
-        </a>
+        </Link>
       </div>
       <span className="px-1 sub-link-grey">·</span>
       <span className="sub-link-grey">{getTime(created_utc)}</span>
     </div>
-    <a href={permalink}>
+    <Link href={permalink}>
       <h1 className="text-4xl mt-3 font-bold tracking-tight leading-tight sm:text-2xl sm:leading-8">
         {title}
       </h1>
-    </a>
+    </Link>
     <h3 className="sub-link-grey text-xl mt-1 font-normal tracking-tight sm:text-lg sm:mt-2 sm:leading-5">
       {limitText(selftext, TITLE_MAX)}
     </h3>
@@ -96,9 +97,9 @@ const UserPost = ({
               )}
             </span>{" "}
             on{" "}
-            <a href="https://unsplash.com" className="underline">
+            <Link href="https://unsplash.com" className="underline">
               Unsplash
-            </a>
+            </Link>
           </div>
         ) : (
           "Original Image"
@@ -112,10 +113,10 @@ const UserPost = ({
       />
     </div>
     <div className="mt-2">
-      <a
+      <Link
         href={permalink}
         className="link-green-hover main-green tracking-normal text-sm"
-      >{`Read more in ${subreddit_name_prefixed}`}</a>
+      >{`Read more in ${subreddit_name_prefixed}`}</Link>
     </div>
     <div className="w-full mt-4 py-4 flex flex-row justify-between items-center">
       <div className="flex flex-row items-center">

@@ -1,6 +1,5 @@
 import Link from "next/link";
 import React, { useState } from "react";
-import MarkdownView from "react-showdown";
 import Image from 'next/image';
 import {
   getEmbedLink,
@@ -15,6 +14,7 @@ import {
 import { PLACEHOLDER_IMAGES, TITLE_MAX } from "../../functions/constants";
 import { Post } from "../../interfaces";
 import { sendSave, sendUnsave, upvote } from "../../functions/service";
+import PostBody from './PostBody';
 
 const PostContent = ({
   title,
@@ -59,7 +59,7 @@ const PostContent = ({
   };
 
   return (
-    <div className="w-full mx-auto max-w-600 pb-2 mt-6 sm:mx-6 sm:w-auto">
+    <div className="w-full mx-auto max-w-[80%] pb-2 mt-6 sm:mx-6 sm:w-auto">
       <h1 className="heading-font text-5xl font-normal leading-tight sm:text-3xl sm:leading-9">
         {title}
       </h1>
@@ -68,14 +68,14 @@ const PostContent = ({
       </h3>
       <div className="w-full mt-4 flex flex-row justify-between items-center sm:block">
         <div className="items-center sub-opacity-54 hidden sm:flex my-4">
-          <a
-            className="w-8/12 truncate hover:underline font-semibold"
+          <Link
             href={url}
+            className="w-8/12 truncate hover:underline font-semibold"
             target="_blank"
             rel="noopener noreferrer"
           >
             {url}
-          </a>
+          </Link>
         </div>
         <div className="items-center flex">
           <div
@@ -91,27 +91,33 @@ const PostContent = ({
             }}
           ></div>
           <div className="pl-3">
-            <Link href={`/user/${author}`}>
-              <span className="main-black text-md hover:underline cursor-pointer sm:text-sm">
-                {author}
-              </span>
+            <Link 
+              href={`/user/${author}`}
+              className="main-black text-md hover:underline cursor-pointer sm:text-sm"
+            >
+              {author}
             </Link>
             <div className="tracking-5 text-sm sub-opacity-68">
               <span>{getTime(created_utc)}</span>
               <span className="px-1">·</span>
-              <span>{subreddit_name_prefixed}</span>
+              <Link 
+                href={`/${subreddit_name_prefixed}`}
+                className="hover:underline"
+              >
+                {subreddit_name_prefixed}
+              </Link>
             </div>
           </div>
         </div>
         <div className="items-center flex sub-opacity-54 sm:hidden">
-          <a
-            className="w-48 truncate hover:underline font-semibold"
+          <Link
             href={url}
+            className="w-48 truncate hover:underline font-semibold"
             target="_blank"
             rel="noopener noreferrer"
           >
             {url}
-          </a>
+          </Link>
         </div>
       </div>
       <figure className="mt-16">
@@ -168,21 +174,19 @@ const PostContent = ({
                 )}
               </span>{" "}
               on{" "}
-              <a href="https://unsplash.com" className="underline">
+              <Link href="https://unsplash.com" className="underline">
                 Unsplash
-              </a>
+              </Link>
             </div>
           ) : (
             "Original Image"
           )}
         </figcaption>
       </figure>
-      <div className="mt-12 heading-font text-xl whitespace-pre-line main-black post-content sm:text-lg">
-        <MarkdownView
-          markdown={selftext}
-          options={{ tables: true, emoji: true }}
-        />
-      </div>
+      <PostBody 
+        content={selftext}
+        className="mt-12 heading-font text-xl whitespace-pre-line main-black post-content sm:text-lg"
+      />
       <div className="w-full mt-4 pt-4 flex flex-row justify-between items-center">
         <div className="flex flex-row items-center">
           <div className="flex flex-row items-center sub-opacity-54 tracking-tight">

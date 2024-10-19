@@ -1,5 +1,6 @@
 import { GetServerSideProps } from "next";
 import Image from 'next/image';
+import Link from 'next/link';
 import {
   getUserInfo,
   getUserPosts,
@@ -7,7 +8,7 @@ import {
 } from "../../../functions/service";
 import React, { useState } from "react";
 import TitleHead from "../../../components/TitleHead";
-import { NavMenu } from "../../../components/common";
+import Header from "../../../components/common/Header";  // Import Header
 import UserPost from "../../../components/user-page/UserPost";
 import UserComment from "../../../components/user-page/UserComment";
 import { DOMAIN } from "../../../functions/constants";
@@ -37,10 +38,6 @@ export const getServerSideProps: GetServerSideProps = async ({
 
 const UserPage = ({ postData, userInfo, params }: any) => {
   const [{ posts, after }, setPostData] = useState(postData);
-  // const [selectedParams, setSelectedParams] = useState({
-  //   ...zipObject(POPULAR_PARAM_KEY, POPULAR_PARAM_DEFAULT),
-  //   ...params
-  // });
   const fetchMorePosts = async () => {
     const next = await getUserPostsClient({
       ...params,
@@ -59,51 +56,24 @@ const UserPage = ({ postData, userInfo, params }: any) => {
         />
         <meta property="og:image" content={`${DOMAIN}/reddium-sub.png`} />
       </TitleHead>
-      <div className="h-full hidden sm:flex py-3 px-8 items-center sub-bottom-border justify-end max-width-main mx-auto z-50 h-16">
-        <div className="flex flex-row items-center">
-          <NavMenu token={params.token} />
-          <a href="/">
-            <Image 
-              className="ml-4 h-6 logo-opacity" 
-              src="/reddium_symbol.svg" 
-              alt="Reddium Symbol"
-              width={24}
-              height={24}
-            />
-          </a>
-        </div>
-      </div>
+      <Header token={params.token} />
       <header className="sub-bottom-border">
         <nav className="h-full px-4 max-width-main mx-auto z-50 h-264 lg:mx-12 sm:mx-6 sm:px-0">
-          <div className="flex w-full items-center justify-end mt-6">
-            <div className="flex flex-row items-center sm:hidden">
-              <NavMenu token={params.token} />
-              <a href="/">
-                <Image 
-                  className="ml-6 h-6 logo-opacity" 
-                  src="/reddium_symbol.svg" 
-                  alt="Reddium Symbol"
-                  width={24}
-                  height={24}
-                />
-              </a>
-            </div>
-          </div>
           <div className="w-full flex items-start flex-col">
             <div className="mr-8 flex flex-row items-center cursor-pointer">
-              <a className="main-black my-10" href={`/user/${userInfo.name}`}>
+              <Link className="main-black my-10" href={`/user/${userInfo.name}`}>
                 <h2 className="text-5xl leading-loose font-bold sm:text-3xl sm:mt-8">
                   {userInfo.name}
                 </h2>
-              </a>
+              </Link>
             </div>
             <div className="flex flex-row items-center sub-link-grey sm:mt-2 h-16 my-2">
               <div className="mr-2 sm:ml-0">{`${userInfo.total_karma} Karma`}</div>
               <span className="px-2">·</span>
               <div className="mx-2">
-                <a className="link-black-hover" href={`/user/${userInfo.name}`}>
+                <Link className="link-black-hover" href={`/user/${userInfo.name}`}>
                   Overview
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -111,7 +81,7 @@ const UserPage = ({ postData, userInfo, params }: any) => {
       </header>
       <section className="mt-12">
         <div className="max-width-main mx-auto">
-          <div className="w-full mx-auto max-w-600 pb-10">
+          <div className="w-full mx-auto max-w-[80%] pb-10">
             {posts.map((item: any, ind: number) =>
               item.kind == "t3" ? (
                 <UserPost key={ind} {...item} />
@@ -125,13 +95,7 @@ const UserPage = ({ postData, userInfo, params }: any) => {
                 onClick={fetchMorePosts}
               >
                 <div className="flex-grow text-center">Show More</div>
-                <Image 
-                  className="ml-3" 
-                  src="/down_arrow.svg" 
-                  alt="Show more"
-                  width={24}
-                  height={24}
-                />
+                <Image className="ml-3" src="/down_arrow.svg" alt="Show more" width={24} height={24} />
               </button>
             </div>
           </div>

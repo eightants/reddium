@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from 'next/image';
+import Image from "next/image";
 import React, { useState } from "react";
 
 import MarkdownView from "react-showdown";
@@ -107,7 +107,7 @@ export const Comment = ({
                 <p className="ml-1">{ups}</p>
               </div>
             </div>
-            <a href={permalink} className="post-link-clear">
+            <Link href={permalink} className="post-link-clear">
               <div className="flex flex-row items-center tracking-tight text-black">
                 <Image className="cursor-pointer w-6 pt-1" src="/comment.svg" alt="Comment" width={24} height={24} />
                 <div>
@@ -116,7 +116,7 @@ export const Comment = ({
                   </p>
                 </div>
               </div>
-            </a>
+            </Link>
           </div>
         </div>
         {replies != "" && depth < maxDepth ? (
@@ -143,12 +143,12 @@ export const Comment = ({
         )}
       </div>
       {replies != "" && !checkedForMore && hasMoreComments(replies) ? (
-        <a href={permalink} className="post-link-clear">
+        <Link href={permalink} className="post-link-clear">
           <button className="my-4 mx-auto p-2 cursor-pointer px-3 max-w-full load-more main-black font-semibold rounded flex flex-row justify-between items-center">
             <div className="flex-grow text-center">Expand thread</div>
             <Image className="ml-3" src="/down_arrow.svg" alt="Expand thread" width={24} height={24} />
-          </button>{" "}
-        </a>
+          </button>
+        </Link>
       ) : (
         <h1></h1>
       )}
