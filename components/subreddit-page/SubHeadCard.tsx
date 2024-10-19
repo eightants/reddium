@@ -1,4 +1,5 @@
 import React from "react";
+import Image from 'next/image';
 import { getIntFromString } from "../../functions/common";
 import { PLACEHOLDER_IMAGES } from "../../functions/constants";
 import { Post } from "../../interfaces";
@@ -62,7 +63,13 @@ const SubHeadCard = (post: Post) =>
       </div>
       <div className="w-full flex justify-between flex-row items-center pt-4">
         <div className="flex flex-row items-center sub-opacity-54 tracking-tight">
-          <img className="cursor-pointer" src="/clap.svg" />
+          <Image 
+            className="cursor-pointer" 
+            src="/clap.svg" 
+            alt="Clap"
+            width={24}
+            height={24}
+          />
           <div>
             <p className="ml-2 text-sm">{`${post.ups}`}</p>
           </div>
@@ -71,7 +78,13 @@ const SubHeadCard = (post: Post) =>
           <div>
             <p className="mr-2 text-sm sub-opacity-54 cursor-pointer">{`${post.num_comments} responses`}</p>
           </div>
-          <img className="cursor-pointer" src="/save.svg" />
+          <Image 
+            className="cursor-pointer" 
+            src="/save.svg" 
+            alt="Save"
+            width={24}
+            height={24}
+          />
         </div>
       </div>
     </div>

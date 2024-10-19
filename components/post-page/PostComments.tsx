@@ -1,4 +1,5 @@
 import React from "react";
+import Image from 'next/image';
 import { Comment } from "./Comment";
 
 const PostComments = ({ comments, backToPost, token }: any) => {
@@ -12,7 +13,13 @@ const PostComments = ({ comments, backToPost, token }: any) => {
           className="mt-8 p-2 cursor-pointer pr-4 pl-2 max-w-full load-more main-black font-semibold rounded flex flex-row justify-between items-center"
           onClick={backToPost}
         >
-          <img className="mr-3 transform rotate-90" src="/down_arrow.svg" />
+          <Image 
+            className="mr-3 transform rotate-90" 
+            src="/down_arrow.svg" 
+            alt="Back to post"
+            width={24}
+            height={24}
+          />
           <div className="flex-grow text-center">Return to post</div>
         </button>
       ) : (

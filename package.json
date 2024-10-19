@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "type-check": "tsc"
+		"type-check": "tsc"
   },
   "dependencies": {
     "@fullhuman/postcss-purgecss": "^3.0.0",
@@ -16,6 +16,7 @@
     "@types/isomorphic-fetch": "0.0.35",
     "@types/lodash": "^4.14.165",
     "autoprefixer": "^10.0.1",
+    "axios": "^1.7.7",
     "cookies": "^0.8.0",
     "cookies-js": "^1.2.3",
     "glob": "^11.0.0",

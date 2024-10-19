@@ -1,5 +1,6 @@
 import Subpage from "../../../components/Subpage";
 import _ from 'lodash';
+import Image from 'next/image';
 
 import { Dropdown } from "../../../components/common";
 import { GetServerSideProps } from "next";
@@ -147,7 +148,13 @@ const SubredditPage = ({ postData, subredditInfo, params }: any) => {
               onClick={fetchMorePosts}
             >
               <div className="flex-grow text-center">Show More</div>
-              <img className="ml-3" src="/down_arrow.svg" />
+              <Image 
+                className="ml-3" 
+                src="/down_arrow.svg" 
+                alt="Show more" 
+                width={24} 
+                height={24}
+              />
             </button>
           </div>
         </div>

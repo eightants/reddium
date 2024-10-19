@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import React, { useEffect, useRef, useState } from "react";
+import Image from 'next/image';
 import { getIntFromString, getTime, limitText } from "../../functions/common";
 import { CLIENT_ID, DESC_MAX, REDIRECT_URI } from "../../functions/constants";
 import { DropdownProps, Props } from "../../interfaces";
@@ -90,7 +91,7 @@ export const Dropdown = ({
         <div className="w-full flex flex-row justify-between items-center">
           <div>{dataObj[id]}</div>
           <div>
-            <img className="ml-3" src="/down_arrow.svg" />
+            <Image className="ml-3" src="/down_arrow.svg" alt="Dropdown arrow" width={24} height={24} />
           </div>{" "}
         </div>
       </button>
@@ -143,11 +144,13 @@ export const NavMenu = ({ token = "" }: any) => {
   return (
     <div className="items-center flex flex-row h-full justify-end">
       <div className="flex flex-row items-center justify-end h-full">
-        <img
+        <Image
           className="cursor-pointer p-1 mr-2 ml-3 sub-opacity-68 link-black-hover"
           src="/search.svg"
           onClick={() => setShowSearch(!showSearch)}
           alt="Search"
+          width={24}
+          height={24}
         />
         {showSearch ? (
           <input
@@ -166,10 +169,12 @@ export const NavMenu = ({ token = "" }: any) => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img
+            <Image
               className="h-8 cursor-pointer p-1 ml-2 sub-opacity-68 link-black-hover"
               src="/coffee.svg"
               alt="Ko-fi"
+              width={32}
+              height={32}
             />
           </a>
         )}
@@ -179,10 +184,12 @@ export const NavMenu = ({ token = "" }: any) => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img
+            <Image
               className="h-10 cursor-pointer p-1 ml-2 sub-opacity-68 link-black-hover hidden md:block"
               src="/github.svg"
               alt="GitHub"
+              width={40}
+              height={40}
             />
           </a>
         )}

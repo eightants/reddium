@@ -1,4 +1,5 @@
 import React from "react";
+import Image from 'next/image';
 import MarkdownView from "react-showdown";
 import {
   getIntFromString,
@@ -47,13 +48,23 @@ const UserPost = ({
     <figure className="mt-8">
       {url &&
       (url.includes(".jpg") || url.includes(".png") || url.includes(".gif")) ? (
-        <img
+        <Image
           className="w-full shimmer-bg"
           src={replaceGifv(url)}
-          width="100%"
+          alt={title}
+          width={600}
+          height={400}
+          layout="responsive"
         />
       ) : thumbnail && thumbnail.includes("://") ? (
-        <img className="w-full shimmer-bg" src={thumbnail} width="100%" />
+        <Image
+          className="w-full shimmer-bg"
+          src={thumbnail}
+          alt={title}
+          width={600}
+          height={400}
+          layout="responsive"
+        />
       ) : (
         <div
           className="w-full shimmer-bg"
@@ -109,20 +120,20 @@ const UserPost = ({
     <div className="w-full mt-4 py-4 flex flex-row justify-between items-center">
       <div className="flex flex-row items-center">
         <div className="flex flex-row items-center tracking-tight">
-          <img className="cursor-pointer w-6" src="/clap.svg" />
+          <Image className="cursor-pointer w-6" src="/clap.svg" alt="Clap" width={24} height={24} />
           <div>
             <p className="ml-2">{ups}</p>
           </div>
         </div>
         <div className="ml-4 flex flex-row items-center tracking-tight">
-          <img className="cursor-pointer w-6 pt-1" src="/comment.svg" />
+          <Image className="cursor-pointer w-6 pt-1" src="/comment.svg" alt="Comment" width={24} height={24} />
           <div>
             <p className="ml-1">{num_comments}</p>
           </div>
         </div>
       </div>
       <div className="flex flex-row items-center tracking-normal">
-        <img className="cursor-pointer" src="/save.svg" />
+        <Image className="cursor-pointer" src="/save.svg" alt="Save" width={24} height={24} />
       </div>
     </div>
     <div className="sub-bottom-border mb-4 pt-6"></div>

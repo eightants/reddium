@@ -1,4 +1,5 @@
 import React from "react";
+import Link from 'next/link';
 
 const TrendingSubs = (trendingSubs: any) => (
   <div className="mb-6">
@@ -18,14 +19,14 @@ const TrendingSubs = (trendingSubs: any) => (
               key={ind}
               className="mb-3 pb-3 sub-bottom-border justify-between flex items-center"
             >
-              <a className="heading-text tracking-wide" href={sub}>
+              <Link href={sub} className="heading-text tracking-wide">
                 {sub}
-              </a>
-              <a href={sub}>
+              </Link>
+              <Link href={sub}>
                 <button className="px-3 py-1 cursor-pointer rounded btn-outline-green text-sm">
                   Visit
                 </button>
-              </a>
+              </Link>
             </div>
           ))
       ) : (
@@ -35,9 +36,9 @@ const TrendingSubs = (trendingSubs: any) => (
           <div className="h-4 w-full mb-5 mx-3 pb-3 shimmer-bg"></div>
         </div>
       )}
-      <a className="main-green text-sm" href="/r/trendingsubreddits">
+      <Link href="/r/trendingsubreddits" className="main-green text-sm">
         See More
-      </a>
+      </Link>
     </div>
   </div>
 );

@@ -6,6 +6,7 @@ import {
   getUserPostsClient,
 } from "../../functions/service";
 import React, { useState } from "react";
+import Image from 'next/image';
 import TitleHead from "../../components/TitleHead";
 import { NavMenu } from "../../components/common";
 import UserPost from "../../components/user-page/UserPost";
@@ -75,7 +76,13 @@ const MePage = ({ postData, userInfo, params }: any) => {
         <div className="flex flex-row items-center">
           <NavMenu token={params.token} />
           <a href="/">
-            <img className="ml-4 h-6 logo-opacity" src="/reddium_symbol.svg" />
+            <Image 
+              className="ml-4 h-6 logo-opacity" 
+              src="/reddium_symbol.svg" 
+              alt="Reddium Symbol"
+              width={24}
+              height={24}
+            />
           </a>
         </div>
       </div>
@@ -104,9 +111,12 @@ const MePage = ({ postData, userInfo, params }: any) => {
             <div className="flex flex-row items-center sm:hidden">
               <NavMenu token={params.token} />
               <a href="/">
-                <img
-                  className="ml-6 h-6 logo-opacity"
-                  src="/reddium_symbol.svg"
+                <Image 
+                  className="ml-6 h-6 logo-opacity" 
+                  src="/reddium_symbol.svg" 
+                  alt="Reddium Symbol"
+                  width={24}
+                  height={24}
                 />
               </a>
             </div>
@@ -117,12 +127,12 @@ const MePage = ({ postData, userInfo, params }: any) => {
         <div className="max-width-main mx-auto flex flex-row">
           <div className="w-user w-full pl-4 lg:hidden pt-12">
             <div className="w-132 flex flex-col text-sm top-150 sticky">
-              <img
-                className="w-full mb-8"
-                src={`/avatars/avatar_${getIntFromString(
-                  userInfo.name,
-                  18
-                )}.jpg`}
+              <Image 
+                className="w-full mb-8" 
+                src={`/avatars/avatar_${getIntFromString(userInfo.name, 18)}.jpg`} 
+                alt={`${userInfo.name}'s avatar`}
+                width={132}
+                height={132}
               />
               <div className="uppercase sub-opacity-54 font-normal tracking-wide mb-2">
                 About
@@ -149,7 +159,13 @@ const MePage = ({ postData, userInfo, params }: any) => {
                 onClick={fetchMorePosts}
               >
                 <div className="flex-grow text-center">Show More</div>
-                <img className="ml-3" src="/down_arrow.svg" />
+                <Image 
+                  className="ml-3" 
+                  src="/down_arrow.svg" 
+                  alt="Show more"
+                  width={24}
+                  height={24}
+                />
               </button>
             </div>
           </div>
