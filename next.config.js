@@ -5,25 +5,19 @@ const nextConfig = {
     loader: 'custom',
     loaderFile: './lib/imageLoader.ts',
   },
-  publicRuntimeConfig: Object.keys(process.env).reduce((config, key) => {
-    if (key.startsWith('REDDIUM_')) {
-      config[key] = process.env[key];
-    }
-    return config;
-  }, {}),
-  eslint: {
-    dirs: ['pages', 'components', 'lib', 'src'], // specify directories to lint
-    ignoreDuringBuilds: false, // or true if you want to ignore ESLint errors during builds
+  publicRuntimeConfig: {
+    // Set defaults
+    REDDIUM_DISABLE_ABOUT: true,
+    REDDIUM_DISABLE_KOFI_LINK: true,
+    // Overwrite with any REDDIUM_ environment variables
+    ...Object.fromEntries(
+      Object.entries(process.env)
+        .filter(([key]) => key.startsWith('REDDIUM_'))
+    ),
   },
-  publicRuntimeConfig: Object.keys(process.env).reduce((config, key) => {
-    if (key.startsWith('REDDIUM_')) {
-      config[key] = process.env[key];
-    }
-    return config;
-  }, {}),
   eslint: {
-    dirs: ['pages', 'components', 'lib', 'src'], // specify directories to lint
-    ignoreDuringBuilds: false, // or true if you want to ignore ESLint errors during builds
+    dirs: ['pages', 'components', 'lib', 'src'],
+    ignoreDuringBuilds: false,
   },
 };
 
