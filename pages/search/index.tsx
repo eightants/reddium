@@ -19,6 +19,7 @@ import {
 import { zipObject } from "lodash";
 import Cookies from "cookies";
 import { getSearch, getSearchClient } from "../../functions/service";
+import Image from 'next/image';
 
 export const getServerSideProps: GetServerSideProps = async ({
   req,
@@ -79,7 +80,7 @@ const SearchPage = ({ searchRes, params }: any) => {
           <div className="flex-grow flex items-center">
             <a href="/">
               <div className="pr-4 h-8 flex flex-row items-center cursor-pointer">
-                <img className="w-12" src="reddium_symbol.svg" />
+                <Image src="/reddium_symbol.svg" alt="Reddium symbol" width={48} height={32} />
                 <h1 className="ml-2 site-name text-3xl tracking-tighter text-black sm:hidden">
                   Reddium
                 </h1>
@@ -184,7 +185,7 @@ const SearchPage = ({ searchRes, params }: any) => {
                       onClick={fetchMorePosts}
                     >
                       <div className="flex-grow text-center">Show More</div>
-                      <img className="ml-3" src="/down_arrow.svg" />
+                      <Image src="/down_arrow.svg" alt="Down arrow" width={24} height={24} className="ml-3" />
                     </button>
                   ) : (
                     <div className="py-10"></div>

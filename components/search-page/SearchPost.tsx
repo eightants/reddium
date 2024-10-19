@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import MarkdownView from "react-showdown";
+import Image from 'next/image';
 import {
   getIntFromString,
   getTime,
@@ -103,16 +104,22 @@ const SearchPost = ({
         (url.includes(".jpg") ||
           url.includes(".png") ||
           url.includes(".gif")) ? (
-          <img
-            className="w-full shimmer-bg max-h-200"
+          <Image
             src={replaceGifv(url)}
-            width="100%"
+            alt={title}
+            width={600}
+            height={400}
+            layout="responsive"
+            className="w-full shimmer-bg max-h-200"
           />
         ) : thumbnail && thumbnail.includes("://") ? (
-          <img
-            className="w-full shimmer-bg max-h-200"
+          <Image
             src={thumbnail}
-            width="100%"
+            alt={title}
+            width={600}
+            height={400}
+            layout="responsive"
+            className="w-full shimmer-bg max-h-200"
           />
         ) : (
           <div
@@ -147,15 +154,21 @@ const SearchPost = ({
         <div className="flex flex-row items-center">
           <div className="flex flex-row items-center tracking-tight">
             {upvoted ? (
-              <img
-                className="cursor-pointer w-6"
+              <Image
                 src="/clap1.svg"
+                alt="Upvoted"
+                width={24}
+                height={24}
+                className="cursor-pointer w-6"
                 onClick={() => castVote(0)}
               />
             ) : (
-              <img
-                className="cursor-pointer w-6"
+              <Image
                 src="/clap.svg"
+                alt="Not upvoted"
+                width={24}
+                height={24}
+                className="cursor-pointer w-6"
                 onClick={() => castVote(1)}
               />
             )}
@@ -169,15 +182,21 @@ const SearchPost = ({
             <p className="ml-1 text-sm sub-link-grey mr-2">{`${num_comments} responses`}</p>
           </div>
           {isSaved ? (
-            <img
-              className="cursor-pointer"
+            <Image
               src="/save1.svg"
+              alt="Saved"
+              width={24}
+              height={24}
+              className="cursor-pointer"
               onClick={() => savePost(0)}
             />
           ) : (
-            <img
-              className="cursor-pointer"
+            <Image
               src="/save.svg"
+              alt="Not saved"
+              width={24}
+              height={24}
+              className="cursor-pointer"
               onClick={() => savePost(1)}
             />
           )}

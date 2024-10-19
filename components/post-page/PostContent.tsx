@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import MarkdownView from "react-showdown";
+import Image from 'next/image';
 import {
   getEmbedLink,
   getIntFromString,
@@ -119,13 +120,23 @@ const PostContent = ({
             <iframe className="h-video-frame" src={getEmbedLink(url)}></iframe>
           </div>
         ) : url && isImage(url) ? (
-          <img
+          <Image
             className="w-full shimmer-bg"
             src={replaceGifv(url)}
-            width="100%"
+            alt={title}
+            width={600}
+            height={400}
+            layout="responsive"
           />
         ) : thumbnail && isImage(thumbnail) ? (
-          <img className="w-full shimmer-bg" src={thumbnail} width="100%" />
+          <Image
+            className="w-full shimmer-bg"
+            src={thumbnail}
+            alt={title}
+            width={600}
+            height={400}
+            layout="responsive"
+          />
         ) : (
           <div
             className="w-full shimmer-bg"
@@ -176,15 +187,21 @@ const PostContent = ({
         <div className="flex flex-row items-center">
           <div className="flex flex-row items-center sub-opacity-54 tracking-tight">
             {upvoted ? (
-              <img
+              <Image
                 className="cursor-pointer w-8"
                 src="/clap1.svg"
+                alt="Upvoted"
+                width={32}
+                height={32}
                 onClick={() => castVote(0)}
               />
             ) : (
-              <img
+              <Image
                 className="cursor-pointer w-8"
                 src="/clap.svg"
+                alt="Not upvoted"
+                width={32}
+                height={32}
                 onClick={() => castVote(1)}
               />
             )}
@@ -193,7 +210,7 @@ const PostContent = ({
             </div>
           </div>
           <div className="ml-4 flex flex-row items-center sub-opacity-54 tracking-tight">
-            <img className="cursor-pointer w-8 pt-1" src="/comment.svg" />
+            <Image className="cursor-pointer w-8 pt-1" src="/comment.svg" alt="Comment" width={32} height={32} />
             <div>
               <p className="ml-1">{num_comments}</p>
             </div>
@@ -201,9 +218,9 @@ const PostContent = ({
         </div>
         <div className="flex flex-row items-center tracking-normal">
           {isSaved ? (
-            <img className="cursor-pointer" src="/save1.svg" onClick={() => savePost(0)}/>
+            <Image className="cursor-pointer" src="/save1.svg" alt="Saved" width={24} height={24} onClick={() => savePost(0)}/>
           ) : (
-            <img className="cursor-pointer" src="/save.svg" onClick={() => savePost(1)}/>
+            <Image className="cursor-pointer" src="/save.svg" alt="Not saved" width={24} height={24} onClick={() => savePost(1)}/>
           )}
         </div>
       </div>

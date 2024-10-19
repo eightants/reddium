@@ -1,5 +1,5 @@
 import Subpage from "../../../components/Subpage";
-import { zipObject } from "lodash";
+import _ from 'lodash';
 
 import { Dropdown } from "../../../components/common";
 import { GetServerSideProps } from "next";
@@ -51,7 +51,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 const SubredditPage = ({ postData, subredditInfo, params }: any) => {
   const [{ posts, after }, setPostData] = useState(postData);
   const [selectedParams, setSelectedParams] = useState({
-    ...zipObject(POPULAR_PARAM_KEY, POPULAR_PARAM_DEFAULT),
+    ..._.zipObject(POPULAR_PARAM_KEY, POPULAR_PARAM_DEFAULT),
     ...params,
   });
 

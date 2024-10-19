@@ -1,5 +1,6 @@
 import React from "react";
 import MarkdownView from "react-showdown";
+import Image from 'next/image';
 
 import { getTime } from "../../functions/common";
 
@@ -36,14 +37,26 @@ const UserComment = ({
           </h4>
           <div className="w-full mt-4 mb-4 flex flex-row justify-start items-center">
             <div className="flex flex-row items-center tracking-tight mr-4">
-              <img className="cursor-pointer w-6" src="/clap.svg" />
+              <Image 
+                src="/clap.svg" 
+                alt="Clap icon" 
+                width={24} 
+                height={24} 
+                className="cursor-pointer"
+              />
               <div>
                 <p className="ml-1">{ups}</p>
               </div>
             </div>
             <a href={permalink} className="post-link-clear">
               <div className="flex flex-row items-center tracking-tight">
-                <img className="cursor-pointer w-6 pt-1" src="/comment.svg" />
+                <Image 
+                  src="/comment.svg" 
+                  alt="Comment icon" 
+                  width={24} 
+                  height={24} 
+                  className="cursor-pointer pt-1"
+                />
               </div>
             </a>
           </div>
