@@ -2,15 +2,16 @@
 
 <p align="center">
   <a href="https://reddium.vercel.app" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/visit-reddium.vercel.app-35586C.svg"></a>
-  <a href="https://github.com/eightants/reddium/releases/latest"><img src="https://img.shields.io/github/release/eightants/reddium/all.svg?colorB=38a275?label=version"></a>
   <a href="https://ko-fi.com/eightants" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/buy_me_a-coffee-ff69b4.svg"></a>
 </p>
+
+> Reddium was sunsetted on January 12, 2024 due to recent changes to the Reddit API. If you would still like to use Reddium, you can fork the Github repository and host your website yourself. Reddium had 30k+ monthly and 600k+ lifetime users at the time of shut down. 
 
 Have you ever wanted to browse Reddit while studying at Starbucks? Or maybe while sitting on the subway to work? In those situations, you might start being self-conscious of Reddit's bright and distinct website. What if people around you judge the subreddits you browse and the posts you read? Now, think about someone browsing Medium in the same situations. Just seeing the interface of Medium gives the impression of someone being a "knowledge seeker".
 
 On the other hand, the Reddit experience on a mobile browser is lacking at best. Many functionalities require you to download the Reddit app. Is there a way to improve the experience without downloading the app?
 
-Enter Reddium: [reddium.vercel.app](https://reddium.vercel.app)
+Enter Reddium: [reddium.viewodyssey.com](https://reddium.viewodyssey.com)
 
 Reddium is a Medium-themed Reddit client. No longer worry about being judged while browsing Reddit in public. The Reddium interface converts Reddit posts, discussions, and memes into well-crafted articles. Once remote work is over, Reddium will be the perfect site to visit during your commute.
 
